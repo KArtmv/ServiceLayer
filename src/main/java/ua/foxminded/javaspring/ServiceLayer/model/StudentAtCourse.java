@@ -2,27 +2,38 @@ package ua.foxminded.javaspring.ServiceLayer.model;
 
 public class StudentAtCourse {
 
-	private Student studentID;
-	private Course courseID;
+	private Long enrollmentID;
+	private Student student;
+	private Course course;
 
-	public StudentAtCourse(Student studentID) {
-		this.studentID = studentID;
+	public StudentAtCourse(Student student) {
+		this.student = student;
 	}
 
-	public StudentAtCourse(Student studentID, Course courseID) {
-		this.studentID = studentID;
-		this.courseID = courseID;
+	public StudentAtCourse(Student student, Course course) {
+		this.student = student;
+		this.course = course;
 	}
 
-	public StudentAtCourse(Course courseID) {
-		this.courseID = courseID;
+	public StudentAtCourse(Long enrollmentID, Student student, Course course) {
+		this.enrollmentID = enrollmentID;
+		this.student = student;
+		this.course = course;
 	}
 
-	public Student getStudentID() {
-		return studentID;
+	public StudentAtCourse(Course course) {
+		this.course = course;
 	}
 
-	public Course getCourseID() {
-		return courseID;
+	public Student getStudent() {
+		return student;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public Long getEnrollmentID() {
+		return enrollmentID;
 	}
 }
