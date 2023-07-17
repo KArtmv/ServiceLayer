@@ -6,6 +6,7 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private Long groupID;
+	private String groupName;
 
 	public Student(Long studentID) {
 		this.studentID = studentID;
@@ -22,11 +23,11 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	public Student(Long studentID, String firstName, String lastName, Long groupID) {
+	public Student(Long studentID, String firstName, String lastName, String groupName) {
 		this.studentID = studentID;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.groupID = groupID;
+		this.groupName = groupName;
 	}
 
 	public Long getStudentID() {
@@ -43,6 +44,10 @@ public class Student {
 
 	public Long getGroupID() {
 		return groupID;
+	}
+
+	public String getGroupName() {
+		return groupName;
 	}
 
 }
