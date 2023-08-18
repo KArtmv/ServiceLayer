@@ -10,12 +10,12 @@ public class Course {
 		this.courseID = courseID;
 	}
 
-	public Course(String courseDiscript, String courseName) {
+	public Course(String courseName, String courseDiscript) {
 		this.courseName = courseName;
 		this.courseDiscript = courseDiscript;
 	}
 
-	public Course(Long courseID, String courseDiscript, String courseName) {
+	public Course(Long courseID, String courseName, String courseDiscript) {
 		this.courseID = courseID;
 		this.courseName = courseName;
 		this.courseDiscript = courseDiscript;
@@ -29,10 +29,7 @@ public class Course {
 		return courseName;
 	}
 
-	public String getCourseDiscript() {
+	public String getCourseDescript() {
 		return courseDiscript;
-	}
-
-	public void setCourseName() {
 	}
 }
