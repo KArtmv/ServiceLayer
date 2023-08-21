@@ -13,7 +13,7 @@ public class RandomNumber {
 		this.random = random;
 	}
 
-	public Integer generateBeetwenOneAnd(int toNumber) {
+	public Integer generateBetweenOneAnd(int toNumber) {
 		int randomNumber = 0;
 		boolean isZero = false;
 		while (!isZero) {
