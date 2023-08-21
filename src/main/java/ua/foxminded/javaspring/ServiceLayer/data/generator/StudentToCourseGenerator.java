@@ -41,13 +41,13 @@ public class StudentToCourseGenerator {
 	}
 
 	private Set<Integer> randomlyCoursesIndex() {
-		int randomlyQuantityCoursesOfStudent = randomNumber.generateBeetwenOneAnd(maxCountStudentCourses);
+		int randomlyQuantityCoursesOfStudent = randomNumber.generateBetweenOneAnd(maxCountStudentCourses);
 		int indexOfCourse = 0;
 
 		Set<Integer> indicesCoursesOfStudent = new HashSet<>();
 
 		while (indicesCoursesOfStudent.size() < randomlyQuantityCoursesOfStudent) {
-			indexOfCourse = randomNumber.generateBeetwenOneAnd(countCourses);
+			indexOfCourse = randomNumber.generateBetweenOneAnd(countCourses);
 			indicesCoursesOfStudent.add(indexOfCourse);
 		}
 		return indicesCoursesOfStudent;

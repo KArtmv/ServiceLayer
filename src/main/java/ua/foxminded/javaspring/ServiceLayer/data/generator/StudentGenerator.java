@@ -46,8 +46,8 @@ public class StudentGenerator {
 		int countLastNames = lastNames.size();
 
 		while (studentsNames.size() < 200) {
-			int randomFirstNameIndex = randomNumber.generateBeetwenOneAnd(countFirstNames);
-			int randomLastNameIndex = randomNumber.generateBeetwenOneAnd(countLastNames);
+			int randomFirstNameIndex = randomNumber.generateBetweenOneAnd(countFirstNames);
+			int randomLastNameIndex = randomNumber.generateBetweenOneAnd(countLastNames);
 
 			if (randomFirstNameIndex != randomLastNameIndex) {
 				studentsNames.add(new Student(
@@ -64,7 +64,7 @@ public class StudentGenerator {
 		List<Student> completeStudents = new ArrayList<>();
 
 		for (Student student : studentsNames) {
-			randomGroupIndex = randomNumber.generateBeetwenOneAnd(countOfGroups);
+			randomGroupIndex = randomNumber.generateBetweenOneAnd(countOfGroups);
 			completeStudents.add(new Student(
 					studentID, 
 					student.getFirstName(), 
