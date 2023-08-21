@@ -13,17 +13,17 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 public class CourseGenerator {
 
 	private ReadDataFile dataFile;
-	private String courseFilePaph;
-
-	public CourseGenerator(ReadDataFile dataFile, @Qualifier("courseFilePaph") String courseFilePaph) {
-		this.dataFile = dataFile;
-		this.courseFilePaph = courseFilePaph;
-	}
+	private String courseFilePath;
 
 	private List<Course> courses = new ArrayList<>();
 
+	public CourseGenerator(ReadDataFile dataFile, @Qualifier("courseFilePath") String courseFilePath) {
+		this.dataFile = dataFile;
+		this.courseFilePath = courseFilePath;
+	}
+
 	public List<Course> create() {
-		List<String> coursesName = dataFile.scan(courseFilePaph);
+		List<String> coursesName = dataFile.scan(courseFilePath);
 
 		Long courseID = 1L;
 

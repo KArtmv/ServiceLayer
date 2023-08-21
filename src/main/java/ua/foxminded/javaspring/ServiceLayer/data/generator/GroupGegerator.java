@@ -13,17 +13,17 @@ import ua.foxminded.javaspring.ServiceLayer.model.Group;
 public class GroupGegerator {
 
 	private ReadDataFile dataFile;
-	private String filePaph;
+	private String filePath;
 
 	private List<Group> groups = new ArrayList<>();
 
-	public GroupGegerator(ReadDataFile dataFile, @Qualifier("groupFilePaph") String fileName) {
+	public GroupGegerator(ReadDataFile dataFile, @Qualifier("groupFilePath") String filePath) {
 		this.dataFile = dataFile;
-		this.filePaph = fileName;
+		this.filePath = filePath;
 	}
 
 	public List<Group> createGroups() {
-		List<String> groupNames = dataFile.scan(filePaph);
+		List<String> groupNames = dataFile.scan(filePath);
 
 		Long groupID = 1L;
 
