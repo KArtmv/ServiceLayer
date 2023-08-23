@@ -14,5 +14,5 @@ public interface GroupDAO {
 	
 	boolean isTableExist();
 	
-	void createGroupTable(String fileName);
+	void createGroupTable();
 }

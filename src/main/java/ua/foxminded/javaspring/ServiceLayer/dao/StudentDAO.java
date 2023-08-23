@@ -17,8 +17,8 @@ public interface StudentDAO {
 	boolean addStudent(Student student);
 
 	boolean isValidStudentID(Student student);
-	
+
 	boolean isTableExist();
-	
-	void createStudentTable(String fileName);
+
+	void createStudentTable();
 }

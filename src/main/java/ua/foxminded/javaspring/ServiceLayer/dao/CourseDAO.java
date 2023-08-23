@@ -21,9 +21,9 @@ public interface CourseDAO {
 
 	boolean isCourseTableExist();
 
-	void createCourseTable(String sqlScript);
+	void createCourseTable();
 
 	boolean isStudentToCourseTableExist();
 
-	void createStodentToCourseTable(String sqlScript);
+	void createStodentToCourseTable();
 }
