@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.config;
+package ua.foxminded.javaspring.ServiceLayer.data.resources;
 
 public class ResourcesFilesDatabaseData {
 

@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import ua.foxminded.javaspring.ServiceLayer.config.SQLFilesOfCreateTables;
-import ua.foxminded.javaspring.ServiceLayer.config.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;

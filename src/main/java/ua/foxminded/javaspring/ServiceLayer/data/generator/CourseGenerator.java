@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.javaspring.ServiceLayer.config.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
 @Component

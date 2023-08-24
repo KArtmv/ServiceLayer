@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import ua.foxminded.javaspring.ServiceLayer.config.SQLFilesOfCreateTables;
-import ua.foxminded.javaspring.ServiceLayer.config.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
