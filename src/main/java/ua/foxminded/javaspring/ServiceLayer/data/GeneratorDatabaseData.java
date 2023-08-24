@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.javaspring.ServiceLayer.data.tables.TablesConduct;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
