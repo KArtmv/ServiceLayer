@@ -1,12 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-
-@Configuration
-@Import({ Config.class, SQLFileConfig.class })
-public class SQLScriptTablesExistConfig {
+public class SQLScriptTablesExist {
 
 	private static final String SQL_CHEK_IS_TABLE_EXIST = "SELECT EXISTS ("
 			+ "SELECT 1 "
@@ -18,23 +12,19 @@ public class SQLScriptTablesExistConfig {
 	private static final String COURSE_TABLE_NAME = "courses";
 	private static final String STUDENT_TO_COURSE_TABLE_NAME = "studenttocourse";
 
-	@Bean
-	public String studentTableExist() {
+	public String getStudentTableExist() {
 		return String.format(SQL_CHEK_IS_TABLE_EXIST, STUDENT_TABLE_NAME);
 	}
 
-	@Bean
-	public String courseTableExist() {
+	public String getCourseTableExist() {
 		return String.format(SQL_CHEK_IS_TABLE_EXIST, COURSE_TABLE_NAME);
 	}
 
-	@Bean
-	public String groupTableExist() {
+	public String getGroupTableExist() {
 		return String.format(SQL_CHEK_IS_TABLE_EXIST, GROUP_TABLE_NAME);
 	}
 
-	@Bean
-	public String studentToCourseTableExist() {
+	public String getStudentToCourseTableExist() {
 		return String.format(SQL_CHEK_IS_TABLE_EXIST, STUDENT_TO_COURSE_TABLE_NAME);
 	}
 }
