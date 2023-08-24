@@ -1,55 +1,56 @@
-package ua.foxminded.javaspring.ServiceLayer.data.tables;
+package ua.foxminded.javaspring.ServiceLayer.data;
 
 import org.springframework.stereotype.Component;
+
+import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
+import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
+import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
 
 @Component
 public class TablesConduct {
 
-	private StudentTable studentTable;
-	private GroupTable groupTable;
-	private CourseTable courseTable;
-	private StudentToCourseTable studentToCourseTable;
+	private StudentDAO studentDAO;
+	private GroupDAO groupDAO;
+	private CourseDAO courseDAO;
 
-	public TablesConduct(StudentTable studentTable, GroupTable groupTable, CourseTable courseTable,
-			StudentToCourseTable studentToCourseTable) {
-		this.studentTable = studentTable;
-		this.groupTable = groupTable;
-		this.courseTable = courseTable;
-		this.studentToCourseTable = studentToCourseTable;
+	public TablesConduct(StudentDAO studentDAO, GroupDAO groupDAO, CourseDAO courseDAO) {
+		this.studentDAO = studentDAO;
+		this.groupDAO = groupDAO;
+		this.courseDAO = courseDAO;
 	}
 
 	public boolean studentTable() {
-		boolean isExist = studentTable.isTableExist();
+		boolean isExist = studentDAO.isTableExist();
 
 		if (!isExist) {
-			studentTable.createTable();
+			studentDAO.createStudentTable();
 		}
 		return isExist;
 	}
 
 	public boolean groupTable() {
-		boolean isExist = groupTable.isTableExist();
+		boolean isExist = groupDAO.isTableExist();
 
 		if (!isExist) {
-			groupTable.createTable();
+			groupDAO.createGroupTable();
 		}
 		return isExist;
 	}
 
 	public boolean courseTable() {
-		boolean isExist = courseTable.isTableExist();
+		boolean isExist = courseDAO.isCourseTableExist();
 
 		if (!isExist) {
-			courseTable.createTable();
+			courseDAO.createCourseTable();
 		}
 		return isExist;
 	}
 
 	public boolean studentToCourseTable() {
-		boolean isExist = studentToCourseTable.isTableExist();
+		boolean isExist = courseDAO.isStudentToCourseTableExist();
 
 		if (!isExist) {
-			studentToCourseTable.createTable();
+			courseDAO.createStodentToCourseTable();
 		}
 		return isExist;
 	}
