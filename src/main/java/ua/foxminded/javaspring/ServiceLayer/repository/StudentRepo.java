@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import ua.foxminded.javaspring.ServiceLayer.config.SQLFilesOfCreateTables;
+import ua.foxminded.javaspring.ServiceLayer.config.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
+import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
@@ -18,8 +20,8 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentMapper;
 @Repository
 public class StudentRepo implements StudentDAO {
 
-	private String sqlQueryOfStudentTableExist;
 	private JdbcTemplate jdbcTemplate;
+	private CompileSqlScriptLines sqlScript;
 
 	private static final String SQL_ADD_NEW_STUDENT = "insert into students (first_name, last_name, group_id) values (?, ?, ?)";
 	private static final String SQL_GET_STUDENT_BY_ID = "select * from student where student_id=?";
@@ -30,17 +32,20 @@ public class StudentRepo implements StudentDAO {
 				+ "join course c on sc.course_id = c.course_id"
 				+ "where student_id=?";
 	private static final String SQL_CHECK_IS_STUDENT_EXIST = "select student_id from student where student_id=?";
-	
+
+	private SQLScriptTablesExist scriptTablesExist = new SQLScriptTablesExist();
+	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
 
 	@Autowired
-	public StudentRepo(JdbcTemplate jdbcTemplate, @Qualifier("studentTableExist") String sqlQueryOfStudentTableExist) {
+	public StudentRepo(JdbcTemplate jdbcTemplate, CompileSqlScriptLines sqlScript) {
 		this.jdbcTemplate = jdbcTemplate;
-		this.sqlQueryOfStudentTableExist = sqlQueryOfStudentTableExist;
+		this.sqlScript = sqlScript;
 	}
 
 	@Override
 	public Optional<Student> getStudentByID(Student student) {
-		Student studentResult = jdbcTemplate.queryForObject(SQL_GET_STUDENT_BY_ID, new StudentMapper(), student.getStudentID());
+		Student studentResult = jdbcTemplate.queryForObject(SQL_GET_STUDENT_BY_ID, new StudentMapper(),
+				student.getStudentID());
 		return Optional.ofNullable(studentResult);
 	}
 
@@ -67,11 +72,11 @@ public class StudentRepo implements StudentDAO {
 
 	@Override
 	public boolean isTableExist() {
-		return jdbcTemplate.queryForObject(sqlQueryOfStudentTableExist, Boolean.class);
+		return jdbcTemplate.queryForObject(scriptTablesExist.getStudentTableExist(), Boolean.class);
 	}
 
 	@Override
-	public void createStudentTable(String sqlRequest) {
-		jdbcTemplate.execute(sqlRequest);
+	public void createStudentTable() {
+		jdbcTemplate.execute(sqlScript.compileScript(sqlTableFile.getSqlScriptFileStudent()));
 	}
 }

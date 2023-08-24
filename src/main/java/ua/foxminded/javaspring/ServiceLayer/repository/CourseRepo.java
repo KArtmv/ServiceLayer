@@ -3,11 +3,13 @@ package ua.foxminded.javaspring.ServiceLayer.repository;
 import java.sql.ResultSet;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import ua.foxminded.javaspring.ServiceLayer.config.SQLFilesOfCreateTables;
+import ua.foxminded.javaspring.ServiceLayer.config.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
+import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
@@ -17,8 +19,7 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
 public class CourseRepo implements CourseDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private String sqlQueryOfCourseTableExist;
-	private String sqlQueryOfStudentToCourseTableExist;
+	private CompileSqlScriptLines script;
 
 	private static final String SQL_ADD_NEW_COURSE = "insert into courses (course_name, course_description) values (?, ?)";
 	private static final String SQL_GET_ALL_STUDENT_FROM_COURSE = "select c.course_name, c.course_description, s.first_name, s.last_name"
@@ -31,11 +32,12 @@ public class CourseRepo implements CourseDAO {
 	private static final String SQL_REMOVE_STUDENT_FROM_ALL_THEIR_COURSES = "delete from studentatcourse where student_id=?";
 	private static final String SQL_CHECK_IS_COURSE_EXIST = "select course_id from course where course_id=?";
 
-	public CourseRepo(JdbcTemplate jdbcTemplate, @Qualifier("courseTableExist") String sqlQueryOfCourseTableExist,
-			@Qualifier("studentToCourseTableExist") String sqlQueryOfStudentToCourseTableExist) {
+	private SQLScriptTablesExist sqlScriptTebleExist = new SQLScriptTablesExist();
+	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
+
+	public CourseRepo(JdbcTemplate jdbcTemplate, CompileSqlScriptLines sqlScript) {
 		this.jdbcTemplate = jdbcTemplate;
-		this.sqlQueryOfCourseTableExist = sqlQueryOfCourseTableExist;
-		this.sqlQueryOfStudentToCourseTableExist = sqlQueryOfStudentToCourseTableExist;
+		this.script = sqlScript;
 	}
 
 	@Override
@@ -70,21 +72,21 @@ public class CourseRepo implements CourseDAO {
 
 	@Override
 	public boolean isCourseTableExist() {
-		return jdbcTemplate.queryForObject(sqlQueryOfCourseTableExist, Boolean.class);
+		return jdbcTemplate.queryForObject(sqlScriptTebleExist.getCourseTableExist(), Boolean.class);
 	}
 
 	@Override
 	public boolean isStudentToCourseTableExist() {
-		return jdbcTemplate.queryForObject(sqlQueryOfStudentToCourseTableExist, Boolean.class);
+		return jdbcTemplate.queryForObject(sqlScriptTebleExist.getStudentToCourseTableExist(), Boolean.class);
 	}
 
 	@Override
-	public void createCourseTable(String sqlScript) {
-		jdbcTemplate.execute(sqlScript);
+	public void createCourseTable() {
+		jdbcTemplate.execute(script.compileScript(sqlTableFile.getSqlScriptFileCourse()));
 	}
 
 	@Override
-	public void createStodentToCourseTable(String sqlScript) {
-		jdbcTemplate.execute(sqlScript);
+	public void createStodentToCourseTable() {
+		jdbcTemplate.execute(script.compileScript(sqlTableFile.getSqlScriptFileStudentToCourse()));
 	}
 }
