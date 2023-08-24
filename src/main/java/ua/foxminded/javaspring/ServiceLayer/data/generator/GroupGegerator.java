@@ -3,9 +3,9 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import ua.foxminded.javaspring.ServiceLayer.config.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
@@ -13,17 +13,16 @@ import ua.foxminded.javaspring.ServiceLayer.model.Group;
 public class GroupGegerator {
 
 	private ReadDataFile dataFile;
-	private String filePath;
 
 	private List<Group> groups = new ArrayList<>();
 
-	public GroupGegerator(ReadDataFile dataFile, @Qualifier("groupFilePath") String filePath) {
+	public GroupGegerator(ReadDataFile dataFile) {
 		this.dataFile = dataFile;
-		this.filePath = filePath;
 	}
 
 	public List<Group> createGroups() {
-		List<String> groupNames = dataFile.scan(filePath);
+		ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
+		List<String> groupNames = dataFile.scan(resourcesFiles.getGroupsFile());
 
 		Long groupID = 1L;
 

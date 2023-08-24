@@ -3,9 +3,9 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import ua.foxminded.javaspring.ServiceLayer.config.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
@@ -14,18 +14,12 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 @Component
 public class StudentGenerator {
 
-	private String firstNameFilePath;
-	private String lastNameFilePath;
 	private RandomNumber randomNumber;
 	private ReadDataFile dataFile;
 
 	private HashSet<Student> studentsNames = new HashSet<>();
-	
-	public StudentGenerator(@Qualifier("firstNameFilePath") String firstNameFilePath,
-			@Qualifier("lastNameFilePath") String lastNameFilePath, ReadDataFile fileOfNames,
-			RandomNumber randomNumber) {
-		this.firstNameFilePath = firstNameFilePath;
-		this.lastNameFilePath = lastNameFilePath;
+
+	public StudentGenerator(ReadDataFile fileOfNames, RandomNumber randomNumber) {
 		this.randomNumber = randomNumber;
 		this.dataFile = fileOfNames;
 	}
@@ -39,8 +33,9 @@ public class StudentGenerator {
 	}
 
 	private void studentNameRandomCombiner() {
-		List<String> firstNames = dataFile.scan(firstNameFilePath);
-		List<String> lastNames = dataFile.scan(lastNameFilePath);
+		ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
+		List<String> firstNames = dataFile.scan(resourcesFiles.getFirstNameFile());
+		List<String> lastNames = dataFile.scan(resourcesFiles.getLastNameFile());
 
 		int countFirstNames = firstNames.size();
 		int countLastNames = lastNames.size();
@@ -51,8 +46,8 @@ public class StudentGenerator {
 
 			if (randomFirstNameIndex != randomLastNameIndex) {
 				studentsNames.add(new Student(
-							firstNames.get(randomFirstNameIndex - 1), 
-							lastNames.get(randomLastNameIndex - 1)));
+						firstNames.get(randomFirstNameIndex - 1),
+						lastNames.get(randomLastNameIndex - 1)));
 			}
 		}
 	}
@@ -66,8 +61,7 @@ public class StudentGenerator {
 		for (Student student : studentsNames) {
 			randomGroupIndex = randomNumber.generateBetweenOneAnd(countOfGroups);
 			completeStudents.add(new Student(
-					studentID, 
-					student.getFirstName(), 
+					studentID, student.getFirstName(), 
 					student.getLastName(),
 					Long.valueOf(randomGroupIndex)));
 			studentID++;

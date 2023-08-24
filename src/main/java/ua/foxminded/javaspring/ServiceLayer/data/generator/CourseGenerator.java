@@ -3,9 +3,9 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import ua.foxminded.javaspring.ServiceLayer.config.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
@@ -13,17 +13,15 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 public class CourseGenerator {
 
 	private ReadDataFile dataFile;
-	private String courseFilePath;
-
 	private List<Course> courses = new ArrayList<>();
 
-	public CourseGenerator(ReadDataFile dataFile, @Qualifier("courseFilePath") String courseFilePath) {
+	public CourseGenerator(ReadDataFile dataFile) {
 		this.dataFile = dataFile;
-		this.courseFilePath = courseFilePath;
 	}
 
 	public List<Course> create() {
-		List<String> coursesName = dataFile.scan(courseFilePath);
+		ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
+		List<String> coursesName = dataFile.scan(resourcesFiles.getCoursesFile());
 
 		Long courseID = 1L;
 
