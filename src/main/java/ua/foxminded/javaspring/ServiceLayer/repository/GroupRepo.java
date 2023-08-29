@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
+import ua.foxminded.javaspring.ServiceLayer.data.CompileStringLines;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
@@ -18,7 +18,7 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.CountStudentAtGroupMapper;
 public class GroupRepo implements GroupDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private CompileSqlScriptLines sqlScript;
+	private CompileStringLines sqlScript;
 
 	private static final String SQL_ADD_NEW_GROUP = "insert into groups (group_name) values (?)";
 	private static final String SQL_COUNT_STUDENTS_BY_GROUPS = "select group_name, count(s.student_id) as student_count"
@@ -30,7 +30,7 @@ public class GroupRepo implements GroupDAO {
 	private SQLScriptTablesExist scriptTablesExist = new SQLScriptTablesExist();
 	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
 
-	public GroupRepo(JdbcTemplate jdbcTemplate, CompileSqlScriptLines sqlScript) {
+	public GroupRepo(JdbcTemplate jdbcTemplate, CompileStringLines sqlScript) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.sqlScript = sqlScript;
 	}
@@ -57,6 +57,6 @@ public class GroupRepo implements GroupDAO {
 
 	@Override
 	public void createGroupTable() {
-		jdbcTemplate.execute(sqlScript.compileScript(sqlTableFile.getSqlScriptFileGroup()));
+		jdbcTemplate.execute(sqlScript.compile(sqlTableFile.getSqlScriptFileGroup()));
 	}
 }

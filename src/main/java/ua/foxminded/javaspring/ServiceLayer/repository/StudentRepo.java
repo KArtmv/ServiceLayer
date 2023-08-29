@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
+import ua.foxminded.javaspring.ServiceLayer.data.CompileStringLines;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
@@ -21,7 +21,7 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentMapper;
 public class StudentRepo implements StudentDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private CompileSqlScriptLines sqlScript;
+	private CompileStringLines sqlScript;
 
 	private static final String SQL_ADD_NEW_STUDENT = "insert into students (first_name, last_name, group_id) values (?, ?, ?)";
 	private static final String SQL_GET_STUDENT_BY_ID = "select * from student where student_id=?";
@@ -37,7 +37,7 @@ public class StudentRepo implements StudentDAO {
 	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
 
 	@Autowired
-	public StudentRepo(JdbcTemplate jdbcTemplate, CompileSqlScriptLines sqlScript) {
+	public StudentRepo(JdbcTemplate jdbcTemplate, CompileStringLines sqlScript) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.sqlScript = sqlScript;
 	}
@@ -77,6 +77,6 @@ public class StudentRepo implements StudentDAO {
 
 	@Override
 	public void createStudentTable() {
-		jdbcTemplate.execute(sqlScript.compileScript(sqlTableFile.getSqlScriptFileStudent()));
+		jdbcTemplate.execute(sqlScript.compile(sqlTableFile.getSqlScriptFileStudent()));
 	}
 }

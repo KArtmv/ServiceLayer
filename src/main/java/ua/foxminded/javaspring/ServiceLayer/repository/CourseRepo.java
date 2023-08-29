@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.CompileSqlScriptLines;
+import ua.foxminded.javaspring.ServiceLayer.data.CompileStringLines;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
@@ -19,7 +19,7 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
 public class CourseRepo implements CourseDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private CompileSqlScriptLines script;
+	private CompileStringLines script;
 
 	private static final String SQL_ADD_NEW_COURSE = "insert into courses (course_name, course_description) values (?, ?)";
 	private static final String SQL_GET_ALL_STUDENT_FROM_COURSE = "select c.course_name, c.course_description, s.first_name, s.last_name"
@@ -35,7 +35,7 @@ public class CourseRepo implements CourseDAO {
 	private SQLScriptTablesExist sqlScriptTebleExist = new SQLScriptTablesExist();
 	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
 
-	public CourseRepo(JdbcTemplate jdbcTemplate, CompileSqlScriptLines sqlScript) {
+	public CourseRepo(JdbcTemplate jdbcTemplate, CompileStringLines sqlScript) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.script = sqlScript;
 	}
@@ -82,11 +82,11 @@ public class CourseRepo implements CourseDAO {
 
 	@Override
 	public void createCourseTable() {
-		jdbcTemplate.execute(script.compileScript(sqlTableFile.getSqlScriptFileCourse()));
+		jdbcTemplate.execute(script.compile(sqlTableFile.getSqlScriptFileCourse()));
 	}
 
 	@Override
 	public void createStodentToCourseTable() {
-		jdbcTemplate.execute(script.compileScript(sqlTableFile.getSqlScriptFileStudentToCourse()));
+		jdbcTemplate.execute(script.compile(sqlTableFile.getSqlScriptFileStudentToCourse()));
 	}
 }

@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CompileSqlScriptLines {
+public class CompileStringLines {
 
 	private ReadDataFile dataFile;
 
-	public CompileSqlScriptLines(ReadDataFile dataFile) {
+	public CompileStringLines(ReadDataFile dataFile) {
 		this.dataFile = dataFile;
 	}
 
-	public String compileScript(String fileName) {
+	public String compile(String fileName) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		List<String> strings = dataFile.scan(fileName);
