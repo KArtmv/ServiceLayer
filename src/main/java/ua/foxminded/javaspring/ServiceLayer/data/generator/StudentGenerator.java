@@ -1,5 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,14 +28,14 @@ public class StudentGenerator {
 		this.resourcesFiles = resourcesFiles;
 	}
 
-	public List<Student> generate(List<Group> groups) {
+	public List<Student> generate(List<Group> groups) throws IOException {
 		studentNameRandomCombiner();
 		int countOfGroups = groups.size();
 
 		return addRandomGroup(countOfGroups);
 	}
 
-	private void studentNameRandomCombiner() {
+	private void studentNameRandomCombiner() throws IOException {
 		List<String> firstNames = readFile.getData(resourcesFiles.getFirstNameFile());
 		List<String> lastNames = readFile.getData(resourcesFiles.getLastNameFile());
 

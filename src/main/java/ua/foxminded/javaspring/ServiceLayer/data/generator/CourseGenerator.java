@@ -1,5 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CourseGenerator {
 		this.resourcesFiles = resourcesFiles;
 	}
 
-	public List<Course> generate() {
+	public List<Course> generate() throws IOException {
 		List<String> coursesName = readFile.getData(resourcesFiles.getCoursesFilePath());
 
 		Long courseID = 1L;
