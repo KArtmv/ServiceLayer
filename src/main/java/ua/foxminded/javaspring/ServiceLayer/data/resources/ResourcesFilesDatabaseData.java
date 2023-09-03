@@ -1,17 +1,20 @@
 package ua.foxminded.javaspring.ServiceLayer.data.resources;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ResourcesFilesDatabaseData {
 
-	private static final String GROUPS_FILE = "src/main/resources/data/groups.txt";
-	private static final String COURSES_FILE = "src/main/resources/data/courses.txt";
-	private static final String FIRST_NAME_FILE = "src/main/resources/data/firstNames.txt";
-	private static final String LAST_NAME_FILE = "src/main/resources/data/lastNames.txt";
+	private static final String GROUPS_FILE = "data/groups.txt";
+	private static final String COURSES_FILE = "data/courses.txt";
+	private static final String FIRST_NAME_FILE = "data/firstNames.txt";
+	private static final String LAST_NAME_FILE = "data/lastNames.txt";
 
 	public String getGroupsFile() {
 		return GROUPS_FILE;
 	}
 
-	public String getCoursesFile() {
+	public String getCoursesFilePath() {
 		return COURSES_FILE;
 	}
 

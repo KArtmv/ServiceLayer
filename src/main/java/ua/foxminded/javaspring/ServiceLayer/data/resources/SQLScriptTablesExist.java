@@ -1,5 +1,8 @@
 package ua.foxminded.javaspring.ServiceLayer.data.resources;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SQLScriptTablesExist {
 
 	private static final String SQL_CHEK_IS_TABLE_EXIST = "SELECT EXISTS ("
