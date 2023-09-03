@@ -1,36 +1,48 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
+import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 
 @Component
-public class StudentTableInitializer {
+public class StudentInitializer {
 
 	private StudentDAO studentDAO;
+	private DataConduct dataConduct;
 
-	public StudentTableInitializer(StudentDAO studentDAO) {
+	private List<Student> students = new ArrayList<>();
+
+	public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct) {
 		this.studentDAO = studentDAO;
+		this.dataConduct = dataConduct;
 	}
 
-	public void initializeStudentTableAndData(List<Student> students) {
+	public void initializeStudentTableAndData() {
 		if (studentDAO.isTableExist()) {
-			insertIfTatleIsEmpty(students);
+			insertIfTatleIsEmpty();
 		} else {
 			studentDAO.createStudentTable();
-			insertStudentsIntoTable(students);
+			insertStudentsIntoTable();
 		}
 	}
 
-	private void insertIfTatleIsEmpty(List<Student> students) {
+	private void insertIfTatleIsEmpty() {
 		if (studentDAO.isTableEmpty()) {
-			insertStudentsIntoTable(students);
+			insertStudentsIntoTable();
 		}
 	}
 
-	private void insertStudentsIntoTable(List<Student> students) {
+	private void insertStudentsIntoTable() {
+		generateStudentsData();
 		students.forEach(studentDAO::addStudent);
+	}
+
+	private List<Student> generateStudentsData() {
+		students = dataConduct.createStudents();
+		return students;
 	}
 }

@@ -1,37 +1,49 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
+import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
 @Component
-public class GroupTableInitializer {
+public class GroupInitializer {
 
 	private GroupDAO groupDAO;
+	private DataConduct dataConduct;
 
-	public GroupTableInitializer(GroupDAO groupDAO) {
+	private List<Group> groups = new ArrayList<>();
+
+	public GroupInitializer(GroupDAO groupDAO, DataConduct dataConduct) {
 		this.groupDAO = groupDAO;
+		this.dataConduct = dataConduct;
 	}
 
-	public void initializeGroupTablesAndData(List<Group> groups) {
+	public void initializeGroupTablesAndData() {
 		if (groupDAO.isTableExist()) {
-			insertIfTableIsEmpty(groups);
+			insertIfTableIsEmpty();
 		} else {
 			groupDAO.createGroupTable();
-			insertGroupsIntoTable(groups);
+			insertGroupsIntoTable();
 		}
 	}
 
-	private void insertIfTableIsEmpty(List<Group> groups) {
+	private void insertIfTableIsEmpty() {
 		if (groupDAO.isGroupTableEmpty()) {
-			insertGroupsIntoTable(groups);
+			insertGroupsIntoTable();
 		}
 	}
 
-	private void insertGroupsIntoTable(List<Group> groups) {
+	private void insertGroupsIntoTable() {
+		generateGroupData();
 		groups.forEach(groupDAO::addGroup);
+	}
+
+	private List<Group> generateGroupData() {
+		groups = dataConduct.createGroups();
+		return groups;
 	}
 }
