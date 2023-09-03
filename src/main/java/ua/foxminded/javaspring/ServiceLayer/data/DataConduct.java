@@ -22,10 +22,9 @@ public class DataConduct {
 	private GroupGegerator groupGegerator;
 	private StudentToCourseGenerator studentToCourse;
 
-	private List<Student> students = new ArrayList<>();
-	private List<Course> courses = new ArrayList<>();
-	private List<Group> groups = new ArrayList<>();
-	private List<StudentAtCourse> studentAtCourses = new ArrayList<>();
+	private List<Student> students;
+	private List<Course> courses;
+	private List<Group> groups;
 
 	public DataConduct(StudentGenerator studentGenerator, CourseGenerator courseGenerator,
 			GroupGegerator groupGegerator, StudentToCourseGenerator studentToCourse) {
@@ -36,22 +35,21 @@ public class DataConduct {
 	}
 
 	public List<Student> createStudents() {
-		students.addAll(studentGenerator.generate(groups));
+		students = studentGenerator.generate(groups);
 		return students;
 	}
 
 	public List<Group> createGroups() {
-		groups.addAll(groupGegerator.createGroups());
+		groups = groupGegerator.createGroups();
 		return groups;
 	}
 
 	public List<Course> createCourses() {
-		courses.addAll(courseGenerator.create());
+		courses = courseGenerator.create();
 		return courses;
 	}
 
 	public List<StudentAtCourse> createRelationStudentCourse() {
-		studentAtCourses.addAll(studentToCourse.addStudentToCourse(students, courses.size()));
-		return studentAtCourses;
+		return studentToCourse.addStudentToCourse(students, courses.size());
 	}
 }
