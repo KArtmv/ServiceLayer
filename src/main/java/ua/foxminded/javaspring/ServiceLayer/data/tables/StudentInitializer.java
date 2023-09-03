@@ -23,14 +23,14 @@ public class StudentInitializer {
 
 	public void initializeStudentTableAndData() {
 		if (studentDAO.isTableExist()) {
-			insertIfTatleIsEmpty();
+			insertIfTableIsEmpty();
 		} else {
 			studentDAO.createStudentTable();
 			insertStudentsIntoTable();
 		}
 	}
 
-	private void insertIfTatleIsEmpty() {
+	private void insertIfTableIsEmpty() {
 		if (studentDAO.isTableEmpty()) {
 			insertStudentsIntoTable();
 		}

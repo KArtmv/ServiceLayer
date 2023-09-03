@@ -1,6 +1,5 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class GroupInitializer {
 	private GroupDAO groupDAO;
 	private DataConduct dataConduct;
 
-	private List<Group> groups = new ArrayList<>();
+	private List<Group> groups;
 
 	public GroupInitializer(GroupDAO groupDAO, DataConduct dataConduct) {
 		this.groupDAO = groupDAO;

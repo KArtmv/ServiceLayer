@@ -1,6 +1,5 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class StudentToCourseInitializer {
 	private CourseDAO courseDAO;
 	private DataConduct dataConduct;
 
-	private List<StudentAtCourse> studentAtCourses = new ArrayList<>();
+	private List<StudentAtCourse> studentAtCourses;
 
 	public StudentToCourseInitializer(CourseDAO courseDAO, DataConduct dataConduct) {
 		this.courseDAO = courseDAO;
