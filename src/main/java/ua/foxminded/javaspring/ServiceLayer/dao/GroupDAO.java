@@ -15,4 +15,6 @@ public interface GroupDAO {
 	boolean isTableExist();
 	
 	void createGroupTable();
+
+	boolean isGroupTableEmpty();
 }

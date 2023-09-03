@@ -26,4 +26,8 @@ public interface CourseDAO {
 	boolean isStudentToCourseTableExist();
 
 	void createStodentToCourseTable();
+	
+	boolean isCourseTableEmpty();
+
+	boolean isStudentToCourseTableEmpty();
 }

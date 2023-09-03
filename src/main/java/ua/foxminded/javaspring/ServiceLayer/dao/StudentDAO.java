@@ -21,4 +21,6 @@ public interface StudentDAO {
 	boolean isTableExist();
 
 	void createStudentTable();
+
+	boolean isTableEmpty();
 }
