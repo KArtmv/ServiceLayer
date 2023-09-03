@@ -1,59 +1,38 @@
 package ua.foxminded.javaspring.ServiceLayer.data;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.javaspring.ServiceLayer.model.Course;
-import ua.foxminded.javaspring.ServiceLayer.model.Group;
-import ua.foxminded.javaspring.ServiceLayer.model.Student;
-import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.CourseInitializer;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.GroupInitializer;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentInitializer;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentToCourseInitializer;
 
 @Component
 public class GeneratorDatabaseData {
 
-	private InsertDataIntoDatabase dataIntoDatabase;
-	private TablesConduct checkIsExist;
-	private DataConduct dataConduct;
+	private StudentInitializer studentInitializer;
+	private CourseInitializer courseInitializer;
+	private GroupInitializer groupInitializer;
+	private StudentToCourseInitializer studentToCourseInitializer;
 
-	public GeneratorDatabaseData(InsertDataIntoDatabase dataIntoDatabase, TablesConduct conduct,
-			DataConduct dataConduct) {
-		this.dataIntoDatabase = dataIntoDatabase;
-		this.checkIsExist = conduct;
-		this.dataConduct = dataConduct;
+	public GeneratorDatabaseData(StudentInitializer studentInitializer, CourseInitializer courseInitializer,
+			GroupInitializer groupInitializer, StudentToCourseInitializer studentToCourseInitializer) {
+		this.studentInitializer = studentInitializer;
+		this.courseInitializer = courseInitializer;
+		this.groupInitializer = groupInitializer;
+		this.studentToCourseInitializer = studentToCourseInitializer;
 	}
 
 	@PostConstruct
 	public void generateDataAndInsertIntoDatabase() {
-		group(dataConduct.createGroups());
-		student(dataConduct.createStudents());
-		course(dataConduct.createCourses());
-		studentToCourse(dataConduct.createRelationStudentCourse());
-	}
+		groupInitializer.initializeGroupTablesAndData();
 
-	private void student(List<Student> students) {
-		if (!checkIsExist.studentTable()) {
-			dataIntoDatabase.insertStudent(students);
-		}
-	}
+		courseInitializer.initializeCourseTableAndData();
 
-	private void group(List<Group> groups) {
-		if (!checkIsExist.groupTable()) {
-			dataIntoDatabase.insertGroup(groups);
-		}
-	}
+		studentInitializer.initializeStudentTableAndData();
 
-	private void course(List<Course> courses) {
-		if (!checkIsExist.courseTable()) {
-			dataIntoDatabase.insertCourse(courses);
-		}
-	}
-
-	private void studentToCourse(List<StudentAtCourse> studentAtCourses) {
-		if (!checkIsExist.studentToCourseTable()) {
-			dataIntoDatabase.insertStudentToCourse(studentAtCourses);
-		}
+		studentToCourseInitializer.initializeStudentToCourseTableAndData();
 	}
 }
