@@ -22,7 +22,7 @@ public class GroupGegerator {
 		this.resourcesFiles = resourcesFiles;
 	}
 
-	public List<Group> createGroups() {
+	public List<Group> generate() {
 		List<String> groupNames = readFile.getData(resourcesFiles.getGroupsFile());
 
 		Long groupID = 1L;

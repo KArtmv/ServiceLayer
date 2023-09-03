@@ -22,7 +22,7 @@ public class CourseGenerator {
 		this.resourcesFiles = resourcesFiles;
 	}
 
-	public List<Course> create() {
+	public List<Course> generate() {
 		List<String> coursesName = readFile.getData(resourcesFiles.getCoursesFilePath());
 
 		Long courseID = 1L;
