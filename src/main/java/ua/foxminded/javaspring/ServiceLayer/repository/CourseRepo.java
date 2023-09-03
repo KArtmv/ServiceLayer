@@ -96,15 +96,12 @@ public class CourseRepo implements CourseDAO {
 
 	@Override
 	public boolean isCourseTableEmpty() {
-		boolean isEmpty = jdbcTemplate.queryForObject(SQL_CHECK_IS_COURSE_TABLE_EMPTY, Integer.class) == 0;
-		System.out.println("Table is Empty?-" + isEmpty);
+		return jdbcTemplate.queryForObject(SQL_CHECK_IS_COURSE_TABLE_EMPTY, Integer.class) == 0;
 
-		return isEmpty;
-		
 	}
 
 	@Override
 	public boolean isStudentToCourseTableEmpty() {
-		return jdbcTemplate.queryForObject(SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY, Integer.class) > 0;
+		return jdbcTemplate.queryForObject(SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY, Integer.class) == 0;
 	}
 }
