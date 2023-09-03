@@ -40,12 +40,12 @@ public class DataConduct {
 	}
 
 	public List<Group> createGroups() {
-		groups = groupGegerator.createGroups();
+		groups = groupGegerator.generate();
 		return groups;
 	}
 
 	public List<Course> createCourses() {
-		courses = courseGenerator.create();
+		courses = courseGenerator.generate();
 		return courses;
 	}
 
