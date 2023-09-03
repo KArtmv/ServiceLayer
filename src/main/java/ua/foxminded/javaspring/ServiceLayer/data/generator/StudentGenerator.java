@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
-import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResoucesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
@@ -15,27 +15,28 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 public class StudentGenerator {
 
 	private RandomNumber randomNumber;
-	private ReadDataFile dataFile;
+	private ReadResoucesFile readFile;
+	private ResourcesFilesDatabaseData resourcesFiles;
 
 	private HashSet<Student> studentsNames = new HashSet<>();
 
-	public StudentGenerator(ReadDataFile fileOfNames, RandomNumber randomNumber) {
+	public StudentGenerator(RandomNumber randomNumber, ReadResoucesFile readFile,
+			ResourcesFilesDatabaseData resourcesFiles) {
 		this.randomNumber = randomNumber;
-		this.dataFile = fileOfNames;
+		this.readFile = readFile;
+		this.resourcesFiles = resourcesFiles;
 	}
 
 	public List<Student> generate(List<Group> groups) {
 		studentNameRandomCombiner();
-
 		int countOfGroups = groups.size();
 
 		return addRandomGroup(countOfGroups);
 	}
 
 	private void studentNameRandomCombiner() {
-		ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
-		List<String> firstNames = dataFile.scan(resourcesFiles.getFirstNameFile());
-		List<String> lastNames = dataFile.scan(resourcesFiles.getLastNameFile());
+		List<String> firstNames = readFile.getData(resourcesFiles.getFirstNameFile());
+		List<String> lastNames = readFile.getData(resourcesFiles.getLastNameFile());
 
 		int countFirstNames = firstNames.size();
 		int countLastNames = lastNames.size();
@@ -61,7 +62,8 @@ public class StudentGenerator {
 		for (Student student : studentsNames) {
 			randomGroupIndex = randomNumber.generateBetweenOneAnd(countOfGroups);
 			completeStudents.add(new Student(
-					studentID, student.getFirstName(), 
+					studentID, 
+					student.getFirstName(), 
 					student.getLastName(),
 					Long.valueOf(randomGroupIndex)));
 			studentID++;

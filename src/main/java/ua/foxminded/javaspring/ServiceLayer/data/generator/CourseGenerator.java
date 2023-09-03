@@ -5,23 +5,25 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.javaspring.ServiceLayer.data.ReadDataFile;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResoucesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
 @Component
 public class CourseGenerator {
 
-	private ReadDataFile dataFile;
+	private ReadResoucesFile readFile;
+	private ResourcesFilesDatabaseData resourcesFiles;
+
 	private List<Course> courses = new ArrayList<>();
 
-	public CourseGenerator(ReadDataFile dataFile) {
-		this.dataFile = dataFile;
+	public CourseGenerator(ReadResoucesFile dataFile, ResourcesFilesDatabaseData resourcesFiles) {
+		this.readFile = dataFile;
+		this.resourcesFiles = resourcesFiles;
 	}
 
 	public List<Course> create() {
-		ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
-		List<String> coursesName = dataFile.scan(resourcesFiles.getCoursesFile());
+		List<String> coursesName = readFile.getData(resourcesFiles.getCoursesFilePath());
 
 		Long courseID = 1L;
 
