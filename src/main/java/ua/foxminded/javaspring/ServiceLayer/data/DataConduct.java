@@ -1,6 +1,5 @@
 package ua.foxminded.javaspring.ServiceLayer.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
