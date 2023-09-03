@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.CompileStringLines;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResoucesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
@@ -19,7 +19,9 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
 public class CourseRepo implements CourseDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private CompileStringLines script;
+	private ReadResoucesFile readFile;
+	private SQLScriptTablesExist scriptTablesExist;
+	private SQLFilesOfCreateTables sqlTableFile;
 
 	private static final String SQL_ADD_NEW_COURSE = "insert into courses (course_name, course_description) values (?, ?)";
 	private static final String SQL_GET_ALL_STUDENT_FROM_COURSE = "select c.course_name, c.course_description, s.first_name, s.last_name"
@@ -31,13 +33,15 @@ public class CourseRepo implements CourseDAO {
 	private static final String SQL_REMOVE_STUDENT_FROM_COURSE = "delete from studentatcourse where enrollment_id=?";
 	private static final String SQL_REMOVE_STUDENT_FROM_ALL_THEIR_COURSES = "delete from studentatcourse where student_id=?";
 	private static final String SQL_CHECK_IS_COURSE_EXIST = "select course_id from course where course_id=?";
+	private static final String SQL_CHECK_IS_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM courses";
+	private static final String SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM studenttocourse";
 
-	private SQLScriptTablesExist sqlScriptTebleExist = new SQLScriptTablesExist();
-	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
-
-	public CourseRepo(JdbcTemplate jdbcTemplate, CompileStringLines sqlScript) {
+	public CourseRepo(JdbcTemplate jdbcTemplate, ReadResoucesFile readFile, SQLScriptTablesExist scriptTablesExist,
+			SQLFilesOfCreateTables sqlTableFile) {
 		this.jdbcTemplate = jdbcTemplate;
-		this.script = sqlScript;
+		this.readFile = readFile;
+		this.scriptTablesExist = scriptTablesExist;
+		this.sqlTableFile = sqlTableFile;
 	}
 
 	@Override
@@ -72,21 +76,35 @@ public class CourseRepo implements CourseDAO {
 
 	@Override
 	public boolean isCourseTableExist() {
-		return jdbcTemplate.queryForObject(sqlScriptTebleExist.getCourseTableExist(), Boolean.class);
+		return jdbcTemplate.queryForObject(scriptTablesExist.getCourseTableExist(), Boolean.class);
 	}
 
 	@Override
 	public boolean isStudentToCourseTableExist() {
-		return jdbcTemplate.queryForObject(sqlScriptTebleExist.getStudentToCourseTableExist(), Boolean.class);
+		return jdbcTemplate.queryForObject(scriptTablesExist.getStudentToCourseTableExist(), Boolean.class);
 	}
 
 	@Override
 	public void createCourseTable() {
-		jdbcTemplate.execute(script.compile(sqlTableFile.getSqlScriptFileCourse()));
+		jdbcTemplate.execute(readFile.getScript(sqlTableFile.getCourseFilePath()));
 	}
 
 	@Override
 	public void createStodentToCourseTable() {
-		jdbcTemplate.execute(script.compile(sqlTableFile.getSqlScriptFileStudentToCourse()));
+		jdbcTemplate.execute(readFile.getScript(sqlTableFile.getStudentToCourseFilePath()));
+	}
+
+	@Override
+	public boolean isCourseTableEmpty() {
+		boolean isEmpty = jdbcTemplate.queryForObject(SQL_CHECK_IS_COURSE_TABLE_EMPTY, Integer.class) == 0;
+		System.out.println("Table is Empty?-" + isEmpty);
+
+		return isEmpty;
+		
+	}
+
+	@Override
+	public boolean isStudentToCourseTableEmpty() {
+		return jdbcTemplate.queryForObject(SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY, Integer.class) > 0;
 	}
 }

@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.CompileStringLines;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResoucesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
@@ -18,8 +18,11 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.CountStudentAtGroupMapper;
 public class GroupRepo implements GroupDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	private CompileStringLines sqlScript;
+	private ReadResoucesFile readFile;
+	private SQLScriptTablesExist scriptTablesExist;
+	private SQLFilesOfCreateTables sqlTableFile;
 
+	private static final String SQL_CHECK_IS_GROUP_TABLE_EMPTY = "SELECT COUNT(*) FROM groups";
 	private static final String SQL_ADD_NEW_GROUP = "insert into groups (group_name) values (?)";
 	private static final String SQL_COUNT_STUDENTS_BY_GROUPS = "select group_name, count(s.student_id) as student_count"
 			+ "from students s"
@@ -27,12 +30,12 @@ public class GroupRepo implements GroupDAO {
 			+ "group by g.group_name"
 			+ "having count(s.student_id)<=21";
 
-	private SQLScriptTablesExist scriptTablesExist = new SQLScriptTablesExist();
-	private SQLFilesOfCreateTables sqlTableFile = new SQLFilesOfCreateTables();
-
-	public GroupRepo(JdbcTemplate jdbcTemplate, CompileStringLines sqlScript) {
+	public GroupRepo(JdbcTemplate jdbcTemplate, ReadResoucesFile readFile, SQLScriptTablesExist scriptTablesExist,
+			SQLFilesOfCreateTables sqlTableFile) {
 		this.jdbcTemplate = jdbcTemplate;
-		this.sqlScript = sqlScript;
+		this.readFile = readFile;
+		this.scriptTablesExist = scriptTablesExist;
+		this.sqlTableFile = sqlTableFile;
 	}
 
 	@Override
@@ -57,6 +60,11 @@ public class GroupRepo implements GroupDAO {
 
 	@Override
 	public void createGroupTable() {
-		jdbcTemplate.execute(sqlScript.compile(sqlTableFile.getSqlScriptFileGroup()));
+		jdbcTemplate.execute(readFile.getScript(sqlTableFile.getGroupFilePath()));
+	}
+
+	@Override
+	public boolean isGroupTableEmpty() {
+		return jdbcTemplate.queryForObject(SQL_CHECK_IS_GROUP_TABLE_EMPTY, Integer.class) == 0;
 	}
 }
