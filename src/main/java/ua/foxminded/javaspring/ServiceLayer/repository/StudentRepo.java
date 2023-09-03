@@ -23,15 +23,14 @@ public class StudentRepo implements StudentDAO {
 	private ReadResoucesFile readFile;
 	private SQLScriptTablesExist scriptTablesExist;
 	private SQLFilesOfCreateTables sqlTableFile;
-	
+
 	private static final String SQL_ADD_NEW_STUDENT = "insert into students (first_name, last_name, group_id) values (?, ?, ?)";
 	private static final String SQL_GET_STUDENT_BY_ID = "select * from student where student_id=?";
 	private static final String SQL_DELETE_STUDENT_BY_ID = "delete from student where student_id=?";
 	private static final String SQL_GET_LIST_COURSES_OF_STUDENT = "select"
 			+ "sc.enrollment_id, s.first_name, s.last_name, c.course_name, c.course_description"
 			+ "from student s join studentatcourse sc on s.student_id = sc.student_id"
-			+ "join course c on sc.course_id = c.course_id"
-			+ "where student_id=?";
+			+ "join course c on sc.course_id = c.course_id" + "where student_id=?";
 	private static final String SQL_CHECK_IS_STUDENT_EXIST = "select student_id from student where student_id=?";
 	private static final String SQL_CHECK_IS_STUDEN_TABLE_EMPTY = "SELECT COUNT(*) FROM students";
 

@@ -5,10 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SQLScriptTablesExist {
 
-	private static final String SQL_CHEK_IS_TABLE_EXIST = "SELECT EXISTS ("
-			+ "SELECT 1 "
-			+ "FROM information_schema.tables "
-			+ "WHERE table_name = '%s')";
+	private static final String SQL_CHEK_IS_TABLE_EXIST = "SELECT EXISTS (" + "SELECT 1 "
+			+ "FROM information_schema.tables " + "WHERE table_name = '%s')";
 
 	private static final String STUDENT_TABLE_NAME = "students";
 	private static final String GROUP_TABLE_NAME = "groups";

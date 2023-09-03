@@ -7,8 +7,8 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
-public class CourseServiceImpl implements CourseService{
-	
+public class CourseServiceImpl implements CourseService {
+
 	private CourseDAO courseDAO;
 
 	public CourseServiceImpl(CourseDAO courseDAO) {

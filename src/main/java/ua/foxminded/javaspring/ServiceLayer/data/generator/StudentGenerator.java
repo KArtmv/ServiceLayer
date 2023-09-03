@@ -46,9 +46,8 @@ public class StudentGenerator {
 			int randomLastNameIndex = randomNumber.generateBetweenOneAnd(countLastNames);
 
 			if (randomFirstNameIndex != randomLastNameIndex) {
-				studentsNames.add(new Student(
-						firstNames.get(randomFirstNameIndex - 1),
-						lastNames.get(randomLastNameIndex - 1)));
+				studentsNames.add(
+						new Student(firstNames.get(randomFirstNameIndex - 1), lastNames.get(randomLastNameIndex - 1)));
 			}
 		}
 	}
@@ -61,10 +60,7 @@ public class StudentGenerator {
 
 		for (Student student : studentsNames) {
 			randomGroupIndex = randomNumber.generateBetweenOneAnd(countOfGroups);
-			completeStudents.add(new Student(
-					studentID, 
-					student.getFirstName(), 
-					student.getLastName(),
+			completeStudents.add(new Student(studentID, student.getFirstName(), student.getLastName(),
 					Long.valueOf(randomGroupIndex)));
 			studentID++;
 		}

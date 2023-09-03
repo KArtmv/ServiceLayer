@@ -11,9 +11,9 @@ public interface GroupDAO {
 	List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
 
 	boolean isValidGroupID(Group group);
-	
+
 	boolean isTableExist();
-	
+
 	void createGroupTable();
 
 	boolean isGroupTableEmpty();

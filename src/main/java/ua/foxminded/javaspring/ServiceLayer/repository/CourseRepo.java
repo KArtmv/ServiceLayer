@@ -25,10 +25,8 @@ public class CourseRepo implements CourseDAO {
 
 	private static final String SQL_ADD_NEW_COURSE = "insert into courses (course_name, course_description) values (?, ?)";
 	private static final String SQL_GET_ALL_STUDENT_FROM_COURSE = "select c.course_name, c.course_description, s.first_name, s.last_name"
-			+ "from studenttocourse sc" 
-			+ "join students s on s.student_id = sc.student_id"
-			+ "join courses c on c.course_id = sc.course_id" 
-			+ "where c.course_id=1";
+			+ "from studenttocourse sc" + "join students s on s.student_id = sc.student_id"
+			+ "join courses c on c.course_id = sc.course_id" + "where c.course_id=1";
 	private static final String SQL_ADD_STUDENT_TO_COURSE = "insert into studenttocourse (student_id, course_id) values (?, ?)";
 	private static final String SQL_REMOVE_STUDENT_FROM_COURSE = "delete from studentatcourse where enrollment_id=?";
 	private static final String SQL_REMOVE_STUDENT_FROM_ALL_THEIR_COURSES = "delete from studentatcourse where student_id=?";
