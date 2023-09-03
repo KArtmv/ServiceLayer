@@ -1,7 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.data;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,21 +18,21 @@ public class ReadResoucesFile {
 		this.resourceLoader = resourceLoader;
 	}
 
-	public String getScript(String filePath) throws IOException {
+	public String getScript(String filePath) {
 		StringBuilder currentStatmant = new StringBuilder();
 		List<String> lines = getData(filePath);
 		lines.forEach(line -> currentStatmant.append(line.trim()).append("\n"));
 		return currentStatmant.toString();
 	}
 
-	public List<String> getData(String filePath) throws IOException {
+	public List<String> getData(String filePath) {
 		List<String> lines = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(getResource(filePath)))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				lines.add(line);
 			}
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.out.println("Failed to read file; " + filePath);
 		}
 		return lines;

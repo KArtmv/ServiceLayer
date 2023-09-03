@@ -1,6 +1,5 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class GroupGegerator {
 		this.resourcesFiles = resourcesFiles;
 	}
 
-	public List<Group> generate() throws IOException {
+	public List<Group> generate() {
 		List<String> groupNames = readFile.getData(resourcesFiles.getGroupsFile());
 
 		Long groupID = 1L;
