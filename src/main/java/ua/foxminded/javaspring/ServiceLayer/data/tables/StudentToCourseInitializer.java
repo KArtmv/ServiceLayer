@@ -4,41 +4,41 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
+import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 @Component
 public class StudentToCourseInitializer {
 
-	private CourseDAO courseDAO;
+	private StudentAtCourseDAO studentAtCourseDAO;
 	private DataConduct dataConduct;
 
 	private List<StudentAtCourse> studentAtCourses;
 
-	public StudentToCourseInitializer(CourseDAO courseDAO, DataConduct dataConduct) {
-		this.courseDAO = courseDAO;
+	public StudentToCourseInitializer(StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct) {
+		this.studentAtCourseDAO = studentAtCourseDAO;
 		this.dataConduct = dataConduct;
 	}
 
 	public void initializeStudentToCourseTableAndData() {
-		if (courseDAO.isStudentToCourseTableExist()) {
+		if (studentAtCourseDAO.isStudentToCourseTableExist()) {
 			insertIfTableIsEmpty();
 		} else {
-			courseDAO.createStodentToCourseTable();
+			studentAtCourseDAO.createStodentToCourseTable();
 			insertStudentToCourseIntoTable();
 		}
 	}
 
 	private void insertIfTableIsEmpty() {
-		if (courseDAO.isStudentToCourseTableEmpty()) {
+		if (studentAtCourseDAO.isStudentToCourseTableEmpty()) {
 			insertStudentToCourseIntoTable();
 		}
 	}
 
 	private void insertStudentToCourseIntoTable() {
 		generateStudentAtCoursesData();
-		studentAtCourses.forEach(t -> courseDAO.addStodentToCourse(t.getStudent(), t.getCourse()));
+		studentAtCourses.forEach(t -> studentAtCourseDAO.addStodentToCourse(t.getStudent(), t.getCourse()));
 	}
 
 	private List<StudentAtCourse> generateStudentAtCoursesData() {
