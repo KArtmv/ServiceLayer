@@ -6,7 +6,7 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
-public interface CourseService {
+public interface StudentAtCourseService {
 	List<StudentAtCourse> courseStudents(Course course);
 
 	boolean addStodentToCourse(Student student, Course course);
