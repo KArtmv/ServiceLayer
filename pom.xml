@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<testcontainers.version>1.18.3</testcontainers.version>
-		    <powermock.version>2.0.2</powermock.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,21 +55,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<scope>test</scope>
-		</dependency>
-		
-   <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-   </dependency>
-   <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-easymock</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-   </dependency>
-		
+		</dependency>		
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
