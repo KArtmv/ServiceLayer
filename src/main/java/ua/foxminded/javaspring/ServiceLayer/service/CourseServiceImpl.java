@@ -5,14 +5,14 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
 public class CourseServiceImpl implements CourseService {
 
-	private CourseDAO courseDAO;
+    private CourseDAO courseDAO;
 
-	public CourseServiceImpl(CourseDAO courseDAO) {
-		this.courseDAO = courseDAO;
-	}
+    public CourseServiceImpl(CourseDAO courseDAO) {
+        this.courseDAO = courseDAO;
+    }
 
-	@Override
-	public boolean isValidCourseID(Course course) {
-		return courseDAO.isValidCourseID(course);
-	}
+    @Override
+    public boolean isValidCourseID(Course course) {
+        return courseDAO.isValidCourseID(course);
+    }
 }

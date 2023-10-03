@@ -10,11 +10,11 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 @Service
 public interface StudentService {
 
-	Student getStudentByID(Student student);
+    Student getStudentByID(Student student);
 
-	boolean saveStudent(Student student);
+    boolean saveStudent(Student student);
 
-	List<StudentAtCourse> studentCourses(Student studentID);
+    List<StudentAtCourse> studentCourses(Student studentID);
 
-	boolean deleteStudent(Student studentID);
+    boolean deleteStudent(Student studentID);
 }

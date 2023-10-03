@@ -11,38 +11,38 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 @Component
 public class CourseInitializer {
 
-	private CourseDAO courseDAO;
-	private DataConduct dataConduct;
+    private CourseDAO courseDAO;
+    private DataConduct dataConduct;
 
-	private List<Course> courses;
+    private List<Course> courses;
 
-	public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct) {
-		this.courseDAO = courseDAO;
-		this.dataConduct = dataConduct;
-	}
+    public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct) {
+        this.courseDAO = courseDAO;
+        this.dataConduct = dataConduct;
+    }
 
-	public void initializeCourseTableAndData() {
-		if (courseDAO.isCourseTableExist()) {
-			insertIfTableIsEmpty();
-		} else {
-			courseDAO.createCourseTable();
-			insertCoursesIntoTable();
-		}
-	}
+    public void initializeCourseTableAndData() {
+        if (courseDAO.isCourseTableExist()) {
+            insertIfTableIsEmpty();
+        } else {
+            courseDAO.createCourseTable();
+            insertCoursesIntoTable();
+        }
+    }
 
-	private void insertIfTableIsEmpty() {
-		if (courseDAO.isCourseTableEmpty()) {
-			insertCoursesIntoTable();
-		}
-	}
+    private void insertIfTableIsEmpty() {
+        if (courseDAO.isCourseTableEmpty()) {
+            insertCoursesIntoTable();
+        }
+    }
 
-	private void insertCoursesIntoTable() {
-		generateCoursesData();
-		courses.forEach(courseDAO::addCourse);
-	}
+    private void insertCoursesIntoTable() {
+        generateCoursesData();
+        courses.forEach(courseDAO::addCourse);
+    }
 
-	private List<Course> generateCoursesData() {
-		courses = dataConduct.createCourses();
-		return courses;
-	}
+    private List<Course> generateCoursesData() {
+        courses = dataConduct.createCourses();
+        return courses;
+    }
 }

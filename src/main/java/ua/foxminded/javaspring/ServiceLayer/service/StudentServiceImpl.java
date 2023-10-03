@@ -13,36 +13,36 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-	private StudentDAO studentDAO;
+    private StudentDAO studentDAO;
 
-	@Autowired
-	public StudentServiceImpl(StudentDAO studentDAO) {
-		this.studentDAO = studentDAO;
-	}
+    @Autowired
+    public StudentServiceImpl(StudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
+    }
 
-	@Override
-	public boolean saveStudent(Student student) {
-		return studentDAO.addStudent(student);
-	}
+    @Override
+    public boolean saveStudent(Student student) {
+        return studentDAO.addStudent(student);
+    }
 
-	@Override
-	public List<StudentAtCourse> studentCourses(Student studentID) {
-		return studentDAO.studentCourses(studentID);
-	}
+    @Override
+    public List<StudentAtCourse> studentCourses(Student studentID) {
+        return studentDAO.studentCourses(studentID);
+    }
 
-	@Override
-	public boolean deleteStudent(Student studentID) {
-		return studentDAO.deleleteStudent(studentID);
-	}
+    @Override
+    public boolean deleteStudent(Student studentID) {
+        return studentDAO.deleteStudent(studentID);
+    }
 
-	@Override
-	public Student getStudentByID(Student student) {
-		Optional<Student> result = studentDAO.getStudentByID(student);
+    @Override
+    public Student getStudentByID(Student student) {
+        Optional<Student> result = studentDAO.getStudentByID(student);
 
-		Student resultStudent = null;
-		if (result.isPresent()) {
-			resultStudent = result.get();
-		}
-		return resultStudent;
-	}
+        Student resultStudent = null;
+        if (result.isPresent()) {
+            resultStudent = result.get();
+        }
+        return resultStudent;
+    }
 }

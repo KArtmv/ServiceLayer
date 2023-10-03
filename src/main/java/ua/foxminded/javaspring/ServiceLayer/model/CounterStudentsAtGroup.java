@@ -2,19 +2,19 @@ package ua.foxminded.javaspring.ServiceLayer.model;
 
 public class CounterStudentsAtGroup {
 
-	private Integer studentsCount;
-	private String groupName;
+    private Integer studentsCount;
+    private String groupName;
 
-	public CounterStudentsAtGroup(Integer studentsCount, String groupName) {
-		this.studentsCount = studentsCount;
-		this.groupName = groupName;
-	}
+    public CounterStudentsAtGroup(Integer studentsCount, String groupName) {
+        this.studentsCount = studentsCount;
+        this.groupName = groupName;
+    }
 
-	public Integer getStudentsCount() {
-		return studentsCount;
-	}
+    public Integer getStudentsCount() {
+        return studentsCount;
+    }
 
-	public String getGroupName() {
-		return groupName;
-	}
+    public String getGroupName() {
+        return groupName;
+    }
 }

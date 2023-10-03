@@ -16,39 +16,39 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 @Component
 public class DataConduct {
 
-	private StudentGenerator studentGenerator;
-	private CourseGenerator courseGenerator;
-	private GroupGegerator groupGegerator;
-	private StudentToCourseGenerator studentToCourse;
+    private StudentGenerator studentGenerator;
+    private CourseGenerator courseGenerator;
+    private GroupGegerator groupGegerator;
+    private StudentToCourseGenerator studentToCourse;
 
-	private List<Student> students;
-	private List<Course> courses;
-	private List<Group> groups;
+    private List<Student> students;
+    private List<Course> courses;
+    private List<Group> groups;
 
-	public DataConduct(StudentGenerator studentGenerator, CourseGenerator courseGenerator,
-			GroupGegerator groupGegerator, StudentToCourseGenerator studentToCourse) {
-		this.studentGenerator = studentGenerator;
-		this.courseGenerator = courseGenerator;
-		this.groupGegerator = groupGegerator;
-		this.studentToCourse = studentToCourse;
-	}
+    public DataConduct(StudentGenerator studentGenerator, CourseGenerator courseGenerator,
+                       GroupGegerator groupGegerator, StudentToCourseGenerator studentToCourse) {
+        this.studentGenerator = studentGenerator;
+        this.courseGenerator = courseGenerator;
+        this.groupGegerator = groupGegerator;
+        this.studentToCourse = studentToCourse;
+    }
 
-	public List<Student> createStudents() {
-		students = studentGenerator.generate(groups);
-		return students;
-	}
+    public List<Student> createStudents() {
+        students = studentGenerator.generate(groups);
+        return students;
+    }
 
-	public List<Group> createGroups() {
-		groups = groupGegerator.generate();
-		return groups;
-	}
+    public List<Group> createGroups() {
+        groups = groupGegerator.generate();
+        return groups;
+    }
 
-	public List<Course> createCourses() {
-		courses = courseGenerator.generate();
-		return courses;
-	}
+    public List<Course> createCourses() {
+        courses = courseGenerator.generate();
+        return courses;
+    }
 
-	public List<StudentAtCourse> createRelationStudentCourse() {
-		return studentToCourse.addStudentToCourse(students, courses.size());
-	}
+    public List<StudentAtCourse> createRelationStudentCourse() {
+        return studentToCourse.addStudentToCourse(students, courses.size());
+    }
 }

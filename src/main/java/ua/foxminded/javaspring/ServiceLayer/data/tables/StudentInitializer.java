@@ -11,38 +11,38 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 @Component
 public class StudentInitializer {
 
-	private StudentDAO studentDAO;
-	private DataConduct dataConduct;
+    private StudentDAO studentDAO;
+    private DataConduct dataConduct;
 
-	private List<Student> students = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 
-	public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct) {
-		this.studentDAO = studentDAO;
-		this.dataConduct = dataConduct;
-	}
+    public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct) {
+        this.studentDAO = studentDAO;
+        this.dataConduct = dataConduct;
+    }
 
-	public void initializeStudentTableAndData() {
-		if (studentDAO.isTableExist()) {
-			insertIfTableIsEmpty();
-		} else {
-			studentDAO.createStudentTable();
-			insertStudentsIntoTable();
-		}
-	}
+    public void initializeStudentTableAndData() {
+        if (studentDAO.isTableExist()) {
+            insertIfTableIsEmpty();
+        } else {
+            studentDAO.createStudentTable();
+            insertStudentsIntoTable();
+        }
+    }
 
-	private void insertIfTableIsEmpty() {
-		if (studentDAO.isTableEmpty()) {
-			insertStudentsIntoTable();
-		}
-	}
+    private void insertIfTableIsEmpty() {
+        if (studentDAO.isTableEmpty()) {
+            insertStudentsIntoTable();
+        }
+    }
 
-	private void insertStudentsIntoTable() {
-		generateStudentsData();
-		students.forEach(studentDAO::addStudent);
-	}
+    private void insertStudentsIntoTable() {
+        generateStudentsData();
+        students.forEach(studentDAO::addStudent);
+    }
 
-	private List<Student> generateStudentsData() {
-		students = dataConduct.createStudents();
-		return students;
-	}
+    private List<Student> generateStudentsData() {
+        students = dataConduct.createStudents();
+        return students;
+    }
 }

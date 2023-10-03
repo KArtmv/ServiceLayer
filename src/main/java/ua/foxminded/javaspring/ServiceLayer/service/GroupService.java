@@ -9,6 +9,6 @@ import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 @Service
 public interface GroupService {
 
-	List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
+    List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
 
 }

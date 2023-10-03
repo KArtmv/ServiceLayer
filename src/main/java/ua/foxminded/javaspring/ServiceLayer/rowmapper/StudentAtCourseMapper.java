@@ -11,10 +11,10 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 public class StudentAtCourseMapper implements RowMapper<StudentAtCourse> {
 
-	@Override
-	public StudentAtCourse mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new StudentAtCourse(rs.getLong("enrollment_id"),
-				new Student(rs.getString("first_name"), rs.getString("last_name")),
-				new Course(rs.getString("course_name"), rs.getString("course_descroption")));
-	}
+    @Override
+    public StudentAtCourse mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return new StudentAtCourse(rs.getLong("enrollment_id"),
+                new Student(rs.getString("first_name"), rs.getString("last_name")),
+                new Course(rs.getString("course_name"), rs.getString("course_descroption")));
+    }
 }

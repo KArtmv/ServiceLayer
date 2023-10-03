@@ -7,14 +7,14 @@ import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 
 public class GroupServiceImpl implements GroupService {
 
-	private GroupDAO groupDAO;
+    private GroupDAO groupDAO;
 
-	public GroupServiceImpl(GroupDAO groupDAO) {
-		this.groupDAO = groupDAO;
-	}
+    public GroupServiceImpl(GroupDAO groupDAO) {
+        this.groupDAO = groupDAO;
+    }
 
-	@Override
-	public List<CounterStudentsAtGroup> counterStudentsAtGroups(int count) {
-		return groupDAO.counterStudentsAtGroups(count);
-	}
+    @Override
+    public List<CounterStudentsAtGroup> counterStudentsAtGroups(int count) {
+        return groupDAO.counterStudentsAtGroups(count);
+    }
 }

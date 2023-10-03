@@ -3,13 +3,13 @@ package ua.foxminded.javaspring.ServiceLayer.dao;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
 public interface CourseDAO {
-	boolean addCourse(Course course);
+    boolean addCourse(Course course);
 
-	boolean isValidCourseID(Course course);
+    boolean isValidCourseID(Course course);
 
-	boolean isCourseTableExist();
+    boolean isCourseTableExist();
 
-	void createCourseTable();
+    void createCourseTable();
 
-	boolean isCourseTableEmpty();
+    boolean isCourseTableEmpty();
 }

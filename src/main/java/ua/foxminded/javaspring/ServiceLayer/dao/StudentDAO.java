@@ -8,19 +8,19 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 public interface StudentDAO {
 
-	Optional<Student> getStudentByID(Student student);
+    Optional<Student> getStudentByID(Student student);
 
-	boolean deleleteStudent(Student student);
+    boolean deleteStudent(Student student);
 
-	List<StudentAtCourse> studentCourses(Student student);
+    List<StudentAtCourse> studentCourses(Student student);
 
-	boolean addStudent(Student student);
+    boolean addStudent(Student student);
 
-	boolean isValidStudentID(Student student);
+    boolean isValidStudentID(Student student);
 
-	boolean isTableExist();
+    boolean isTableExist();
 
-	void createStudentTable();
+    void createStudentTable();
 
-	boolean isTableEmpty();
+    boolean isTableEmpty();
 }

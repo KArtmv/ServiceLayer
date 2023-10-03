@@ -7,21 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class RandomNumber {
 
-	private Random random;
+    private Random random;
 
-	public RandomNumber(Random random) {
-		this.random = random;
-	}
+    public RandomNumber(Random random) {
+        this.random = random;
+    }
 
-	public Integer generateBetweenOneAnd(int toNumber) {
-		int randomNumber = 0;
-		boolean isZero = false;
-		while (!isZero) {
-			randomNumber = random.nextInt(toNumber + 1);
-			if (randomNumber != 0) {
-				isZero = true;
-			}
-		}
-		return randomNumber;
-	}
+    public Integer generateBetweenOneAnd(int toNumber) {
+        int randomNumber = 0;
+        boolean isZero = false;
+        while (!isZero) {
+            randomNumber = random.nextInt(toNumber + 1);
+            if (randomNumber != 0) {
+                isZero = true;
+            }
+        }
+        return randomNumber;
+    }
 }
