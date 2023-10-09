@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.CountConfig;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
@@ -16,18 +17,21 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 public class StudentToCourseGenerator {
 
     private RandomNumber randomNumber;
-    private Integer maxCountStudentCourses;
-    private int countCourses = 0;
+    private CountConfig countConfig;
+    private int countCourses;
+
+    private int maxCountCoursesOfStudent;
 
     private List<StudentAtCourse> studentAtCourses = new ArrayList<>();
 
-    public StudentToCourseGenerator(RandomNumber randomNumber, Integer maxCountStudentCourses) {
+    public StudentToCourseGenerator(RandomNumber randomNumber, CountConfig countConfig) {
         this.randomNumber = randomNumber;
-        this.maxCountStudentCourses = maxCountStudentCourses;
+        this.countConfig = countConfig;
     }
 
     public List<StudentAtCourse> addStudentToCourse(List<Student> students, int coursesCount) {
         countCourses = coursesCount;
+        maxCountCoursesOfStudent = countConfig.getMaxCountCoursesOfStudent();
 
         students.forEach(this::addToCourseByIndex);
 
@@ -35,20 +39,20 @@ public class StudentToCourseGenerator {
     }
 
     private void addToCourseByIndex(Student student) {
-        for (Integer courseIndex : randomlyCoursesIndex()) {
+        Set<Integer> courseIndices = randomlyCoursesIndex();
+
+        for (Integer courseIndex : courseIndices) {
             studentAtCourses.add(new StudentAtCourse(student, new Course(Long.valueOf(courseIndex))));
         }
     }
 
     private Set<Integer> randomlyCoursesIndex() {
-        int randomlyQuantityCoursesOfStudent = randomNumber.generateBetweenOneAnd(maxCountStudentCourses);
-        int indexOfCourse = 0;
-
         Set<Integer> indicesCoursesOfStudent = new HashSet<>();
 
+        int randomlyQuantityCoursesOfStudent = randomNumber.generateBetweenOneAnd(maxCountCoursesOfStudent);
+
         while (indicesCoursesOfStudent.size() < randomlyQuantityCoursesOfStudent) {
-            indexOfCourse = randomNumber.generateBetweenOneAnd(countCourses);
-            indicesCoursesOfStudent.add(indexOfCourse);
+            indicesCoursesOfStudent.add(randomNumber.generateBetweenOneAnd(countCourses));
         }
         return indicesCoursesOfStudent;
     }
