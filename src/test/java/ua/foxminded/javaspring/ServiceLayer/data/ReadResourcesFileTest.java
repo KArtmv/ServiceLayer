@@ -52,6 +52,7 @@ class ReadResourcesFileTest {
         List<String> result = resourcesFile.getData(FILE_PATH);
 
         assertThat(result).isEqualTo(expect);
+
         verify(resourceLoader).getResource(FILE_PATH);
     }
 
@@ -61,6 +62,8 @@ class ReadResourcesFileTest {
 
         String result = resourcesFile.getScript(FILE_PATH).trim();
         assertEquals(SCRIPT, result);
+
+        verify(resourceLoader).getResource(FILE_PATH);
     }
 
     @Test
