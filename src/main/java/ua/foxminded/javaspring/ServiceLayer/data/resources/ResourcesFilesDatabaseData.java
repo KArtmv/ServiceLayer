@@ -10,7 +10,7 @@ public class ResourcesFilesDatabaseData {
     private static final String FIRST_NAME_FILE = "data/firstNames.txt";
     private static final String LAST_NAME_FILE = "data/lastNames.txt";
 
-    public String getGroupsFile() {
+    public String getGroupsFilePath() {
         return GROUPS_FILE;
     }
 
@@ -18,11 +18,11 @@ public class ResourcesFilesDatabaseData {
         return COURSES_FILE;
     }
 
-    public String getFirstNameFile() {
+    public String getFirstNameFilePath() {
         return FIRST_NAME_FILE;
     }
 
-    public String getLastNameFile() {
+    public String getLastNameFilePath() {
         return LAST_NAME_FILE;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ua.foxminded.javaspring.ServiceLayer.data.generator.CourseGenerator;
-import ua.foxminded.javaspring.ServiceLayer.data.generator.GroupGegerator;
+import ua.foxminded.javaspring.ServiceLayer.data.generator.GroupGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.StudentGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.StudentToCourseGenerator;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
@@ -18,7 +18,7 @@ public class DataConduct {
 
     private StudentGenerator studentGenerator;
     private CourseGenerator courseGenerator;
-    private GroupGegerator groupGegerator;
+    private GroupGenerator groupGenerator;
     private StudentToCourseGenerator studentToCourse;
 
     private List<Student> students;
@@ -26,10 +26,10 @@ public class DataConduct {
     private List<Group> groups;
 
     public DataConduct(StudentGenerator studentGenerator, CourseGenerator courseGenerator,
-                       GroupGegerator groupGegerator, StudentToCourseGenerator studentToCourse) {
+                       GroupGenerator groupGenerator, StudentToCourseGenerator studentToCourse) {
         this.studentGenerator = studentGenerator;
         this.courseGenerator = courseGenerator;
-        this.groupGegerator = groupGegerator;
+        this.groupGenerator = groupGenerator;
         this.studentToCourse = studentToCourse;
     }
 
@@ -39,7 +39,7 @@ public class DataConduct {
     }
 
     public List<Group> createGroups() {
-        groups = groupGegerator.generate();
+        groups = groupGenerator.generate();
         return groups;
     }
 

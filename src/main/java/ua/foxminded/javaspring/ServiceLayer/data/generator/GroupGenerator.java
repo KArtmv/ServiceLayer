@@ -10,20 +10,20 @@ import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabas
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
 @Component
-public class GroupGegerator {
+public class GroupGenerator {
 
     private ReadResourcesFile readFile;
     private ResourcesFilesDatabaseData resourcesFiles;
 
     private List<Group> groups = new ArrayList<>();
 
-    public GroupGegerator(ReadResourcesFile readFile, ResourcesFilesDatabaseData resourcesFiles) {
+    public GroupGenerator(ReadResourcesFile readFile, ResourcesFilesDatabaseData resourcesFiles) {
         this.readFile = readFile;
         this.resourcesFiles = resourcesFiles;
     }
 
     public List<Group> generate() {
-        List<String> groupNames = readFile.getData(resourcesFiles.getGroupsFile());
+        List<String> groupNames = readFile.getData(resourcesFiles.getGroupsFilePath());
 
         Long groupID = 1L;
 
