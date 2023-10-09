@@ -26,46 +26,30 @@ public class CourseGeneratorTest {
     @Mock
     ReadResourcesFile readFile;
 
-    @Mock
-    CourseGenerator courseGenerator;
-
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void generate_shouldReturnListOfCourse_whenIsCalled() {
-        Course course = new Course("test", "test");
-        List<Course> courses = Arrays.asList(course, course, course);
-
-        when(courseGenerator.generate()).thenReturn(courses);
-
-        List<Course> result = courseGenerator.generate();
-
-        assertThat(result).containsAll(courses);
-
-        verify(courseGenerator).generate();
-    }
-
-
-    @Test
     void generate_shouldReturnListOfCourse_whenIsValidDataProvided() {
         CourseGenerator courseGenerator = new CourseGenerator(readFile, resourcesFiles);
 
-        when(resourcesFiles.getCoursesFilePath()).thenReturn("test/test.txt");
-        when(readFile.getData("test/test.txt")).thenReturn(Arrays.asList("test_test", "test_test", "test_test"));
+        String filePath = "test/test.txt";
 
-        List<Course> courses = new ArrayList<>();
-        courses.add(new Course(1L, "test", "test"));
-        courses.add(new Course(2L, "test", "test"));
-        courses.add(new Course(3L, "test", "test"));
+        List<Course> expected = new ArrayList<>();
+        expected.add(new Course(1L, "test", "test"));
+        expected.add(new Course(2L, "test", "test"));
+        expected.add(new Course(3L, "test", "test"));
+
+        when(resourcesFiles.getCoursesFilePath()).thenReturn(filePath);
+        when(readFile.getData(filePath)).thenReturn(Arrays.asList("test_test", "test_test", "test_test"));
 
         List<Course> result = courseGenerator.generate();
 
-        assertThat(result).usingRecursiveComparison().isEqualTo(courses);
+        assertThat(result).usingRecursiveComparison().isEqualTo(expected);
 
         verify(resourcesFiles).getCoursesFilePath();
-        verify(readFile).getData("test/test.txt");
+        verify(readFile).getData(filePath);
     }
 }
