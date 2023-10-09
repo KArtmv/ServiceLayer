@@ -21,33 +21,31 @@ public class ReadResourcesFile {
     }
 
     public String getScript(String filePath) {
-        StringBuilder currentStatmant = new StringBuilder();
+        StringBuilder currentStatement = new StringBuilder();
         List<String> lines = getData(filePath);
-        lines.forEach(line -> currentStatmant.append(line.trim()).append("\n"));
-        return currentStatmant.toString();
+        lines.forEach(line -> currentStatement.append(line.trim()).append("\n"));
+        return currentStatement.toString();
     }
 
-    public List<String> getData(String filePath) {
+    public List<String> getData(String filePath){
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getDataResource(filePath)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File is not found: " + filePath);
         } catch (IOException e) {
-            System.out.println("Failed to read the file " + filePath + ": " + e);
+            System.out.println("File is not found: " + filePath);
         }
         return lines;
     }
 
     private InputStream getDataResource(String filePath) {
-        InputStream inputStream = null;
+        InputStream inputStream;
         try {
             inputStream = resourceLoader.getResource(filePath).getInputStream();
         } catch (IOException e) {
-            System.out.println("Failed to get resouce: " + filePath);
+            throw new RuntimeException(e);
         }
         return inputStream;
     }
