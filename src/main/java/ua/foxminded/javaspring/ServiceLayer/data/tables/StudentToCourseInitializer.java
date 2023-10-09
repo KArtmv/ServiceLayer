@@ -41,8 +41,7 @@ public class StudentToCourseInitializer {
         studentAtCourses.forEach(t -> studentAtCourseDAO.addStudentToCourse(t.getStudent(), t.getCourse()));
     }
 
-    private List<StudentAtCourse> generateStudentAtCoursesData() {
+    private void generateStudentAtCoursesData() {
         studentAtCourses = dataConduct.createRelationStudentCourse();
-        return studentAtCourses;
     }
 }
