@@ -1,0 +1,65 @@
+package ua.foxminded.javaspring.ServiceLayer.data.generator;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.CountConfig;
+import ua.foxminded.javaspring.ServiceLayer.model.Course;
+import ua.foxminded.javaspring.ServiceLayer.model.Student;
+import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class StudentToCourseGeneratorTest {
+    @Mock
+    private RandomNumber randomNumber;
+
+    @Mock
+    private CountConfig countConfig;
+
+    @BeforeEach
+    void init(){
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void generate_shouldReturnListOfStudentAtCourse_whenIsCorrect(){
+        StudentToCourseGenerator studentToCourseGenerator = new StudentToCourseGenerator(randomNumber, countConfig);
+
+        List<Student> students = new ArrayList<>();
+        students.add(new Student(1L, "firstName", "lastName", 2L));
+        students.add(new Student(2L, "firstName", "lastName", 3L));
+        students.add(new Student(3L, "firstName", "lastName", 1L));
+
+        int countCourses = 10;
+        int maxCountCoursesOfStudent = 3;
+
+        when(countConfig.getMaxCountCoursesOfStudent()).thenReturn(maxCountCoursesOfStudent);
+        when(randomNumber.generateBetweenOneAnd(maxCountCoursesOfStudent)).thenReturn(1, 2, 3);
+        when(randomNumber.generateBetweenOneAnd(countCourses)).thenReturn(4, 5, 6, 7, 8, 9);
+
+        List<StudentAtCourse> studentAtCourses = studentToCourseGenerator.addStudentToCourse(students, countCourses);
+
+        for(StudentAtCourse studentAtCourse: studentAtCourses){
+            Student student = studentAtCourse.getStudent();
+            Course course = studentAtCourse.getCourse();
+
+            assertThat(student.getStudentID() > 0).isTrue();
+            assertThat((course.getCourseID() > 0) && (course.getCourseID() <= countCourses)).isTrue();
+        }
+
+        verify(countConfig).getMaxCountCoursesOfStudent();
+        verify(randomNumber, times(3)).generateBetweenOneAnd(maxCountCoursesOfStudent);
+        verify(randomNumber, times(6)).generateBetweenOneAnd(countCourses);
+    }
+}
