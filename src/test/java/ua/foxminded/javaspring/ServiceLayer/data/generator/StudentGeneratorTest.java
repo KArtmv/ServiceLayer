@@ -16,8 +16,6 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
