@@ -34,21 +34,30 @@ public class DataConduct {
     }
 
     public List<Student> createStudents() {
-        students = studentGenerator.generate(groups);
+        if (students == null){
+            createGroups();
+            students = studentGenerator.generate(groups);
+        }
         return students;
     }
 
     public List<Group> createGroups() {
-        groups = groupGenerator.generate();
+        if (groups == null){
+            groups = groupGenerator.generate();
+        }
         return groups;
     }
 
     public List<Course> createCourses() {
-        courses = courseGenerator.generate();
+        if (courses == null){
+            courses = courseGenerator.generate();
+        }
         return courses;
     }
 
     public List<StudentAtCourse> createRelationStudentCourse() {
+        createCourses();
+        createStudents();
         return studentToCourse.addStudentToCourse(students, courses.size());
     }
 }
