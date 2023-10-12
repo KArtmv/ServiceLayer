@@ -8,7 +8,13 @@ public class CourseServiceImpl implements CourseService {
     private CourseDAO courseDAO;
 
     public CourseServiceImpl(CourseDAO courseDAO) {
+
         this.courseDAO = courseDAO;
+    }
+
+    @Override
+    public boolean addCourse(Course course) {
+        return courseDAO.addCourse(course);
     }
 
     @Override
