@@ -17,11 +17,19 @@ public class RandomNumber {
         int randomNumber = 0;
         boolean isZero = false;
         while (!isZero) {
-            randomNumber = random.nextInt(toNumber + 1);
+            randomNumber = random.nextInt(checkIsNumberValid(toNumber) + 1);
             if (randomNumber != 0) {
                 isZero = true;
             }
         }
         return randomNumber;
+    }
+
+    private Integer checkIsNumberValid(int numberToCheck){
+        if (numberToCheck > 0){
+            return numberToCheck;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }
