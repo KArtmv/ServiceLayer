@@ -101,7 +101,7 @@ public class DataConductTest {
         for (Course course : result) {
             assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
             assertThat(course.getCourseName()).isNotEmpty();
-            assertThat(course.getCourseDescript()).isNotEmpty();
+            assertThat(course.getCourseDescription()).isNotEmpty();
         }
 
         verify(courseGenerator).generate();
@@ -145,7 +145,7 @@ public class DataConductTest {
 
             assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
             assertThat(course.getCourseName()).isNotEmpty();
-            assertThat(course.getCourseDescript()).isNotEmpty();
+            assertThat(course.getCourseDescription()).isNotEmpty();
         }
         verify(courseGenerator).generate();
         verify(groupGenerator).generate();

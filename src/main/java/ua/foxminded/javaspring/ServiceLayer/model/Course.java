@@ -4,21 +4,21 @@ public class Course {
 
     private Long courseID;
     private String courseName;
-    private String courseDiscript;
+    private String courseDescription;
 
     public Course(Long courseID) {
         this.courseID = courseID;
     }
 
-    public Course(String courseName, String courseDiscript) {
+    public Course(String courseName, String courseDescription) {
         this.courseName = courseName;
-        this.courseDiscript = courseDiscript;
+        this.courseDescription = courseDescription;
     }
 
-    public Course(Long courseID, String courseName, String courseDiscript) {
+    public Course(Long courseID, String courseName, String courseDescription) {
         this.courseID = courseID;
         this.courseName = courseName;
-        this.courseDiscript = courseDiscript;
+        this.courseDescription = courseDescription;
     }
 
     public Long getCourseID() {
@@ -29,7 +29,7 @@ public class Course {
         return courseName;
     }
 
-    public String getCourseDescript() {
-        return courseDiscript;
+    public String getCourseDescription() {
+        return courseDescription;
     }
 }

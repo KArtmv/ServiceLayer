@@ -38,7 +38,7 @@ public class CourseRepo implements CourseDAO {
 
     @Override
     public boolean addCourse(Course course) {
-        return jdbcTemplate.update(SQL_ADD_NEW_COURSE, course.getCourseName(), course.getCourseDescript()) > 0;
+        return jdbcTemplate.update(SQL_ADD_NEW_COURSE, course.getCourseName(), course.getCourseDescription()) > 0;
     }
 
     @Override
