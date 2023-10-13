@@ -8,6 +8,10 @@ public class Student {
     private Long groupID;
     private String groupName;
 
+    public Student(long studentID) {
+        this.studentID = studentID;
+    }
+
     public Student(String firstName, String lastName, Long groupID) {
         this.firstName = firstName;
         this.lastName = lastName;
