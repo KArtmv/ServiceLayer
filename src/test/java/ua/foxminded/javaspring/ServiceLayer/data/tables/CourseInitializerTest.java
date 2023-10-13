@@ -20,46 +20,46 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 @RunWith(MockitoJUnitRunner.class)
 public class CourseInitializerTest {
 
-	@Mock
-	private CourseDAO courseDAO;
-	@Mock
-	private DataConduct dataConduct;
+    @Mock
+    private CourseDAO courseDAO;
+    @Mock
+    private DataConduct dataConduct;
 
-	private CourseInitializer initializer;
+    private CourseInitializer initializer;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-		initializer = new CourseInitializer(courseDAO, dataConduct);
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+        initializer = new CourseInitializer(courseDAO, dataConduct);
+    }
 
-	@Test
-	void initializeCourseTableAndData_whenCourseTableExist() {
-		Course course = new Course("course", "discription");
-		List<Course> courses = Arrays.asList(course, course, course);
+    @Test
+    void initializeCourseTableAndData_whenCourseTableExist() {
+        Course course = new Course("course", "discription");
+        List<Course> courses = Arrays.asList(course, course, course);
 
-		when(courseDAO.isCourseTableExist()).thenReturn(true);
-		when(courseDAO.isCourseTableEmpty()).thenReturn(true);
-		when(dataConduct.createCourses()).thenReturn(courses);
+        when(courseDAO.isCourseTableExist()).thenReturn(true);
+        when(courseDAO.isCourseTableEmpty()).thenReturn(true);
+        when(dataConduct.createCourses()).thenReturn(courses);
 
-		initializer.initializeCourseTableAndData();
+        initializer.initializeCourseTableAndData();
 
-		verify(courseDAO).isCourseTableExist();
-		verify(courseDAO).isCourseTableEmpty();
-		verify(dataConduct).createCourses();
-	}
+        verify(courseDAO).isCourseTableExist();
+        verify(courseDAO).isCourseTableEmpty();
+        verify(dataConduct).createCourses();
+    }
 
-	@Test
-	void initializeCourseTableAndData_whenCourseTableNotExist() {
-		Course course = new Course("course", "discription");
-		List<Course> courses = Arrays.asList(course, course, course);
+    @Test
+    void initializeCourseTableAndData_whenCourseTableNotExist() {
+        Course course = new Course("course", "discription");
+        List<Course> courses = Arrays.asList(course, course, course);
 
-		when(courseDAO.isCourseTableExist()).thenReturn(false);
-		when(dataConduct.createCourses()).thenReturn(courses);
+        when(courseDAO.isCourseTableExist()).thenReturn(false);
+        when(dataConduct.createCourses()).thenReturn(courses);
 
-		initializer.initializeCourseTableAndData();
+        initializer.initializeCourseTableAndData();
 
-		verify(courseDAO).isCourseTableExist();
-		verify(dataConduct).createCourses();
-	}
+        verify(courseDAO).isCourseTableExist();
+        verify(dataConduct).createCourses();
+    }
 }

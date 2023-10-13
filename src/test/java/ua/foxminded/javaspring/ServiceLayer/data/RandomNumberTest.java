@@ -24,13 +24,13 @@ public class RandomNumberTest {
     private RandomNumber randomNumber;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         randomNumber = new RandomNumber(random);
     }
 
     @Test
-    void generateBetweenOneAnd_shouldReturnIntegerValue_whenPassedValidNumber(){
+    void generateBetweenOneAnd_shouldReturnIntegerValue_whenPassedValidNumber() {
         int passNumber = 10;
 
         when(random.nextInt(anyInt())).thenReturn(1);
@@ -43,7 +43,7 @@ public class RandomNumberTest {
     }
 
     @Test
-    void generateBetweenOneAnd_shouldReturnIntegerValue_whenPassedNotValidNumber(){
+    void generateBetweenOneAnd_shouldReturnIntegerValue_whenPassedNotValidNumber() {
         int passNumber = 0;
 
         when(random.nextInt(anyInt())).thenThrow(IllegalArgumentException.class);

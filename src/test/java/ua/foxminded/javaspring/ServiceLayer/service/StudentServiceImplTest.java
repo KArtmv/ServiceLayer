@@ -29,13 +29,13 @@ public class StudentServiceImplTest {
     private StudentServiceImpl studentService;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         studentService = new StudentServiceImpl(studentDAO);
     }
 
     @Test
-    void saveStudent_shouldReturnTrue_whenIsAddedSuccessfully(){
+    void saveStudent_shouldReturnTrue_whenIsAddedSuccessfully() {
         when(studentDAO.addStudent(any(Student.class))).thenReturn(true);
 
         assertThat(studentService.saveStudent(studentInitial())).isTrue();
@@ -44,7 +44,7 @@ public class StudentServiceImplTest {
     }
 
     @Test
-    void allCoursesOfStudent_shouldReturnListOfAllStudentCourses_whenIsCalled(){
+    void allCoursesOfStudent_shouldReturnListOfAllStudentCourses_whenIsCalled() {
         List<StudentAtCourse> coursesOfStudent = new ArrayList<>();
         Student student = studentInitial();
         coursesOfStudent.add(new StudentAtCourse(student, new Course(1L)));
@@ -57,7 +57,7 @@ public class StudentServiceImplTest {
 
         int courseID = 1;
 
-        for (StudentAtCourse course : result){
+        for (StudentAtCourse course : result) {
             assertThat(course.getStudent()).usingRecursiveComparison().isSameAs(student);
             assertThat(course.getCourse().getCourseID()).isEqualTo(courseID);
             courseID++;
@@ -67,7 +67,7 @@ public class StudentServiceImplTest {
     }
 
     @Test
-    void deleteStudent_shouldReturnTrue_whenDeletedSuccessfully(){
+    void deleteStudent_shouldReturnTrue_whenDeletedSuccessfully() {
         when(studentDAO.deleteStudent(any(Student.class))).thenReturn(true);
 
         assertThat(studentService.deleteStudent(studentInitial())).isTrue();
@@ -76,7 +76,7 @@ public class StudentServiceImplTest {
     }
 
     @Test
-    void getStudentByID_shouldReturnStudentObjectInstance_whenIsFound(){
+    void getStudentByID_shouldReturnStudentObjectInstance_whenIsFound() {
         int studentID = 1;
         Student student = studentInitial();
 
@@ -89,7 +89,7 @@ public class StudentServiceImplTest {
         verify(studentDAO).getStudentByID(any(Student.class));
     }
 
-    private Student studentInitial(){
+    private Student studentInitial() {
         return new Student(1L, "firstName", "lastName");
     }
 

@@ -34,7 +34,7 @@ public class DataConduct {
     }
 
     public List<Student> createStudents() {
-        if (students == null){
+        if (students == null) {
             createGroups();
             students = studentGenerator.generate(groups);
         }
@@ -42,14 +42,14 @@ public class DataConduct {
     }
 
     public List<Group> createGroups() {
-        if (groups == null){
+        if (groups == null) {
             groups = groupGenerator.generate();
         }
         return groups;
     }
 
     public List<Course> createCourses() {
-        if (courses == null){
+        if (courses == null) {
             courses = courseGenerator.generate();
         }
         return courses;

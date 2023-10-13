@@ -44,15 +44,15 @@ public class DataConductTest {
     private List<Group> groups;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         dataConduct = new DataConduct(studentGenerator, courseGenerator, groupGenerator, studentToCourse);
     }
 
     @Test
-    void createStudents_shouldReturnListOfStudent_whenIsRun(){
+    void createStudents_shouldReturnListOfStudent_whenIsRun() {
         List<Student> students = new ArrayList<>();
-        for(int id = 1; id <= 3; id++){
+        for (int id = 1; id <= 3; id++) {
             students.add(new Student(
                     (long) id,
                     "firstName",
@@ -65,7 +65,7 @@ public class DataConductTest {
 
         List<Student> result = dataConduct.createStudents();
 
-        for (Student student: result) {
+        for (Student student : result) {
             assertThat((student.getStudentID() > 0) && (student.getStudentID() <= 3)).isTrue();
             assertThat(student.getFirstName()).isNotEmpty();
             assertThat(student.getLastName()).isNotEmpty();
@@ -75,7 +75,7 @@ public class DataConductTest {
     }
 
     @Test
-    void createGroups_shouldReturnListOfGroup_whenIsRun(){
+    void createGroups_shouldReturnListOfGroup_whenIsRun() {
         groupsListInit();
 
         when(groupGenerator.generate()).thenReturn(groups);
@@ -91,7 +91,7 @@ public class DataConductTest {
     }
 
     @Test
-    void createCourses_shouldReturnListOfCourse_whenIsRun(){
+    void createCourses_shouldReturnListOfCourse_whenIsRun() {
         coursesListInit();
 
         when(courseGenerator.generate()).thenReturn(courses);
@@ -108,7 +108,7 @@ public class DataConductTest {
     }
 
     @Test
-    void createRelationStudentCourse_shouldReturnListOfStudentAtCourse_whenIsRan(){
+    void createRelationStudentCourse_shouldReturnListOfStudentAtCourse_whenIsRan() {
         List<StudentAtCourse> studentAtCourses = new ArrayList<>();
         for (int id = 1; id <= 3; id++) {
             studentAtCourses.add(new StudentAtCourse((long) id,
@@ -154,7 +154,7 @@ public class DataConductTest {
 
     void studentsListInit() {
         students = new ArrayList<>();
-        for(int id = 1; id <= 3; id++){
+        for (int id = 1; id <= 3; id++) {
             students.add(new Student(
                     (long) id,
                     "firstName",
@@ -163,18 +163,18 @@ public class DataConductTest {
         }
     }
 
-    void coursesListInit(){
+    void coursesListInit() {
         courses = new ArrayList<>();
 
-        for(int id = 1; id <= 3; id++){
+        for (int id = 1; id <= 3; id++) {
             courses.add(new Course((long) id, "courseName", "courseDescription"));
         }
     }
 
-    void groupsListInit(){
+    void groupsListInit() {
         groups = new ArrayList<>();
 
-        for(int id = 1; id <= 3; id++){
+        for (int id = 1; id <= 3; id++) {
             groups.add(new Group((long) id, "groupName"));
         }
     }

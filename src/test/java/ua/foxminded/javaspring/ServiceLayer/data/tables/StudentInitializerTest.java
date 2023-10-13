@@ -20,47 +20,47 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 @RunWith(MockitoJUnitRunner.class)
 public class StudentInitializerTest {
 
-	@Mock
-	private StudentDAO studentDAO;
+    @Mock
+    private StudentDAO studentDAO;
 
-	@Mock
-	private DataConduct dataConduct;
+    @Mock
+    private DataConduct dataConduct;
 
-	private StudentInitializer initializer;
+    private StudentInitializer initializer;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-		initializer = new StudentInitializer(studentDAO, dataConduct);
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+        initializer = new StudentInitializer(studentDAO, dataConduct);
+    }
 
-	@Test
-	void initializeStudentTablesAndData_whenGroupTableExist() {
-		Student student = new Student("firsName", "lastName");
-		List<Student> students = Arrays.asList(student, student, student);
+    @Test
+    void initializeStudentTablesAndData_whenGroupTableExist() {
+        Student student = new Student("firsName", "lastName");
+        List<Student> students = Arrays.asList(student, student, student);
 
-		when(studentDAO.isTableExist()).thenReturn(true);
-		when(studentDAO.isTableEmpty()).thenReturn(true);
-		when(dataConduct.createStudents()).thenReturn(students);
+        when(studentDAO.isTableExist()).thenReturn(true);
+        when(studentDAO.isTableEmpty()).thenReturn(true);
+        when(dataConduct.createStudents()).thenReturn(students);
 
-		initializer.initializeStudentTableAndData();
+        initializer.initializeStudentTableAndData();
 
-		verify(studentDAO).isTableExist();
-		verify(studentDAO).isTableEmpty();
-		verify(dataConduct).createStudents();
-	}
+        verify(studentDAO).isTableExist();
+        verify(studentDAO).isTableEmpty();
+        verify(dataConduct).createStudents();
+    }
 
-	@Test
-	void initializeStudentTablesAndData_whenGroupTableNotExist() {
-		Student student = new Student("firsName", "lastName");
-		List<Student> students = Arrays.asList(student, student, student);
+    @Test
+    void initializeStudentTablesAndData_whenGroupTableNotExist() {
+        Student student = new Student("firsName", "lastName");
+        List<Student> students = Arrays.asList(student, student, student);
 
-		when(studentDAO.isTableExist()).thenReturn(false);
-		when(dataConduct.createStudents()).thenReturn(students);
+        when(studentDAO.isTableExist()).thenReturn(false);
+        when(dataConduct.createStudents()).thenReturn(students);
 
-		initializer.initializeStudentTableAndData();
+        initializer.initializeStudentTableAndData();
 
-		verify(studentDAO).isTableExist();
-		verify(dataConduct).createStudents();
-	}
+        verify(studentDAO).isTableExist();
+        verify(dataConduct).createStudents();
+    }
 }

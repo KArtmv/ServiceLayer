@@ -28,28 +28,28 @@ public class GroupGeneratorTest {
     ResourcesFilesDatabaseData resourcesFiles;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void generate_shouldReturnListOfGroup_whenProvidedDataIsValid(){
-    GroupGenerator groupGenerator = new GroupGenerator(readResourcesFile, resourcesFiles);
-    String filePath = "test/group.txt";
-    List<Group> expect = new ArrayList<>();
-    expect.add(new Group(1L, "test"));
-    expect.add(new Group(2L, "test"));
-    expect.add(new Group(3L, "test"));
+    void generate_shouldReturnListOfGroup_whenProvidedDataIsValid() {
+        GroupGenerator groupGenerator = new GroupGenerator(readResourcesFile, resourcesFiles);
+        String filePath = "test/group.txt";
+        List<Group> expect = new ArrayList<>();
+        expect.add(new Group(1L, "test"));
+        expect.add(new Group(2L, "test"));
+        expect.add(new Group(3L, "test"));
 
 
-    when(resourcesFiles.getGroupsFilePath()).thenReturn(filePath);
-    when(readResourcesFile.getData(filePath)).thenReturn(Arrays.asList("test", "test", "test"));
+        when(resourcesFiles.getGroupsFilePath()).thenReturn(filePath);
+        when(readResourcesFile.getData(filePath)).thenReturn(Arrays.asList("test", "test", "test"));
 
-    List<Group> result = groupGenerator.generate();
+        List<Group> result = groupGenerator.generate();
 
-    assertThat(result).usingRecursiveComparison().isEqualTo(expect);
+        assertThat(result).usingRecursiveComparison().isEqualTo(expect);
 
-    verify(resourcesFiles).getGroupsFilePath();
-    verify(readResourcesFile).getData(filePath);
+        verify(resourcesFiles).getGroupsFilePath();
+        verify(readResourcesFile).getData(filePath);
     }
 }

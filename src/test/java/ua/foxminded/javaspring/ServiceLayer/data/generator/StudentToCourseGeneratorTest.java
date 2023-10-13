@@ -14,6 +14,7 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -26,12 +27,12 @@ public class StudentToCourseGeneratorTest {
     private CountConfig countConfig;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void generate_shouldReturnListOfStudentAtCourse_whenIsCorrect(){
+    void generate_shouldReturnListOfStudentAtCourse_whenIsCorrect() {
         StudentToCourseGenerator studentToCourseGenerator = new StudentToCourseGenerator(randomNumber, countConfig);
 
         List<Student> students = new ArrayList<>();
@@ -48,7 +49,7 @@ public class StudentToCourseGeneratorTest {
 
         List<StudentAtCourse> studentAtCourses = studentToCourseGenerator.addStudentToCourse(students, countCourses);
 
-        for(StudentAtCourse studentAtCourse: studentAtCourses){
+        for (StudentAtCourse studentAtCourse : studentAtCourses) {
             Student student = studentAtCourse.getStudent();
             Course course = studentAtCourse.getCourse();
 

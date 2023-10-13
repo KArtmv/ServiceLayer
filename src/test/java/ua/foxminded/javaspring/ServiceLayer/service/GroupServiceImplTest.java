@@ -28,13 +28,13 @@ public class GroupServiceImplTest {
     private GroupServiceImpl groupService;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         groupService = new GroupServiceImpl(groupDAO);
     }
 
     @Test
-    void counterStudentsAtGroups_shouldReturnListOfCountStudentsAtGroup_whenIsCalled(){
+    void counterStudentsAtGroups_shouldReturnListOfCountStudentsAtGroup_whenIsCalled() {
         List<CounterStudentsAtGroup> counterStudentsAtGroup = new ArrayList<>();
         counterStudentsAtGroup.add(new CounterStudentsAtGroup(22, "someGroup1"));
         counterStudentsAtGroup.add(new CounterStudentsAtGroup(18, "someGroup2"));
@@ -52,7 +52,7 @@ public class GroupServiceImplTest {
     }
 
     @Test
-    void isValidGroupID_shouldReturnTrue_whenGroupGroupExistByThisID(){
+    void isValidGroupID_shouldReturnTrue_whenGroupGroupExistByThisID() {
         int groupID = 7;
 
         when(groupDAO.isValidGroupID(any(Group.class))).thenReturn(true);

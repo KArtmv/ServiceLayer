@@ -16,6 +16,7 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -36,12 +37,12 @@ public class StudentGeneratorTest {
     private StudentGenerator studentGenerator;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void generate_shouldReturnListOfStudents_whenIsOk(){
+    void generate_shouldReturnListOfStudents_whenIsOk() {
         studentGenerator = new StudentGenerator(randomNumber, readResourcesFile, resourcesFiles, countConfig);
 
         String firstNameFilePath = "test/firstName.txt";
@@ -54,8 +55,8 @@ public class StudentGeneratorTest {
         int countLastNames = lastNames.size();
 
         List<Group> groups = new ArrayList<>();
-        groups.add(new Group(1L,"group1"));
-        groups.add(new Group(2L,"group2"));
+        groups.add(new Group(1L, "group1"));
+        groups.add(new Group(2L, "group2"));
         groups.add(new Group(3L, "group3"));
         groups.add(new Group(4L, "group4"));
         groups.add(new Group(5L, "group5"));
@@ -68,14 +69,14 @@ public class StudentGeneratorTest {
 
         when(countConfig.getMaxCountOfStudents()).thenReturn(3);
 
-        when(randomNumber.generateBetweenOneAnd(countFirstNames)).thenReturn(1,2, 3);
-        when(randomNumber.generateBetweenOneAnd(countLastNames)).thenReturn(1,2, 3);
+        when(randomNumber.generateBetweenOneAnd(countFirstNames)).thenReturn(1, 2, 3);
+        when(randomNumber.generateBetweenOneAnd(countLastNames)).thenReturn(1, 2, 3);
         when(randomNumber.generateBetweenOneAnd(groups.size())).thenReturn(3, 2, 1);
 
 
         List<Student> result = studentGenerator.generate(groups);
 
-        for(Student student: result){
+        for (Student student : result) {
             assertThat(student.getStudentID() > 0 && student.getStudentID() < 4).isTrue();
             assertThat(student.getFirstName()).isNotEmpty();
             assertThat(student.getLastName()).isNotEmpty();

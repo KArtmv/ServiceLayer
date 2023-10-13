@@ -28,13 +28,13 @@ public class StudentAtCourseServiceImplTest {
     private StudentAtCourseServiceImpl courseService;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         courseService = new StudentAtCourseServiceImpl(studentAtCourseDAO);
     }
 
     @Test
-    void allStudentsFromCourse_shouldReturnListOfStudentAtCourse_whenIsCalled(){
+    void allStudentsFromCourse_shouldReturnListOfStudentAtCourse_whenIsCalled() {
         int courseID = 3;
 
         List<StudentAtCourse> studentsAtCourse = new ArrayList<>();
@@ -58,7 +58,7 @@ public class StudentAtCourseServiceImplTest {
     }
 
     @Test
-    void addStudentToCourse_shouldReturnTrue_whenStudentIsAddedSuccessfully(){
+    void addStudentToCourse_shouldReturnTrue_whenStudentIsAddedSuccessfully() {
         when(studentAtCourseDAO.addStudentToCourse(any(Student.class), any(Course.class))).thenReturn(true);
 
         assertThat(courseService.addStudentToCourse(studentInitial(),
@@ -68,7 +68,7 @@ public class StudentAtCourseServiceImplTest {
     }
 
     @Test
-    void removeStudentFromCourse_shouldReturnTrue_whenStudentRemovedSuccessfully(){
+    void removeStudentFromCourse_shouldReturnTrue_whenStudentRemovedSuccessfully() {
         when(studentAtCourseDAO.removeStudentFromCourse(any(StudentAtCourse.class))).thenReturn(true);
 
         assertThat(courseService.removeStudentFromCourse(new StudentAtCourse(1L, studentInitial(),
@@ -78,7 +78,7 @@ public class StudentAtCourseServiceImplTest {
     }
 
     @Test
-    void removeStudentFromAllTheirCourses_shouldReturnTrue_whenRemovedSuccessfully(){
+    void removeStudentFromAllTheirCourses_shouldReturnTrue_whenRemovedSuccessfully() {
         when(studentAtCourseDAO.removeStudentFromAllTheirCourses(any(Student.class))).thenReturn(true);
 
         assertThat(courseService.removeStudentFromAllTheirCourses(studentInitial())).isTrue();
@@ -86,11 +86,11 @@ public class StudentAtCourseServiceImplTest {
         verify(studentAtCourseDAO).removeStudentFromAllTheirCourses(any(Student.class));
     }
 
-    private Student studentInitial(){
+    private Student studentInitial() {
         return new Student("firstName", "lastName");
     }
 
-    private Course courseInitial(){
+    private Course courseInitial() {
         return new Course("courseName", "courseDescription");
     }
 }

@@ -25,8 +25,8 @@ public class RandomNumber {
         return randomNumber;
     }
 
-    private Integer checkIsNumberValid(int numberToCheck){
-        if (numberToCheck > 0){
+    private Integer checkIsNumberValid(int numberToCheck) {
+        if (numberToCheck > 0) {
             return numberToCheck;
         } else {
             throw new IllegalArgumentException();

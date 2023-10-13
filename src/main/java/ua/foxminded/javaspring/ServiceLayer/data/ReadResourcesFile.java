@@ -26,7 +26,7 @@ public class ReadResourcesFile {
         return currentStatement.toString();
     }
 
-    public List<String> getData(String filePath){
+    public List<String> getData(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getDataResource(filePath)))) {
             String line;

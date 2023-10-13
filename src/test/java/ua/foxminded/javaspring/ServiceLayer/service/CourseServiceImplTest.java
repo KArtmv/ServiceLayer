@@ -23,13 +23,13 @@ public class CourseServiceImplTest {
     private CourseServiceImpl courseService;
 
     @BeforeEach
-    void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         courseService = new CourseServiceImpl(courseDAO);
     }
 
     @Test
-    void addCourse_shouldReturnTrue_whenCourseIsAdded(){
+    void addCourse_shouldReturnTrue_whenCourseIsAdded() {
         when(courseDAO.addCourse(any(Course.class))).thenReturn(true);
 
         assertThat(courseService.addCourse(new Course(1L, "courseName", "courseDescription"))).isTrue();
@@ -38,7 +38,7 @@ public class CourseServiceImplTest {
     }
 
     @Test
-    void isValidCourseID_shouldReturnTrue_whenCourseIDIsValid(){
+    void isValidCourseID_shouldReturnTrue_whenCourseIDIsValid() {
         when(courseDAO.isValidCourseID(any(Course.class))).thenReturn(true);
 
         assertThat(courseService.isValidCourseID(new Course(1L))).isTrue();

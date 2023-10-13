@@ -12,7 +12,7 @@ public class CountConfig {
         return MAX_COUNT_COURSES_OF_STUDENT;
     }
 
-    public Integer getMaxCountOfStudents(){
+    public Integer getMaxCountOfStudents() {
         return MAX_COUNT_OF_STUDENT;
     }
 }
