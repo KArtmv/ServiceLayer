@@ -41,7 +41,7 @@ public class StudentAtCourseRepo implements StudentAtCourseDAO {
     }
 
     @Override
-    public List<StudentAtCourse> courseStudents(Course course) {
+    public List<StudentAtCourse> allStudentsFromCourse(Course course) {
         return jdbcTemplate.query(SQL_GET_ALL_STUDENT_FROM_COURSE, new StudentAtCourseMapper(), course.getCourseID());
     }
 

@@ -16,8 +16,8 @@ public class StudentAtCourseServiceImpl implements StudentAtCourseService {
     }
 
     @Override
-    public List<StudentAtCourse> courseStudents(Course course) {
-        return studentAtCourseDAO.courseStudents(course);
+    public List<StudentAtCourse> allStudentsFromCourse(Course course) {
+        return studentAtCourseDAO.allStudentsFromCourse(course);
     }
 
     @Override

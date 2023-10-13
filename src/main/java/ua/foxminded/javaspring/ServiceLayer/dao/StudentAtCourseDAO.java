@@ -7,7 +7,7 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 public interface StudentAtCourseDAO {
-    List<StudentAtCourse> courseStudents(Course course);
+    List<StudentAtCourse> allStudentsFromCourse(Course course);
 
     boolean addStudentToCourse(Student student, Course course);
 
