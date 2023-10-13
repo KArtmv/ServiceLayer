@@ -14,7 +14,7 @@ public interface StudentService {
 
     boolean saveStudent(Student student);
 
-    List<StudentAtCourse> studentCourses(Student studentID);
+    List<StudentAtCourse> allCoursesOfStudent(Student studentID);
 
     boolean deleteStudent(Student studentID);
 }

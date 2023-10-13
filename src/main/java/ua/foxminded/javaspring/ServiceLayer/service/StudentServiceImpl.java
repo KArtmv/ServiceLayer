@@ -26,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentAtCourse> studentCourses(Student studentID) {
+    public List<StudentAtCourse> allCoursesOfStudent(Student studentID) {
         return studentDAO.studentCourses(studentID);
     }
 
