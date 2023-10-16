@@ -26,7 +26,7 @@ public class RandomNumberTest {
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
-        randomNumber = new RandomNumber(random);
+        randomNumber = new RandomNumber();
     }
 
     @Test

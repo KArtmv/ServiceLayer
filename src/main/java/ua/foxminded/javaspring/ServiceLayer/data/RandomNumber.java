@@ -7,11 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RandomNumber {
 
-    private Random random;
-
-    public RandomNumber(Random random) {
-        this.random = random;
-    }
+    private final Random random = new Random();
 
     public Integer generateBetweenOneAnd(int toNumber) {
         int randomNumber = 0;
