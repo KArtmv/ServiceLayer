@@ -1,10 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.data.resources;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class ResourcesFilesDatabaseData {
-
     private static final String GROUPS_FILE = "data/groups.txt";
     private static final String COURSES_FILE = "data/courses.txt";
     private static final String FIRST_NAME_FILE = "data/firstNames.txt";

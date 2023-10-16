@@ -1,10 +1,6 @@
 package ua.foxminded.javaspring.ServiceLayer.data.resources;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class SQLFilesOfCreateTables {
-
     private static final String SQL_SCRIPT_FILE_STUDENT = "tables/studentTable.txt";
     private static final String SQL_SCRIPT_FILE_GROUP = "tables/groupTable.txt";
     private static final String SQL_SCRIPT_FILE_COURSE = "tables/courseTable.txt";
