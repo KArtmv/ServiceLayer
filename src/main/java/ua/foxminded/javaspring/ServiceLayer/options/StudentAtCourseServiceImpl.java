@@ -1,12 +1,15 @@
-package ua.foxminded.javaspring.ServiceLayer.service;
+package ua.foxminded.javaspring.ServiceLayer.options;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
+import ua.foxminded.javaspring.ServiceLayer.service.StudentAtCourseService;
 
+@Service
 public class StudentAtCourseServiceImpl implements StudentAtCourseService {
 
     private StudentAtCourseDAO studentAtCourseDAO;
