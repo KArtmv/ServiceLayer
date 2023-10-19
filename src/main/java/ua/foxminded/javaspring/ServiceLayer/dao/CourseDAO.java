@@ -7,9 +7,9 @@ public interface CourseDAO {
 
     boolean isValidCourseID(Course course);
 
-    boolean isCourseTableExist();
+    boolean isCourseTableExist(String sqlQuery);
 
-    void createCourseTable();
+    void createCourseTable(String sqlQuery);
 
     boolean isCourseTableEmpty();
 }

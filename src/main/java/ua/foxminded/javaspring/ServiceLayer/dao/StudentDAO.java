@@ -18,9 +18,9 @@ public interface StudentDAO {
 
     boolean isValidStudentID(Student student);
 
-    boolean isTableExist();
+    boolean isTableExist(String sqlQuery);
 
-    void createStudentTable();
+    void createStudentTable(String sqlQuery);
 
     boolean isTableEmpty();
 }

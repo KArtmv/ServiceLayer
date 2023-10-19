@@ -15,9 +15,9 @@ public interface StudentAtCourseDAO {
 
     boolean removeStudentFromAllTheirCourses(Student student);
 
-    boolean isStudentToCourseTableExist();
+    boolean isStudentToCourseTableExist(String sqlQuery);
 
-    void createStudentToCourseTable();
+    void createStudentToCourseTable(String sqlQuery);
 
     boolean isStudentToCourseTableEmpty();
 }

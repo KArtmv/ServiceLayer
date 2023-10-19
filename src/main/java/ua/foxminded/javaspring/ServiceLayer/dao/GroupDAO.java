@@ -12,9 +12,9 @@ public interface GroupDAO {
 
     boolean isValidGroupID(Group group);
 
-    boolean isTableExist();
+    boolean isTableExist(String sqlQuery);
 
-    void createGroupTable();
+    void createGroupTable(String sqlQuery);
 
     boolean isGroupTableEmpty();
 }
