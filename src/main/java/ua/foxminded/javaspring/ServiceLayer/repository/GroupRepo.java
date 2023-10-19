@@ -18,9 +18,6 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.CountStudentAtGroupMapper;
 public class GroupRepo implements GroupDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private ReadResourcesFile readFile;
-    private SQLScriptTablesExist scriptTablesExist;
-    private SQLFilesOfCreateTables sqlTableFile;
 
     private static final String SQL_CHECK_IS_GROUP_TABLE_EMPTY = "SELECT COUNT(*) FROM groups";
     private static final String SQL_ADD_NEW_GROUP = "insert into groups (group_name) values (?)";
@@ -28,12 +25,8 @@ public class GroupRepo implements GroupDAO {
             + "from students s" + "join groups g on s.group_id = g.group_id" + "group by g.group_name"
             + "having count(s.student_id)<=21";
 
-    public GroupRepo(JdbcTemplate jdbcTemplate, ReadResourcesFile readFile, SQLScriptTablesExist scriptTablesExist,
-                     SQLFilesOfCreateTables sqlTableFile) {
+    public GroupRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.readFile = readFile;
-        this.scriptTablesExist = scriptTablesExist;
-        this.sqlTableFile = sqlTableFile;
     }
 
     @Override
@@ -52,13 +45,13 @@ public class GroupRepo implements GroupDAO {
     }
 
     @Override
-    public boolean isTableExist() {
-        return jdbcTemplate.queryForObject(scriptTablesExist.getGroupTableExist(), Boolean.class);
+    public boolean isTableExist(String sqlQuery) {
+        return jdbcTemplate.queryForObject(sqlQuery, Boolean.class);
     }
 
     @Override
-    public void createGroupTable() {
-        jdbcTemplate.execute(readFile.getScript(sqlTableFile.getGroupFilePath()));
+    public void createGroupTable(String sqlQuery) {
+        jdbcTemplate.execute(sqlQuery);
     }
 
     @Override

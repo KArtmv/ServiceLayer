@@ -20,9 +20,6 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentMapper;
 public class StudentRepo implements StudentDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private ReadResourcesFile readFile;
-    private SQLScriptTablesExist scriptTablesExist;
-    private SQLFilesOfCreateTables sqlTableFile;
 
     private static final String SQL_ADD_NEW_STUDENT = "insert into students (first_name, last_name, group_id) values (?, ?, ?)";
     private static final String SQL_GET_STUDENT_BY_ID = "select * from student where student_id=?";
@@ -34,12 +31,8 @@ public class StudentRepo implements StudentDAO {
     private static final String SQL_CHECK_IS_STUDENT_EXIST = "select student_id from student where student_id=?";
     private static final String SQL_CHECK_IS_STUDEN_TABLE_EMPTY = "SELECT COUNT(*) FROM students";
 
-    public StudentRepo(JdbcTemplate jdbcTemplate, ReadResourcesFile readFile, SQLScriptTablesExist scriptTablesExist,
-                       SQLFilesOfCreateTables sqlTableFile) {
+    public StudentRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.readFile = readFile;
-        this.scriptTablesExist = scriptTablesExist;
-        this.sqlTableFile = sqlTableFile;
     }
 
     @Override
@@ -71,13 +64,13 @@ public class StudentRepo implements StudentDAO {
     }
 
     @Override
-    public boolean isTableExist() {
-        return jdbcTemplate.queryForObject(scriptTablesExist.getStudentTableExist(), Boolean.class);
+    public boolean isTableExist(String sqlQuery) {
+        return jdbcTemplate.queryForObject(sqlQuery, Boolean.class);
     }
 
     @Override
-    public void createStudentTable() {
-        jdbcTemplate.execute(readFile.getScript(sqlTableFile.getStudentFilePath()));
+    public void createStudentTable(String sqlQuery) {
+        jdbcTemplate.execute(sqlQuery);
     }
 
     @Override

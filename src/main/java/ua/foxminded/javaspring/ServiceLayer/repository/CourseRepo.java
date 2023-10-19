@@ -15,20 +15,13 @@ import ua.foxminded.javaspring.ServiceLayer.model.Course;
 public class CourseRepo implements CourseDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private ReadResourcesFile readFile;
-    private SQLScriptTablesExist scriptTablesExist;
-    private SQLFilesOfCreateTables sqlTableFile;
 
     private static final String SQL_ADD_NEW_COURSE = "insert into courses (course_name, course_description) values (?, ?)";
     private static final String SQL_CHECK_IS_COURSE_EXIST = "select course_id from course where course_id=?";
     private static final String SQL_CHECK_IS_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM courses";
 
-    public CourseRepo(JdbcTemplate jdbcTemplate, ReadResourcesFile readFile, SQLScriptTablesExist scriptTablesExist,
-                      SQLFilesOfCreateTables sqlTableFile) {
+    public CourseRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.readFile = readFile;
-        this.scriptTablesExist = scriptTablesExist;
-        this.sqlTableFile = sqlTableFile;
     }
 
     @Override
@@ -42,13 +35,13 @@ public class CourseRepo implements CourseDAO {
     }
 
     @Override
-    public boolean isCourseTableExist() {
-        return jdbcTemplate.queryForObject(scriptTablesExist.getCourseTableExist(), Boolean.class);
+    public boolean isCourseTableExist(String sqlQuery) {
+        return jdbcTemplate.queryForObject(sqlQuery, Boolean.class);
     }
 
     @Override
-    public void createCourseTable() {
-        jdbcTemplate.execute(readFile.getScript(sqlTableFile.getCourseFilePath()));
+    public void createCourseTable(String sqlQuery) {
+        jdbcTemplate.execute(sqlQuery);
     }
 
     @Override

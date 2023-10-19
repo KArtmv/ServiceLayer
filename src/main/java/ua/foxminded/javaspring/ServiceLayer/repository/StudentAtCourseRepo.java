@@ -18,9 +18,6 @@ import ua.foxminded.javaspring.ServiceLayer.rowmapper.StudentAtCourseMapper;
 public class StudentAtCourseRepo implements StudentAtCourseDAO {
 
     private JdbcTemplate jdbcTemplate;
-    private ReadResourcesFile readFile;
-    private SQLScriptTablesExist scriptTablesExist;
-    private SQLFilesOfCreateTables sqlTableFile;
 
     private static final String SQL_GET_ALL_STUDENT_FROM_COURSE = "select c.course_name, c.course_description, s.first_name, s.last_name"
             + "from studenttocourse sc"
@@ -32,12 +29,8 @@ public class StudentAtCourseRepo implements StudentAtCourseDAO {
     private static final String SQL_REMOVE_STUDENT_FROM_ALL_THEIR_COURSES = "delete from studentatcourse where student_id=?";
     private static final String SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM studenttocourse";
 
-    public StudentAtCourseRepo(JdbcTemplate jdbcTemplate, ReadResourcesFile readFile,
-                               SQLScriptTablesExist scriptTablesExist, SQLFilesOfCreateTables sqlTableFile) {
+    public StudentAtCourseRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.readFile = readFile;
-        this.scriptTablesExist = scriptTablesExist;
-        this.sqlTableFile = sqlTableFile;
     }
 
     @Override
@@ -61,13 +54,13 @@ public class StudentAtCourseRepo implements StudentAtCourseDAO {
     }
 
     @Override
-    public boolean isStudentToCourseTableExist() {
-        return jdbcTemplate.queryForObject(scriptTablesExist.getStudentToCourseTableExist(), Boolean.class);
+    public boolean isStudentToCourseTableExist(String sqlQuery) {
+        return jdbcTemplate.queryForObject(sqlQuery, Boolean.class);
     }
 
     @Override
-    public void createStudentToCourseTable() {
-        jdbcTemplate.execute(readFile.getScript(sqlTableFile.getStudentToCourseFilePath()));
+    public void createStudentToCourseTable(String sqlQuery) {
+        jdbcTemplate.execute(sqlQuery);
     }
 
     @Override
