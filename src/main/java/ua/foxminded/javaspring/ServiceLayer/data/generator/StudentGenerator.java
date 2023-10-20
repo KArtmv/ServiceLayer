@@ -1,11 +1,5 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.CountConfig;
@@ -13,7 +7,10 @@ import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabas
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 
-@Component
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class StudentGenerator {
 
     private RandomNumber randomNumber;
@@ -54,8 +51,8 @@ public class StudentGenerator {
         int countLastNames = lastNames.size();
 
         while (studentsNames.size() < maxCountOfStudents) {
-            int randomFirstNameIndex = randomNumber.generateBetweenOneAnd(countFirstNames);
-            int randomLastNameIndex = randomNumber.generateBetweenOneAnd(countLastNames);
+            int randomFirstNameIndex = randomNumber.generateBetweenOneAndInputNumber(countFirstNames);
+            int randomLastNameIndex = randomNumber.generateBetweenOneAndInputNumber(countLastNames);
 
             String firstName = firstNames.get(randomFirstNameIndex - 1);
             String lastName = lastNames.get(randomLastNameIndex - 1);
@@ -76,7 +73,7 @@ public class StudentGenerator {
 
         for (Student student : studentsNames) {
 
-            randomGroupIndex = randomNumber.generateBetweenOneAnd(countOfGroups);
+            randomGroupIndex = randomNumber.generateBetweenOneAndInputNumber(countOfGroups);
 
             generatedStudents.add(new Student(studentID, student.getFirstName(), student.getLastName(),
                     Long.valueOf(randomGroupIndex)));

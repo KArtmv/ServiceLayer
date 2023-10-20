@@ -1,15 +1,12 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
-@Component
+import java.util.ArrayList;
+import java.util.List;
+
 public class CourseGenerator {
 
     private ReadResourcesFile readFile;

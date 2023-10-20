@@ -1,19 +1,16 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
 import ua.foxminded.javaspring.ServiceLayer.data.resources.CountConfig;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
-@Component
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class StudentToCourseGenerator {
 
     private RandomNumber randomNumber;
@@ -49,10 +46,10 @@ public class StudentToCourseGenerator {
     private Set<Integer> randomlyCoursesIndex() {
         Set<Integer> indicesCoursesOfStudent = new HashSet<>();
 
-        int randomlyQuantityCoursesOfStudent = randomNumber.generateBetweenOneAnd(maxCountCoursesOfStudent);
+        int randomlyQuantityCoursesOfStudent = randomNumber.generateBetweenOneAndInputNumber(maxCountCoursesOfStudent);
 
         while (indicesCoursesOfStudent.size() < randomlyQuantityCoursesOfStudent) {
-            indicesCoursesOfStudent.add(randomNumber.generateBetweenOneAnd(countCourses));
+            indicesCoursesOfStudent.add(randomNumber.generateBetweenOneAndInputNumber(countCourses));
         }
         return indicesCoursesOfStudent;
     }
