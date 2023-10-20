@@ -44,8 +44,8 @@ public class StudentToCourseGeneratorTest {
         int maxCountCoursesOfStudent = 3;
 
         when(countConfig.getMaxCountCoursesOfStudent()).thenReturn(maxCountCoursesOfStudent);
-        when(randomNumber.generateBetweenOneAnd(maxCountCoursesOfStudent)).thenReturn(1, 2, 3);
-        when(randomNumber.generateBetweenOneAnd(countCourses)).thenReturn(4, 5, 6, 7, 8, 9);
+        when(randomNumber.generateBetweenOneAndInputNumber(maxCountCoursesOfStudent)).thenReturn(1, 2, 3);
+        when(randomNumber.generateBetweenOneAndInputNumber(countCourses)).thenReturn(4, 5, 6, 7, 8, 9);
 
         List<StudentAtCourse> studentAtCourses = studentToCourseGenerator.addStudentToCourse(students, countCourses);
 
@@ -58,7 +58,7 @@ public class StudentToCourseGeneratorTest {
         }
 
         verify(countConfig).getMaxCountCoursesOfStudent();
-        verify(randomNumber, times(3)).generateBetweenOneAnd(maxCountCoursesOfStudent);
-        verify(randomNumber, times(6)).generateBetweenOneAnd(countCourses);
+        verify(randomNumber, times(3)).generateBetweenOneAndInputNumber(maxCountCoursesOfStudent);
+        verify(randomNumber, times(6)).generateBetweenOneAndInputNumber(countCourses);
     }
 }

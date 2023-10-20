@@ -69,9 +69,9 @@ public class StudentGeneratorTest {
 
         when(countConfig.getMaxCountOfStudents()).thenReturn(3);
 
-        when(randomNumber.generateBetweenOneAnd(countFirstNames)).thenReturn(1, 2, 3);
-        when(randomNumber.generateBetweenOneAnd(countLastNames)).thenReturn(1, 2, 3);
-        when(randomNumber.generateBetweenOneAnd(groups.size())).thenReturn(3, 2, 1);
+        when(randomNumber.generateBetweenOneAndInputNumber(countFirstNames)).thenReturn(1, 2, 3);
+        when(randomNumber.generateBetweenOneAndInputNumber(countLastNames)).thenReturn(1, 2, 3);
+        when(randomNumber.generateBetweenOneAndInputNumber(groups.size())).thenReturn(3, 2, 1);
 
 
         List<Student> result = studentGenerator.generate(groups);
@@ -84,8 +84,8 @@ public class StudentGeneratorTest {
 
         }
 
-        verify(randomNumber, times(3)).generateBetweenOneAnd(countFirstNames);
-        verify(randomNumber, times(3)).generateBetweenOneAnd(countLastNames);
-        verify(randomNumber, times(3)).generateBetweenOneAnd(groups.size());
+        verify(randomNumber, times(3)).generateBetweenOneAndInputNumber(countFirstNames);
+        verify(randomNumber, times(3)).generateBetweenOneAndInputNumber(countLastNames);
+        verify(randomNumber, times(3)).generateBetweenOneAndInputNumber(groups.size());
     }
 }
