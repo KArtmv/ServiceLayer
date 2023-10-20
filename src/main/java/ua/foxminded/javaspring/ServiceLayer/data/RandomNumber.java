@@ -2,30 +2,17 @@ package ua.foxminded.javaspring.ServiceLayer.data;
 
 import java.util.Random;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class RandomNumber {
 
     private final Random random = new Random();
 
-    public Integer generateBetweenOneAnd(int toNumber) {
-        int randomNumber = 0;
-        boolean isZero = false;
-        while (!isZero) {
-            randomNumber = random.nextInt(checkIsNumberValid(toNumber) + 1);
-            if (randomNumber != 0) {
-                isZero = true;
-            }
-        }
-        return randomNumber;
-    }
+    public Integer generateBetweenOneAndInputNumber(int inputNumber) {
+        int randomNumber;
 
-    private Integer checkIsNumberValid(int numberToCheck) {
-        if (numberToCheck > 0) {
-            return numberToCheck;
-        } else {
-            throw new IllegalArgumentException();
-        }
+        do {
+            randomNumber = random.nextInt(inputNumber + 1);
+        } while (randomNumber == 0);
+
+        return randomNumber;
     }
 }
