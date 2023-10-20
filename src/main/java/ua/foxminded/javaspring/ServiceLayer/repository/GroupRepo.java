@@ -7,9 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLFilesOfCreateTables;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLScriptTablesExist;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 import ua.foxminded.javaspring.ServiceLayer.rowmapper.CountStudentAtGroupMapper;
