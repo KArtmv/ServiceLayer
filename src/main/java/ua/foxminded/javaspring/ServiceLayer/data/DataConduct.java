@@ -13,7 +13,6 @@ import ua.foxminded.javaspring.ServiceLayer.model.Group;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
-@Component
 public class DataConduct {
 
     private StudentGenerator studentGenerator;
