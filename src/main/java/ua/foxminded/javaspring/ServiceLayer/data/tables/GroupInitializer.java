@@ -1,31 +1,41 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryIsTableExist;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryOfCreateTable;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
-@Component
+import java.util.List;
+
 public class GroupInitializer {
 
     private GroupDAO groupDAO;
+
     private DataConduct dataConduct;
+
+    private ReadResourcesFile readResourcesFile;
+
+    private SQLQueryIsTableExist isTableExist;
+
+    private SQLQueryOfCreateTable createTable;
 
     private List<Group> groups;
 
-    public GroupInitializer(GroupDAO groupDAO, DataConduct dataConduct) {
+    public GroupInitializer(GroupDAO groupDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile, SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
         this.groupDAO = groupDAO;
         this.dataConduct = dataConduct;
+        this.readResourcesFile = readResourcesFile;
+        this.isTableExist = isTableExist;
+        this.createTable = createTable;
     }
 
     public void initializeGroupTablesAndData() {
-        if (groupDAO.isTableExist()) {
+        if (groupDAO.isTableExist(isTableExist.getGroupTableExist())) {
             insertIfTableIsEmpty();
         } else {
-            groupDAO.createGroupTable();
+            groupDAO.createGroupTable(readResourcesFile.getScript(createTable.getGroupFilePath()));
             insertGroupsIntoTable();
         }
     }
@@ -41,8 +51,7 @@ public class GroupInitializer {
         groups.forEach(groupDAO::addGroup);
     }
 
-    private List<Group> generateGroupData() {
+    private void generateGroupData() {
         groups = dataConduct.createGroups();
-        return groups;
     }
 }

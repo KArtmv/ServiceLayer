@@ -1,31 +1,41 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryIsTableExist;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryOfCreateTable;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
-@Component
+import java.util.List;
+
 public class CourseInitializer {
 
     private CourseDAO courseDAO;
+
     private DataConduct dataConduct;
+
+    private ReadResourcesFile readResourcesFile;
+
+    private SQLQueryIsTableExist isTableExist;
+
+    private SQLQueryOfCreateTable createTable;
 
     private List<Course> courses;
 
-    public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct) {
+    public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile, SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
         this.courseDAO = courseDAO;
         this.dataConduct = dataConduct;
+        this.readResourcesFile = readResourcesFile;
+        this.isTableExist = isTableExist;
+        this.createTable = createTable;
     }
 
     public void initializeCourseTableAndData() {
-        if (courseDAO.isCourseTableExist()) {
+        if (courseDAO.isCourseTableExist(isTableExist.getCourseTableExist())) {
             insertIfTableIsEmpty();
         } else {
-            courseDAO.createCourseTable();
+            courseDAO.createCourseTable(readResourcesFile.getScript(createTable.getCourseFilePath()));
             insertCoursesIntoTable();
         }
     }
@@ -41,8 +51,7 @@ public class CourseInitializer {
         courses.forEach(courseDAO::addCourse);
     }
 
-    private List<Course> generateCoursesData() {
+    private void generateCoursesData() {
         courses = dataConduct.createCourses();
-        return courses;
     }
 }

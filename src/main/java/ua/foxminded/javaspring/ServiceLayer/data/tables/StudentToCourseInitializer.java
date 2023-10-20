@@ -1,31 +1,41 @@
 package ua.foxminded.javaspring.ServiceLayer.data.tables;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
+import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryIsTableExist;
+import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryOfCreateTable;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
-@Component
+import java.util.List;
+
 public class StudentToCourseInitializer {
 
     private StudentAtCourseDAO studentAtCourseDAO;
+
     private DataConduct dataConduct;
+
+    private ReadResourcesFile readResourcesFile;
+
+    private SQLQueryIsTableExist isTableExist;
+
+    private SQLQueryOfCreateTable createTable;
 
     private List<StudentAtCourse> studentAtCourses;
 
-    public StudentToCourseInitializer(StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct) {
+    public StudentToCourseInitializer(StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile, SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
         this.studentAtCourseDAO = studentAtCourseDAO;
         this.dataConduct = dataConduct;
+        this.readResourcesFile = readResourcesFile;
+        this.isTableExist = isTableExist;
+        this.createTable = createTable;
     }
 
     public void initializeStudentToCourseTableAndData() {
-        if (studentAtCourseDAO.isStudentToCourseTableExist()) {
+        if (studentAtCourseDAO.isStudentToCourseTableExist(isTableExist.getStudentToCourseTableExist())) {
             insertIfTableIsEmpty();
         } else {
-            studentAtCourseDAO.createStudentToCourseTable();
+            studentAtCourseDAO.createStudentToCourseTable(readResourcesFile.getScript(createTable.getStudentToCourseFilePath()));
             insertStudentToCourseIntoTable();
         }
     }
