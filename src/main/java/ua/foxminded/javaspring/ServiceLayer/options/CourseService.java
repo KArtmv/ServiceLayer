@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.service;
+package ua.foxminded.javaspring.ServiceLayer.options;
 
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 

@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.options;
+package ua.foxminded.javaspring.ServiceLayer.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
-import ua.foxminded.javaspring.ServiceLayer.service.StudentService;
+import ua.foxminded.javaspring.ServiceLayer.options.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService {

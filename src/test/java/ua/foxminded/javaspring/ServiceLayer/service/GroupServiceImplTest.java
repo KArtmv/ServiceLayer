@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
-import ua.foxminded.javaspring.ServiceLayer.options.GroupServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;

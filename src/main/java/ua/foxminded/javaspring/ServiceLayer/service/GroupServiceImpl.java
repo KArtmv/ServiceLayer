@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.options;
+package ua.foxminded.javaspring.ServiceLayer.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
-import ua.foxminded.javaspring.ServiceLayer.service.GroupService;
+import ua.foxminded.javaspring.ServiceLayer.options.GroupService;
 
 @Service
 public class GroupServiceImpl implements GroupService {

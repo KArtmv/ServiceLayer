@@ -8,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
-import ua.foxminded.javaspring.ServiceLayer.options.CourseServiceImpl;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;

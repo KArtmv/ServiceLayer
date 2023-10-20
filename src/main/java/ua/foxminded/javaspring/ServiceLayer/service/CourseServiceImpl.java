@@ -1,9 +1,9 @@
-package ua.foxminded.javaspring.ServiceLayer.options;
+package ua.foxminded.javaspring.ServiceLayer.service;
 
 import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
-import ua.foxminded.javaspring.ServiceLayer.service.CourseService;
+import ua.foxminded.javaspring.ServiceLayer.options.CourseService;
 
 @Service
 public class CourseServiceImpl implements CourseService {

@@ -10,7 +10,6 @@ import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
-import ua.foxminded.javaspring.ServiceLayer.options.StudentServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;

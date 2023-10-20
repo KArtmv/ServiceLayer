@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.options;
+package ua.foxminded.javaspring.ServiceLayer.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
-import ua.foxminded.javaspring.ServiceLayer.service.StudentAtCourseService;
+import ua.foxminded.javaspring.ServiceLayer.options.StudentAtCourseService;
 
 @Service
 public class StudentAtCourseServiceImpl implements StudentAtCourseService {
