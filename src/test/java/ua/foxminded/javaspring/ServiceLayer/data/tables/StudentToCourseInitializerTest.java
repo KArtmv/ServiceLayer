@@ -58,7 +58,7 @@ public class StudentToCourseInitializerTest {
     }
 
     @Test
-    void initializeStudentToCourseTableAndData_whenStudentToCourseTableExist() {
+    void initializeStudentToCourseTableAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableExist() {
         when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
         when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(true);
         when(studentAtCourseDAO.isStudentToCourseTableEmpty()).thenReturn(true);
@@ -73,7 +73,7 @@ public class StudentToCourseInitializerTest {
     }
 
     @Test
-    void initializeStudentToCourseTableAndData_whenStudentToCourseTableNotExist() {
+    void initializeStudentToCourseTableAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableNotExist() {
         String filePath = "table/studentToCourse.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 

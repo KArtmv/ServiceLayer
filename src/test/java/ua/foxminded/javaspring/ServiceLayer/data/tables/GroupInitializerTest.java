@@ -55,7 +55,7 @@ public class GroupInitializerTest {
     }
 
     @Test
-    void initializeGroupTablesAndData_whenGroupTableExist() {
+    void initializeGroupTablesAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenGroupTableExist() {
         when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
         when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(true);
         when(groupDAO.isGroupTableEmpty()).thenReturn(true);
@@ -70,7 +70,7 @@ public class GroupInitializerTest {
     }
 
     @Test
-    void initializeGroupTablesAndData_whenGroupTableNotExist() {
+    void initializeGroupTablesAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenGroupTableNotExist() {
         String filePath = "table/group.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 

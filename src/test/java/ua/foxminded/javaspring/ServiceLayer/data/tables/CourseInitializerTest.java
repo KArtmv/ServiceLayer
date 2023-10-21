@@ -69,8 +69,8 @@ public class CourseInitializerTest {
     }
 
     @Test
-    void initializeCourseTableAndData_whenCourseTableNotExist() {
-        Course course = new Course("course", "discription");
+    void initializeCourseTableAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenCourseTableNotExist() {
+        Course course = new Course("course", "description");
         List<Course> courses = Arrays.asList(course, course, course);
         String filePath = "table/course.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
