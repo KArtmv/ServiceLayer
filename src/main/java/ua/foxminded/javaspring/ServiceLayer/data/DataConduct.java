@@ -2,8 +2,6 @@ package ua.foxminded.javaspring.ServiceLayer.data;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.data.generator.CourseGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.GroupGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.StudentGenerator;
