@@ -20,36 +20,36 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class CourseGeneratorTest {
 
-    @Mock
-    ResourcesFilesDatabaseData resourcesFiles;
+	@Mock
+	ResourcesFilesDatabaseData resourcesFiles;
 
-    @Mock
-    ReadResourcesFile readFile;
+	@Mock
+	ReadResourcesFile readFile;
 
-    @BeforeEach
-    void init() {
-        MockitoAnnotations.openMocks(this);
-    }
+	@BeforeEach
+	void init() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
-    void generate_shouldReturnListOfCourse_whenIsValidDataProvided() {
-        CourseGenerator courseGenerator = new CourseGenerator(readFile, resourcesFiles);
+	@Test
+	void generate_shouldReturnListOfCourse_whenIsValidDataProvided() {
+		CourseGenerator courseGenerator = new CourseGenerator(readFile, resourcesFiles);
 
-        String filePath = "test/test.txt";
+		String filePath = "test/test.txt";
 
-        List<Course> expected = new ArrayList<>();
-        expected.add(new Course(1L, "test", "test"));
-        expected.add(new Course(2L, "test", "test"));
-        expected.add(new Course(3L, "test", "test"));
+		List<Course> expected = new ArrayList<>();
+		expected.add(new Course(1L, "test", "test"));
+		expected.add(new Course(2L, "test", "test"));
+		expected.add(new Course(3L, "test", "test"));
 
-        when(resourcesFiles.getCoursesFilePath()).thenReturn(filePath);
-        when(readFile.getData(filePath)).thenReturn(Arrays.asList("test_test", "test_test", "test_test"));
+		when(resourcesFiles.getCoursesFilePath()).thenReturn(filePath);
+		when(readFile.getData(filePath)).thenReturn(Arrays.asList("test_test", "test_test", "test_test"));
 
-        List<Course> result = courseGenerator.generate();
+		List<Course> result = courseGenerator.generate();
 
-        assertThat(result).usingRecursiveComparison().isEqualTo(expected);
+		assertThat(result).usingRecursiveComparison().isEqualTo(expected);
 
-        verify(resourcesFiles).getCoursesFilePath();
-        verify(readFile).getData(filePath);
-    }
+		verify(resourcesFiles).getCoursesFilePath();
+		verify(readFile).getData(filePath);
+	}
 }

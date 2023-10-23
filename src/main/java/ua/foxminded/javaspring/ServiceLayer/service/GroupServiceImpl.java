@@ -11,19 +11,19 @@ import ua.foxminded.javaspring.ServiceLayer.options.GroupService;
 @Service
 public class GroupServiceImpl implements GroupService {
 
-    private GroupDAO groupDAO;
+	private GroupDAO groupDAO;
 
-    public GroupServiceImpl(GroupDAO groupDAO) {
-        this.groupDAO = groupDAO;
-    }
+	public GroupServiceImpl(GroupDAO groupDAO) {
+		this.groupDAO = groupDAO;
+	}
 
-    @Override
-    public List<CounterStudentsAtGroup> counterStudentsAtGroups(int count) {
-        return groupDAO.counterStudentsAtGroups(count);
-    }
+	@Override
+	public List<CounterStudentsAtGroup> counterStudentsAtGroups(int count) {
+		return groupDAO.counterStudentsAtGroups(count);
+	}
 
-    @Override
-    public boolean isValidGroupID(Group group) {
-        return groupDAO.isValidGroupID(group);
-    }
+	@Override
+	public boolean isValidGroupID(Group group) {
+		return groupDAO.isValidGroupID(group);
+	}
 }

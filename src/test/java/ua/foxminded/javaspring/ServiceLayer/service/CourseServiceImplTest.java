@@ -17,18 +17,18 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class CourseServiceImplTest {
 
-    @Mock
-    private CourseDAO courseDAO;
+	@Mock
+	private CourseDAO courseDAO;
 
-    private CourseServiceImpl courseService;
+	private CourseServiceImpl courseService;
 
-    @BeforeEach
-    void init() {
-        MockitoAnnotations.openMocks(this);
-        courseService = new CourseServiceImpl(courseDAO);
-    }
+	@BeforeEach
+	void init() {
+		MockitoAnnotations.openMocks(this);
+		courseService = new CourseServiceImpl(courseDAO);
+	}
 
-    @Test
+	@Test
     void addCourse_shouldReturnTrue_whenCourseIsAdded() {
         when(courseDAO.addCourse(any(Course.class))).thenReturn(true);
 
@@ -37,7 +37,7 @@ public class CourseServiceImplTest {
         verify(courseDAO).addCourse(any(Course.class));
     }
 
-    @Test
+	@Test
     void isValidCourseID_shouldReturnTrue_whenCourseIDIsValid() {
         when(courseDAO.isValidCourseID(any(Course.class))).thenReturn(true);
 

@@ -9,8 +9,8 @@ import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 
 public class CountStudentAtGroupMapper implements RowMapper<CounterStudentsAtGroup> {
 
-    @Override
-    public CounterStudentsAtGroup mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new CounterStudentsAtGroup(rs.getInt("coutn"), rs.getString("course_name"));
-    }
+	@Override
+	public CounterStudentsAtGroup mapRow(ResultSet rs, int rowNum) throws SQLException {
+		return new CounterStudentsAtGroup(rs.getInt("coutn"), rs.getString("course_name"));
+	}
 }

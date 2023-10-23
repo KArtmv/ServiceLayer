@@ -7,19 +7,19 @@ import ua.foxminded.javaspring.ServiceLayer.options.CourseService;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-    private CourseDAO courseDAO;
+	private CourseDAO courseDAO;
 
-    public CourseServiceImpl(CourseDAO courseDAO) {
-        this.courseDAO = courseDAO;
-    }
+	public CourseServiceImpl(CourseDAO courseDAO) {
+		this.courseDAO = courseDAO;
+	}
 
-    @Override
-    public boolean addCourse(Course course) {
-        return courseDAO.addCourse(course);
-    }
+	@Override
+	public boolean addCourse(Course course) {
+		return courseDAO.addCourse(course);
+	}
 
-    @Override
-    public boolean isValidCourseID(Course course) {
-        return courseDAO.isValidCourseID(course);
-    }
+	@Override
+	public boolean isValidCourseID(Course course) {
+		return courseDAO.isValidCourseID(course);
+	}
 }
