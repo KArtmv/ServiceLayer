@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -34,6 +35,7 @@ public class StudentGeneratorTest {
 	@Mock
 	CountConfig countConfig;
 
+	@InjectMocks
 	private StudentGenerator studentGenerator;
 
 	@BeforeEach
@@ -43,8 +45,6 @@ public class StudentGeneratorTest {
 
 	@Test
 	void generate_shouldReturnListOfStudents_whenIsOk() {
-		studentGenerator = new StudentGenerator(randomNumber, readResourcesFile, resourcesFiles, countConfig);
-
 		String firstNameFilePath = "test/firstName.txt";
 		String lastNameFilePath = "test/lastName.txt";
 
@@ -80,7 +80,6 @@ public class StudentGeneratorTest {
 			assertThat(student.getFirstName()).isNotEmpty();
 			assertThat(student.getLastName()).isNotEmpty();
 			assertThat(student.getGroupID() > 0 && student.getGroupID() <= 5).isTrue();
-
 		}
 
 		verify(randomNumber, times(3)).generateBetweenOneAndInputNumber(countFirstNames);

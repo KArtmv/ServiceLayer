@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,6 +27,9 @@ public class StudentToCourseGeneratorTest {
 	@Mock
 	private CountConfig countConfig;
 
+	@InjectMocks
+	private StudentToCourseGenerator studentToCourseGenerator;
+
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
@@ -33,8 +37,6 @@ public class StudentToCourseGeneratorTest {
 
 	@Test
 	void generate_shouldReturnListOfStudentAtCourse_whenIsCorrect() {
-		StudentToCourseGenerator studentToCourseGenerator = new StudentToCourseGenerator(randomNumber, countConfig);
-
 		List<Student> students = new ArrayList<>();
 		students.add(new Student(1L, "firstName", "lastName", 2L));
 		students.add(new Student(2L, "firstName", "lastName", 3L));

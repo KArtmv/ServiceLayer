@@ -26,6 +26,9 @@ public class CourseGeneratorTest {
 	@Mock
 	ReadResourcesFile readFile;
 
+	@InjectMocks
+	private CourseGenerator courseGenerator;
+
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
@@ -33,8 +36,6 @@ public class CourseGeneratorTest {
 
 	@Test
 	void generate_shouldReturnListOfCourse_whenIsValidDataProvided() {
-		CourseGenerator courseGenerator = new CourseGenerator(readFile, resourcesFiles);
-
 		String filePath = "test/test.txt";
 
 		List<Course> expected = new ArrayList<>();

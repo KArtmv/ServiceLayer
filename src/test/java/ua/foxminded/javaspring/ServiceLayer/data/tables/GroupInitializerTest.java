@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -38,17 +39,16 @@ public class GroupInitializerTest {
 	@Mock
 	private SQLQueryOfCreateTable queryOfCreateTable;
 
+	@InjectMocks
+	private GroupInitializer initializer;
+
 	private String sqlQueryTableExist;
 
 	private List<Group> groups;
 
-	private GroupInitializer initializer;
-
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
-		initializer = new GroupInitializer(groupDAO, dataConduct, readResourcesFile, queryIsTableExist,
-				queryOfCreateTable);
 		Group group = new Group("group");
 		groups = Arrays.asList(group, group, group);
 		sqlQueryTableExist = "IsTableExist";

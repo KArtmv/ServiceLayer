@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.data.generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -27,6 +28,9 @@ public class GroupGeneratorTest {
 	@Mock
 	ResourcesFilesDatabaseData resourcesFiles;
 
+	@InjectMocks
+	private GroupGenerator groupGenerator;
+
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
@@ -34,7 +38,6 @@ public class GroupGeneratorTest {
 
 	@Test
 	void generate_shouldReturnListOfGroup_whenProvidedDataIsValid() {
-		GroupGenerator groupGenerator = new GroupGenerator(readResourcesFile, resourcesFiles);
 		String filePath = "test/group.txt";
 		List<Group> expect = new ArrayList<>();
 		expect.add(new Group(1L, "test"));

@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -27,12 +28,12 @@ public class StudentServiceImplTest {
 	@Mock
 	private StudentDAO studentDAO;
 
+	@InjectMocks
 	private StudentServiceImpl studentService;
 
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
-		studentService = new StudentServiceImpl(studentDAO);
 	}
 
 	@Test

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -40,17 +41,16 @@ public class StudentToCourseInitializerTest {
 	@Mock
 	private SQLQueryOfCreateTable queryOfCreateTable;
 
+	@InjectMocks
+	private StudentToCourseInitializer initializer;
+
 	private String sqlQueryTableExist;
 
 	private List<StudentAtCourse> studentAtCourses;
 
-	private StudentToCourseInitializer initializer;
-
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
-		initializer = new StudentToCourseInitializer(studentAtCourseDAO, dataConduct, readResourcesFile,
-				queryIsTableExist, queryOfCreateTable);
 		StudentAtCourse studentAtCourse = new StudentAtCourse(new Student("firsName", "lastName"),
 				new Course("course", "discription"));
 		studentAtCourses = Arrays.asList(studentAtCourse, studentAtCourse, studentAtCourse);

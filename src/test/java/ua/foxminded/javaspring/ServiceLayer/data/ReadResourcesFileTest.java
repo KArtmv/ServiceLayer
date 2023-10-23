@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -23,8 +24,9 @@ import static org.mockito.Mockito.*;
 class ReadResourcesFileTest {
 
 	@Mock
-	ResourceLoader resourceLoader;
+	private ResourceLoader resourceLoader;
 
+	@InjectMocks
 	private ReadResourcesFile resourcesFile;
 
 	private static final String FILE_PATH = "tables/course.txt";
@@ -35,7 +37,6 @@ class ReadResourcesFileTest {
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
-		resourcesFile = new ReadResourcesFile(resourceLoader);
 	}
 
 	@Test

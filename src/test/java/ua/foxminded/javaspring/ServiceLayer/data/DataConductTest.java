@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -37,6 +38,7 @@ public class DataConductTest {
 	@Mock
 	private StudentToCourseGenerator studentToCourse;
 
+	@InjectMocks
 	private DataConduct dataConduct;
 
 	private List<Student> students;
@@ -46,7 +48,6 @@ public class DataConductTest {
 	@BeforeEach
 	void init() {
 		MockitoAnnotations.openMocks(this);
-		dataConduct = new DataConduct(studentGenerator, courseGenerator, groupGenerator, studentToCourse);
 	}
 
 	@Test
