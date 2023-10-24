@@ -52,6 +52,9 @@ public class Config {
 	@Autowired
 	private StudentAtCourseDAO studentAtCourseDAO;
 
+	@Autowired
+	private CountConfig countConfig;
+
 	private ReadResourcesFile readResourcesFile;
 
 	public ReadResourcesFile readFile() {
@@ -84,7 +87,7 @@ public class Config {
 	}
 
 	public StudentGenerator studentGenerator() {
-		return new StudentGenerator(new RandomNumber(), readFile(), databaseData, new CountConfig());
+		return new StudentGenerator(new RandomNumber(), readFile(), databaseData, countConfig);
 	}
 
 	public CourseGenerator courseGenerator() {
@@ -96,7 +99,7 @@ public class Config {
 	}
 
 	public StudentToCourseGenerator studentToCourseGenerator() {
-		return new StudentToCourseGenerator(new RandomNumber(), new CountConfig());
+		return new StudentToCourseGenerator(new RandomNumber(), countConfig);
 	}
 
 }
