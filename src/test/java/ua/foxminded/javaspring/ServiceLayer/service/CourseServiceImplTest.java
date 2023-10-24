@@ -3,11 +3,13 @@ package ua.foxminded.javaspring.ServiceLayer.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
+import ua.foxminded.javaspring.ServiceLayer.service.impl.CourseServiceImpl;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,18 +19,18 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class CourseServiceImplTest {
 
-    @Mock
-    private CourseDAO courseDAO;
+	@Mock
+	private CourseDAO courseDAO;
 
-    private CourseServiceImpl courseService;
+	@InjectMocks
+	private CourseServiceImpl courseService;
 
-    @BeforeEach
-    void init() {
-        MockitoAnnotations.openMocks(this);
-        courseService = new CourseServiceImpl(courseDAO);
-    }
+	@BeforeEach
+	void init() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
+	@Test
     void addCourse_shouldReturnTrue_whenCourseIsAdded() {
         when(courseDAO.addCourse(any(Course.class))).thenReturn(true);
 
@@ -37,7 +39,7 @@ public class CourseServiceImplTest {
         verify(courseDAO).addCourse(any(Course.class));
     }
 
-    @Test
+	@Test
     void isValidCourseID_shouldReturnTrue_whenCourseIDIsValid() {
         when(courseDAO.isValidCourseID(any(Course.class))).thenReturn(true);
 

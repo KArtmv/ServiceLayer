@@ -5,12 +5,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResourcesFilesDatabaseData {
+
 	@Value("${databaseResourseFilepath.GROUPS_FILE}")
 	private String GROUPS_FILE;
+
 	@Value("${databaseResourseFilepath.GROUPS_FILE}")
 	private String COURSES_FILE;
+
 	@Value("${databaseResourseFilepath.FIRST_NAME_FILE}")
 	private String FIRST_NAME_FILE;
+
 	@Value("${databaseResourseFilepath.LAST_NAME_FILE}")
 	private String LAST_NAME_FILE;
 

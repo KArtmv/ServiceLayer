@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -25,39 +26,38 @@ import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 @RunWith(MockitoJUnitRunner.class)
 public class StudentToCourseInitializerTest {
 
-    @Mock
-    private StudentAtCourseDAO studentAtCourseDAO;
+	@Mock
+	private StudentAtCourseDAO studentAtCourseDAO;
 
-    @Mock
-    private DataConduct dataConduct;
+	@Mock
+	private DataConduct dataConduct;
 
-    @Mock
-    private ReadResourcesFile readResourcesFile;
+	@Mock
+	private ReadResourcesFile readResourcesFile;
 
-    @Mock
-    private SQLQueryIsTableExist queryIsTableExist;
+	@Mock
+	private SQLQueryIsTableExist queryIsTableExist;
 
-    @Mock
-    private SQLQueryOfCreateTable queryOfCreateTable;
+	@Mock
+	private SQLQueryOfCreateTable queryOfCreateTable;
 
-    private String sqlQueryTableExist;
+	@InjectMocks
+	private StudentToCourseInitializer initializer;
 
-    private List<StudentAtCourse> studentAtCourses;
+	private String sqlQueryTableExist;
 
-    private StudentToCourseInitializer initializer;
+	private List<StudentAtCourse> studentAtCourses;
 
-    @BeforeEach
-    void init() {
-        MockitoAnnotations.openMocks(this);
-        initializer = new StudentToCourseInitializer(studentAtCourseDAO, dataConduct, readResourcesFile, queryIsTableExist, queryOfCreateTable);
-        StudentAtCourse studentAtCourse = new StudentAtCourse(
-                new Student("firsName", "lastName"),
-                new Course("course", "discription"));
-        studentAtCourses = Arrays.asList(studentAtCourse, studentAtCourse, studentAtCourse);
-        sqlQueryTableExist = "IsTableExist";
-    }
+	@BeforeEach
+	void init() {
+		MockitoAnnotations.openMocks(this);
+		StudentAtCourse studentAtCourse = new StudentAtCourse(new Student("firsName", "lastName"),
+				new Course("course", "discription"));
+		studentAtCourses = Arrays.asList(studentAtCourse, studentAtCourse, studentAtCourse);
+		sqlQueryTableExist = "IsTableExist";
+	}
 
-    @Test
+	@Test
     void initializeStudentToCourseTableAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableExist() {
         when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
         when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(true);
@@ -72,23 +72,23 @@ public class StudentToCourseInitializerTest {
         verify(dataConduct).createRelationStudentCourse();
     }
 
-    @Test
-    void initializeStudentToCourseTableAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableNotExist() {
-        String filePath = "table/studentToCourse.txt";
-        String sqlQueryCreateTable = "CreateTableQuery";
+	@Test
+	void initializeStudentToCourseTableAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableNotExist() {
+		String filePath = "table/studentToCourse.txt";
+		String sqlQueryCreateTable = "CreateTableQuery";
 
-        when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
-        when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(false);
-        when(queryOfCreateTable.getStudentToCourseFilePath()).thenReturn(filePath);
-        when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
-        when(dataConduct.createRelationStudentCourse()).thenReturn(studentAtCourses);
+		when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
+		when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(false);
+		when(queryOfCreateTable.getStudentToCourseFilePath()).thenReturn(filePath);
+		when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
+		when(dataConduct.createRelationStudentCourse()).thenReturn(studentAtCourses);
 
-        initializer.initializeStudentToCourseTableAndData();
+		initializer.initializeStudentToCourseTableAndData();
 
-        verify(queryIsTableExist).getStudentToCourseTableExist();
-        verify(studentAtCourseDAO).isStudentToCourseTableExist(sqlQueryTableExist);
-        verify(queryOfCreateTable).getStudentToCourseFilePath();
-        verify(readResourcesFile).getScript(filePath);
-        verify(dataConduct).createRelationStudentCourse();
-    }
+		verify(queryIsTableExist).getStudentToCourseTableExist();
+		verify(studentAtCourseDAO).isStudentToCourseTableExist(sqlQueryTableExist);
+		verify(queryOfCreateTable).getStudentToCourseFilePath();
+		verify(readResourcesFile).getScript(filePath);
+		verify(dataConduct).createRelationStudentCourse();
+	}
 }
