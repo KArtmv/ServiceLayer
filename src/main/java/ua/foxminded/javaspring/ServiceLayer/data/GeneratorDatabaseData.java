@@ -18,44 +18,52 @@ import javax.annotation.PostConstruct;
 @Component
 public class GeneratorDatabaseData {
 
-    private GroupDAO groupDAO;
+	private GroupDAO groupDAO;
 
-    private CourseDAO courseDAO;
+	private CourseDAO courseDAO;
 
-    private StudentDAO studentDAO;
+	private StudentDAO studentDAO;
 
-    private StudentAtCourseDAO studentAtCourseDAO;
+	private StudentAtCourseDAO studentAtCourseDAO;
 
-    private DataConduct dataConduct;
+	private DataConduct dataConduct;
 
-    private ReadResourcesFile readResourcesFile;
+	private ReadResourcesFile readResourcesFile;
 
-    private SQLQueryIsTableExist isTableExist = new SQLQueryIsTableExist();
+	private SQLQueryOfCreateTable createTable;
 
-    private SQLQueryOfCreateTable createTable = new SQLQueryOfCreateTable();
+	private SQLQueryIsTableExist isTableExist;
 
-    @Autowired
-    public GeneratorDatabaseData(GroupDAO groupDAO, CourseDAO courseDAO, StudentDAO studentDAO, StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile) {
-        this.groupDAO = groupDAO;
-        this.courseDAO = courseDAO;
-        this.studentDAO = studentDAO;
-        this.studentAtCourseDAO = studentAtCourseDAO;
-        this.dataConduct = dataConduct;
-        this.readResourcesFile = readResourcesFile;
-    }
+	@Autowired
+	public GeneratorDatabaseData(GroupDAO groupDAO, CourseDAO courseDAO, StudentDAO studentDAO,
+			StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
+			SQLQueryOfCreateTable createTable, SQLQueryIsTableExist isTableExist) {
+		this.groupDAO = groupDAO;
+		this.courseDAO = courseDAO;
+		this.studentDAO = studentDAO;
+		this.studentAtCourseDAO = studentAtCourseDAO;
+		this.dataConduct = dataConduct;
+		this.readResourcesFile = readResourcesFile;
+		this.createTable = createTable;
+		this.isTableExist = isTableExist;
+	}
 
-    @PostConstruct
-    public void generateDataAndInsertIntoDatabase() {
-        GroupInitializer groupInitializer = new GroupInitializer(groupDAO, dataConduct, readResourcesFile, isTableExist, createTable);
-        groupInitializer.initializeGroupTablesAndData();
+	@PostConstruct
+	public void generateDataAndInsertIntoDatabase() {
+		GroupInitializer groupInitializer = new GroupInitializer(groupDAO, dataConduct, readResourcesFile, isTableExist,
+				createTable);
+		groupInitializer.initializeGroupTablesAndData();
 
-        CourseInitializer courseInitializer = new CourseInitializer(courseDAO, dataConduct, readResourcesFile, isTableExist, createTable);
-        courseInitializer.initializeCourseTableAndData();
+		CourseInitializer courseInitializer = new CourseInitializer(courseDAO, dataConduct, readResourcesFile,
+				isTableExist, createTable);
+		courseInitializer.initializeCourseTableAndData();
 
-        StudentInitializer studentInitializer = new StudentInitializer(studentDAO, dataConduct, readResourcesFile, isTableExist, createTable);
-        studentInitializer.initializeStudentTableAndData();
+		StudentInitializer studentInitializer = new StudentInitializer(studentDAO, dataConduct, readResourcesFile,
+				isTableExist, createTable);
+		studentInitializer.initializeStudentTableAndData();
 
-        StudentToCourseInitializer studentToCourseInitializer = new StudentToCourseInitializer(studentAtCourseDAO, dataConduct, readResourcesFile, isTableExist, createTable);
-        studentToCourseInitializer.initializeStudentToCourseTableAndData();
-    }
+		StudentToCourseInitializer studentToCourseInitializer = new StudentToCourseInitializer(studentAtCourseDAO,
+				dataConduct, readResourcesFile, isTableExist, createTable);
+		studentToCourseInitializer.initializeStudentToCourseTableAndData();
+	}
 }

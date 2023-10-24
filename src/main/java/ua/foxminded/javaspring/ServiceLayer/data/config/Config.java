@@ -20,9 +20,10 @@ public class Config {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Autowired
+    private ResourcesFilesDatabaseData resourcesFiles;
+    
     private RandomNumber randomNumber = new RandomNumber();
-
-    private ResourcesFilesDatabaseData resourcesFiles = new ResourcesFilesDatabaseData();
 
     private CountConfig countConfig = new CountConfig();
 

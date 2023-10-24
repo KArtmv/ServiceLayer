@@ -4,3 +4,22 @@ spring:
     url: jdbc:postgresql://localhost:5432/serviceLayerDB
     username: admin
     password: admin
+sqlQueryOfCreateTable:
+  SQL_SCRIPT_FILE_STUDENT: tables/studentTable.txt
+  SQL_SCRIPT_FILE_GROUP: tables/groupTable.txt
+  SQL_SCRIPT_FILE_COURSE: tables/courseTable.txt
+  SQL_SCRIPT_FILE_STUDENT_TO_COURSE: tables/studentToCourseTable.txt
+sqlQueryIsTableExist:
+  SQL_CHECK_IS_TABLE_EXIST: SELECT EXISTS (
+            SELECT 1
+            FROM information_schema.tables
+            WHERE table_name = '%s')
+  STUDENT_TABLE_NAME: students
+  GROUP_TABLE_NAME: groups
+  COURSE_TABLE_NAME: courses
+  STUDENT_TO_COURSE_TABLE_NAME: studenttocourse
+databaseResourseFilepath:
+  GROUPS_FILE: data/groups.txt
+  COURSES_FILE: data/courses.txt
+  FIRST_NAME_FILE: data/firstNames.txt
+  LAST_NAME_FILE: data/lastNames.txt
