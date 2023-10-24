@@ -28,78 +28,78 @@ import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentToCourseInitializ
 @Component
 public class Config {
 
-	@Autowired
-	private ResourceLoader resourceLoader;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
-	@Autowired
-	private GroupDAO groupDAO;
+    @Autowired
+    private GroupDAO groupDAO;
 
-	@Autowired
-	private CourseDAO courseDAO;
+    @Autowired
+    private CourseDAO courseDAO;
 
-	@Autowired
-	private StudentDAO studentDAO;
+    @Autowired
+    private StudentDAO studentDAO;
 
-	@Autowired
-	private SQLQueryOfCreateTable createTable;
+    @Autowired
+    private SQLQueryOfCreateTable createTable;
 
-	@Autowired
-	private SQLQueryIsTableExist isTableExist;
+    @Autowired
+    private SQLQueryIsTableExist isTableExist;
 
-	@Autowired
-	private ResourcesFilesDatabaseData databaseData;
+    @Autowired
+    private ResourcesFilesDatabaseData databaseData;
 
-	@Autowired
-	private StudentAtCourseDAO studentAtCourseDAO;
+    @Autowired
+    private StudentAtCourseDAO studentAtCourseDAO;
 
-	@Autowired
-	private CountConfig countConfig;
+    @Autowired
+    private CountConfig countConfig;
 
-	private ReadResourcesFile readResourcesFile;
+    private ReadResourcesFile readResourcesFile;
 
-	public ReadResourcesFile readFile() {
-		readResourcesFile = new ReadResourcesFile(resourceLoader);
-		return readResourcesFile;
-	}
+    public ReadResourcesFile readFile() {
+        readResourcesFile = new ReadResourcesFile(resourceLoader);
+        return readResourcesFile;
+    }
 
-	@Bean
-	public GroupInitializer groupInitializer() {
-		return new GroupInitializer(groupDAO, dataConduct(), readFile(), isTableExist, createTable);
-	}
+    @Bean
+    public GroupInitializer groupInitializer() {
+        return new GroupInitializer(groupDAO, dataConduct(), readFile(), isTableExist, createTable);
+    }
 
-	@Bean
-	public CourseInitializer courseInitializer() {
-		return new CourseInitializer(courseDAO, dataConduct(), readFile(), isTableExist, createTable);
-	}
+    @Bean
+    public CourseInitializer courseInitializer() {
+        return new CourseInitializer(courseDAO, dataConduct(), readFile(), isTableExist, createTable);
+    }
 
-	@Bean
-	public StudentInitializer studentInitializer() {
-		return new StudentInitializer(studentDAO, dataConduct(), readFile(), isTableExist, createTable);
-	}
+    @Bean
+    public StudentInitializer studentInitializer() {
+        return new StudentInitializer(studentDAO, dataConduct(), readFile(), isTableExist, createTable);
+    }
 
-	@Bean
-	public StudentToCourseInitializer studentToCourseInitializer() {
-		return new StudentToCourseInitializer(studentAtCourseDAO, dataConduct(), readFile(), isTableExist, createTable);
-	}
+    @Bean
+    public StudentToCourseInitializer studentToCourseInitializer() {
+        return new StudentToCourseInitializer(studentAtCourseDAO, dataConduct(), readFile(), isTableExist, createTable);
+    }
 
-	public DataConduct dataConduct() {
-		return new DataConduct(studentGenerator(), courseGenerator(), groupGenerator(), studentToCourseGenerator());
-	}
+    public DataConduct dataConduct() {
+        return new DataConduct(studentGenerator(), courseGenerator(), groupGenerator(), studentToCourseGenerator());
+    }
 
-	public StudentGenerator studentGenerator() {
-		return new StudentGenerator(new RandomNumber(), readFile(), databaseData, countConfig);
-	}
+    public StudentGenerator studentGenerator() {
+        return new StudentGenerator(new RandomNumber(), readFile(), databaseData, countConfig);
+    }
 
-	public CourseGenerator courseGenerator() {
-		return new CourseGenerator(readFile(), databaseData);
-	}
+    public CourseGenerator courseGenerator() {
+        return new CourseGenerator(readFile(), databaseData);
+    }
 
-	public GroupGenerator groupGenerator() {
-		return new GroupGenerator(readFile(), databaseData);
-	}
+    public GroupGenerator groupGenerator() {
+        return new GroupGenerator(readFile(), databaseData);
+    }
 
-	public StudentToCourseGenerator studentToCourseGenerator() {
-		return new StudentToCourseGenerator(new RandomNumber(), countConfig);
-	}
+    public StudentToCourseGenerator studentToCourseGenerator() {
+        return new StudentToCourseGenerator(new RandomNumber(), countConfig);
+    }
 
 }

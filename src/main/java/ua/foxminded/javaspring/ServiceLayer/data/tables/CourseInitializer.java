@@ -11,48 +11,48 @@ import java.util.List;
 
 public class CourseInitializer {
 
-	private CourseDAO courseDAO;
+    private CourseDAO courseDAO;
 
-	private DataConduct dataConduct;
+    private DataConduct dataConduct;
 
-	private ReadResourcesFile readResourcesFile;
+    private ReadResourcesFile readResourcesFile;
 
-	private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist isTableExist;
 
-	private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable createTable;
 
-	private List<Course> courses;
+    private List<Course> courses;
 
-	public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
-			SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
-		this.courseDAO = courseDAO;
-		this.dataConduct = dataConduct;
-		this.readResourcesFile = readResourcesFile;
-		this.isTableExist = isTableExist;
-		this.createTable = createTable;
-	}
+    public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
+                             SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+        this.courseDAO = courseDAO;
+        this.dataConduct = dataConduct;
+        this.readResourcesFile = readResourcesFile;
+        this.isTableExist = isTableExist;
+        this.createTable = createTable;
+    }
 
-	public void initializeCourseTableAndData() {
-		if (courseDAO.isCourseTableExist(isTableExist.getCourseTableExist())) {
-			insertIfTableIsEmpty();
-		} else {
-			courseDAO.createCourseTable(readResourcesFile.getScript(createTable.getCourseFilePath()));
-			insertCoursesIntoTable();
-		}
-	}
+    public void initializeCourseTableAndData() {
+        if (courseDAO.isCourseTableExist(isTableExist.getCourseTableExist())) {
+            insertIfTableIsEmpty();
+        } else {
+            courseDAO.createCourseTable(readResourcesFile.getScript(createTable.getCourseFilePath()));
+            insertCoursesIntoTable();
+        }
+    }
 
-	private void insertIfTableIsEmpty() {
-		if (courseDAO.isCourseTableEmpty()) {
-			insertCoursesIntoTable();
-		}
-	}
+    private void insertIfTableIsEmpty() {
+        if (courseDAO.isCourseTableEmpty()) {
+            insertCoursesIntoTable();
+        }
+    }
 
-	private void insertCoursesIntoTable() {
-		generateCoursesData();
-		courses.forEach(courseDAO::addCourse);
-	}
+    private void insertCoursesIntoTable() {
+        generateCoursesData();
+        courses.forEach(courseDAO::addCourse);
+    }
 
-	private void generateCoursesData() {
-		courses = dataConduct.createCourses();
-	}
+    private void generateCoursesData() {
+        courses = dataConduct.createCourses();
+    }
 }

@@ -24,37 +24,37 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 @RunWith(MockitoJUnitRunner.class)
 public class StudentInitializerTest {
 
-	@Mock
-	private StudentDAO studentDAO;
+    @Mock
+    private StudentDAO studentDAO;
 
-	@Mock
-	private DataConduct dataConduct;
+    @Mock
+    private DataConduct dataConduct;
 
-	@Mock
-	private ReadResourcesFile readResourcesFile;
+    @Mock
+    private ReadResourcesFile readResourcesFile;
 
-	@Mock
-	private SQLQueryIsTableExist queryIsTableExist;
+    @Mock
+    private SQLQueryIsTableExist queryIsTableExist;
 
-	@Mock
-	private SQLQueryOfCreateTable queryOfCreateTable;
+    @Mock
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
-	@InjectMocks
-	private StudentInitializer initializer;
+    @InjectMocks
+    private StudentInitializer initializer;
 
-	private String sqlQueryTableExist;
+    private String sqlQueryTableExist;
 
-	private List<Student> students;
+    private List<Student> students;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-		Student student = new Student("firsName", "lastName");
-		students = Arrays.asList(student, student, student);
-		sqlQueryTableExist = "IsTableExist";
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+        Student student = new Student("firsName", "lastName");
+        students = Arrays.asList(student, student, student);
+        sqlQueryTableExist = "IsTableExist";
+    }
 
-	@Test
+    @Test
     void initializeStudentTablesAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenGroupTableExist() {
         when(queryIsTableExist.getStudentTableExist()).thenReturn(sqlQueryTableExist);
         when(studentDAO.isTableExist(sqlQueryTableExist)).thenReturn(true);
@@ -69,23 +69,23 @@ public class StudentInitializerTest {
         verify(dataConduct).createStudents();
     }
 
-	@Test
-	void initializeStudentTablesAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenGroupTableNotExist() {
-		String filePath = "table/student.txt";
-		String sqlQueryCreateTable = "CreateTableQuery";
+    @Test
+    void initializeStudentTablesAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenGroupTableNotExist() {
+        String filePath = "table/student.txt";
+        String sqlQueryCreateTable = "CreateTableQuery";
 
-		when(queryIsTableExist.getStudentTableExist()).thenReturn(sqlQueryTableExist);
-		when(studentDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
-		when(queryOfCreateTable.getStudentFilePath()).thenReturn(filePath);
-		when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
-		when(dataConduct.createStudents()).thenReturn(students);
+        when(queryIsTableExist.getStudentTableExist()).thenReturn(sqlQueryTableExist);
+        when(studentDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
+        when(queryOfCreateTable.getStudentFilePath()).thenReturn(filePath);
+        when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
+        when(dataConduct.createStudents()).thenReturn(students);
 
-		initializer.initializeStudentTableAndData();
+        initializer.initializeStudentTableAndData();
 
-		verify(queryIsTableExist).getStudentTableExist();
-		verify(studentDAO).isTableExist(sqlQueryTableExist);
-		verify(queryOfCreateTable).getStudentFilePath();
-		verify(readResourcesFile).getScript(filePath);
-		verify(dataConduct).createStudents();
-	}
+        verify(queryIsTableExist).getStudentTableExist();
+        verify(studentDAO).isTableExist(sqlQueryTableExist);
+        verify(queryOfCreateTable).getStudentFilePath();
+        verify(readResourcesFile).getScript(filePath);
+        verify(dataConduct).createStudents();
+    }
 }

@@ -7,11 +7,11 @@ import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;
 
 public interface StudentAtCourseService {
-	List<StudentAtCourse> allStudentsFromCourse(Course course);
+    List<StudentAtCourse> allStudentsFromCourse(Course course);
 
-	boolean addStudentToCourse(Student student, Course course);
+    boolean addStudentToCourse(Student student, Course course);
 
-	boolean removeStudentFromCourse(StudentAtCourse studentAtCourse);
+    boolean removeStudentFromCourse(StudentAtCourse studentAtCourse);
 
-	boolean removeStudentFromAllTheirCourses(Student student);
+    boolean removeStudentFromAllTheirCourses(Student student);
 }

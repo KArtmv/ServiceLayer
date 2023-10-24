@@ -6,15 +6,15 @@ import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
 public interface GroupDAO {
-	boolean addGroup(Group group);
+    boolean addGroup(Group group);
 
-	List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
+    List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
 
-	boolean isValidGroupID(Group group);
+    boolean isValidGroupID(Group group);
 
-	boolean isTableExist(String sqlQuery);
+    boolean isTableExist(String sqlQuery);
 
-	void createGroupTable(String sqlQuery);
+    void createGroupTable(String sqlQuery);
 
-	boolean isGroupTableEmpty();
+    boolean isGroupTableEmpty();
 }

@@ -24,37 +24,37 @@ import ua.foxminded.javaspring.ServiceLayer.model.Group;
 @RunWith(MockitoJUnitRunner.class)
 public class GroupInitializerTest {
 
-	@Mock
-	private GroupDAO groupDAO;
+    @Mock
+    private GroupDAO groupDAO;
 
-	@Mock
-	private DataConduct dataConduct;
+    @Mock
+    private DataConduct dataConduct;
 
-	@Mock
-	private ReadResourcesFile readResourcesFile;
+    @Mock
+    private ReadResourcesFile readResourcesFile;
 
-	@Mock
-	private SQLQueryIsTableExist queryIsTableExist;
+    @Mock
+    private SQLQueryIsTableExist queryIsTableExist;
 
-	@Mock
-	private SQLQueryOfCreateTable queryOfCreateTable;
+    @Mock
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
-	@InjectMocks
-	private GroupInitializer initializer;
+    @InjectMocks
+    private GroupInitializer initializer;
 
-	private String sqlQueryTableExist;
+    private String sqlQueryTableExist;
 
-	private List<Group> groups;
+    private List<Group> groups;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-		Group group = new Group("group");
-		groups = Arrays.asList(group, group, group);
-		sqlQueryTableExist = "IsTableExist";
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+        Group group = new Group("group");
+        groups = Arrays.asList(group, group, group);
+        sqlQueryTableExist = "IsTableExist";
+    }
 
-	@Test
+    @Test
     void initializeGroupTablesAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenGroupTableExist() {
         when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
         when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(true);
@@ -69,23 +69,23 @@ public class GroupInitializerTest {
         verify(dataConduct).createGroups();
     }
 
-	@Test
-	void initializeGroupTablesAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenGroupTableNotExist() {
-		String filePath = "table/group.txt";
-		String sqlQueryCreateTable = "CreateTableQuery";
+    @Test
+    void initializeGroupTablesAndData_shouldCreateTableCourseAndInsertIntoDatabaseTable_whenGroupTableNotExist() {
+        String filePath = "table/group.txt";
+        String sqlQueryCreateTable = "CreateTableQuery";
 
-		when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
-		when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
-		when(queryOfCreateTable.getGroupFilePath()).thenReturn(filePath);
-		when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
-		when(dataConduct.createGroups()).thenReturn(groups);
+        when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
+        when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
+        when(queryOfCreateTable.getGroupFilePath()).thenReturn(filePath);
+        when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
+        when(dataConduct.createGroups()).thenReturn(groups);
 
-		initializer.initializeGroupTablesAndData();
+        initializer.initializeGroupTablesAndData();
 
-		verify(queryIsTableExist).getGroupTableExist();
-		verify(groupDAO).isTableExist(sqlQueryTableExist);
-		verify(queryOfCreateTable).getGroupFilePath();
-		verify(readResourcesFile).getScript(filePath);
-		verify(dataConduct).createGroups();
-	}
+        verify(queryIsTableExist).getGroupTableExist();
+        verify(groupDAO).isTableExist(sqlQueryTableExist);
+        verify(queryOfCreateTable).getGroupFilePath();
+        verify(readResourcesFile).getScript(filePath);
+        verify(dataConduct).createGroups();
+    }
 }

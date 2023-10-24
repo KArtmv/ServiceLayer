@@ -25,18 +25,18 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class StudentServiceImplTest {
 
-	@Mock
-	private StudentDAO studentDAO;
+    @Mock
+    private StudentDAO studentDAO;
 
-	@InjectMocks
-	private StudentServiceImpl studentService;
+    @InjectMocks
+    private StudentServiceImpl studentService;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-	@Test
+    @Test
     void saveStudent_shouldReturnTrue_whenIsAddedSuccessfully() {
         when(studentDAO.addStudent(any(Student.class))).thenReturn(true);
 
@@ -45,30 +45,30 @@ public class StudentServiceImplTest {
         verify(studentDAO).addStudent(any(Student.class));
     }
 
-	@Test
-	void allCoursesOfStudent_shouldReturnListOfAllStudentCourses_whenIsCalled() {
-		List<StudentAtCourse> coursesOfStudent = new ArrayList<>();
-		Student student = studentInitial();
-		coursesOfStudent.add(new StudentAtCourse(student, new Course(1L)));
-		coursesOfStudent.add(new StudentAtCourse(student, new Course(2L)));
-		coursesOfStudent.add(new StudentAtCourse(student, new Course(3L)));
+    @Test
+    void allCoursesOfStudent_shouldReturnListOfAllStudentCourses_whenIsCalled() {
+        List<StudentAtCourse> coursesOfStudent = new ArrayList<>();
+        Student student = studentInitial();
+        coursesOfStudent.add(new StudentAtCourse(student, new Course(1L)));
+        coursesOfStudent.add(new StudentAtCourse(student, new Course(2L)));
+        coursesOfStudent.add(new StudentAtCourse(student, new Course(3L)));
 
-		when(studentDAO.studentCourses(any(Student.class))).thenReturn(coursesOfStudent);
+        when(studentDAO.studentCourses(any(Student.class))).thenReturn(coursesOfStudent);
 
-		List<StudentAtCourse> result = studentService.allCoursesOfStudent(student);
+        List<StudentAtCourse> result = studentService.allCoursesOfStudent(student);
 
-		int courseID = 1;
+        int courseID = 1;
 
-		for (StudentAtCourse course : result) {
-			assertThat(course.getStudent()).usingRecursiveComparison().isSameAs(student);
-			assertThat(course.getCourse().getCourseID()).isEqualTo(courseID);
-			courseID++;
-		}
+        for (StudentAtCourse course : result) {
+            assertThat(course.getStudent()).usingRecursiveComparison().isSameAs(student);
+            assertThat(course.getCourse().getCourseID()).isEqualTo(courseID);
+            courseID++;
+        }
 
-		verify(studentDAO).studentCourses(any(Student.class));
-	}
+        verify(studentDAO).studentCourses(any(Student.class));
+    }
 
-	@Test
+    @Test
     void deleteStudent_shouldReturnTrue_whenDeletedSuccessfully() {
         when(studentDAO.deleteStudent(any(Student.class))).thenReturn(true);
 
@@ -77,22 +77,22 @@ public class StudentServiceImplTest {
         verify(studentDAO).deleteStudent(any(Student.class));
     }
 
-	@Test
-	void getStudentByID_shouldReturnStudentObjectInstance_whenIsFound() {
-		int studentID = 1;
-		Student student = studentInitial();
+    @Test
+    void getStudentByID_shouldReturnStudentObjectInstance_whenIsFound() {
+        int studentID = 1;
+        Student student = studentInitial();
 
-		when(studentDAO.getStudentByID(any(Student.class))).thenReturn(Optional.of(student));
+        when(studentDAO.getStudentByID(any(Student.class))).thenReturn(Optional.of(student));
 
-		Student result = studentService.getStudentByID(new Student(studentID));
+        Student result = studentService.getStudentByID(new Student(studentID));
 
-		assertThat(student).usingRecursiveComparison().isEqualTo(result);
+        assertThat(student).usingRecursiveComparison().isEqualTo(result);
 
-		verify(studentDAO).getStudentByID(any(Student.class));
-	}
+        verify(studentDAO).getStudentByID(any(Student.class));
+    }
 
-	private Student studentInitial() {
-		return new Student(1L, "firstName", "lastName");
-	}
+    private Student studentInitial() {
+        return new Student(1L, "firstName", "lastName");
+    }
 
 }

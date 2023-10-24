@@ -9,7 +9,7 @@ import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
 @Service
 public interface GroupService {
-	List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
+    List<CounterStudentsAtGroup> counterStudentsAtGroups(int count);
 
-	boolean isValidGroupID(Group group);
+    boolean isValidGroupID(Group group);
 }

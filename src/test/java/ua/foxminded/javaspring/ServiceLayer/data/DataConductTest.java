@@ -26,142 +26,142 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DataConductTest {
 
-	@Mock
-	private StudentGenerator studentGenerator;
+    @Mock
+    private StudentGenerator studentGenerator;
 
-	@Mock
-	private CourseGenerator courseGenerator;
+    @Mock
+    private CourseGenerator courseGenerator;
 
-	@Mock
-	private GroupGenerator groupGenerator;
+    @Mock
+    private GroupGenerator groupGenerator;
 
-	@Mock
-	private StudentToCourseGenerator studentToCourse;
+    @Mock
+    private StudentToCourseGenerator studentToCourse;
 
-	@InjectMocks
-	private DataConduct dataConduct;
+    @InjectMocks
+    private DataConduct dataConduct;
 
-	private List<Student> students;
-	private List<Course> courses;
-	private List<Group> groups;
+    private List<Student> students;
+    private List<Course> courses;
+    private List<Group> groups;
 
-	@BeforeEach
-	void init() {
-		MockitoAnnotations.openMocks(this);
-	}
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-	@Test
-	void createStudents_shouldReturnListOfStudent_whenIsRun() {
-		List<Student> students = new ArrayList<>();
-		for (int id = 1; id <= 3; id++) {
-			students.add(new Student((long) id, "firstName", "lastName", (long) id));
-		}
+    @Test
+    void createStudents_shouldReturnListOfStudent_whenIsRun() {
+        List<Student> students = new ArrayList<>();
+        for (int id = 1; id <= 3; id++) {
+            students.add(new Student((long) id, "firstName", "lastName", (long) id));
+        }
 
-		when(studentGenerator.generate(groups)).thenReturn(students);
-		when(groupGenerator.generate()).thenReturn(groups);
+        when(studentGenerator.generate(groups)).thenReturn(students);
+        when(groupGenerator.generate()).thenReturn(groups);
 
-		List<Student> result = dataConduct.createStudents();
+        List<Student> result = dataConduct.createStudents();
 
-		for (Student student : result) {
-			assertThat((student.getStudentID() > 0) && (student.getStudentID() <= 3)).isTrue();
-			assertThat(student.getFirstName()).isNotEmpty();
-			assertThat(student.getLastName()).isNotEmpty();
-			assertThat((student.getGroupID() > 0) && (student.getGroupID() <= 3)).isTrue();
-		}
-		verify(studentGenerator).generate(groups);
-	}
+        for (Student student : result) {
+            assertThat((student.getStudentID() > 0) && (student.getStudentID() <= 3)).isTrue();
+            assertThat(student.getFirstName()).isNotEmpty();
+            assertThat(student.getLastName()).isNotEmpty();
+            assertThat((student.getGroupID() > 0) && (student.getGroupID() <= 3)).isTrue();
+        }
+        verify(studentGenerator).generate(groups);
+    }
 
-	@Test
-	void createGroups_shouldReturnListOfGroup_whenIsRun() {
-		groupsListInit();
+    @Test
+    void createGroups_shouldReturnListOfGroup_whenIsRun() {
+        groupsListInit();
 
-		when(groupGenerator.generate()).thenReturn(groups);
+        when(groupGenerator.generate()).thenReturn(groups);
 
-		List<Group> result = dataConduct.createGroups();
+        List<Group> result = dataConduct.createGroups();
 
-		for (Group group : result) {
-			assertThat((group.getGroupID() > 0) && (group.getGroupID() <= 3)).isTrue();
-			assertThat(group.getGroupName()).isNotEmpty();
-		}
+        for (Group group : result) {
+            assertThat((group.getGroupID() > 0) && (group.getGroupID() <= 3)).isTrue();
+            assertThat(group.getGroupName()).isNotEmpty();
+        }
 
-		verify(groupGenerator).generate();
-	}
+        verify(groupGenerator).generate();
+    }
 
-	@Test
-	void createCourses_shouldReturnListOfCourse_whenIsRun() {
-		coursesListInit();
+    @Test
+    void createCourses_shouldReturnListOfCourse_whenIsRun() {
+        coursesListInit();
 
-		when(courseGenerator.generate()).thenReturn(courses);
+        when(courseGenerator.generate()).thenReturn(courses);
 
-		List<Course> result = dataConduct.createCourses();
+        List<Course> result = dataConduct.createCourses();
 
-		for (Course course : result) {
-			assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
-			assertThat(course.getCourseName()).isNotEmpty();
-			assertThat(course.getCourseDescription()).isNotEmpty();
-		}
+        for (Course course : result) {
+            assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
+            assertThat(course.getCourseName()).isNotEmpty();
+            assertThat(course.getCourseDescription()).isNotEmpty();
+        }
 
-		verify(courseGenerator).generate();
-	}
+        verify(courseGenerator).generate();
+    }
 
-	@Test
-	void createRelationStudentCourse_shouldReturnListOfStudentAtCourse_whenIsRan() {
-		List<StudentAtCourse> studentAtCourses = new ArrayList<>();
-		for (int id = 1; id <= 3; id++) {
-			studentAtCourses.add(new StudentAtCourse((long) id, new Student((long) id, "firstname", "lastName"),
-					new Course((long) id, "courseName", "courseDescription")));
-		}
+    @Test
+    void createRelationStudentCourse_shouldReturnListOfStudentAtCourse_whenIsRan() {
+        List<StudentAtCourse> studentAtCourses = new ArrayList<>();
+        for (int id = 1; id <= 3; id++) {
+            studentAtCourses.add(new StudentAtCourse((long) id, new Student((long) id, "firstname", "lastName"),
+                    new Course((long) id, "courseName", "courseDescription")));
+        }
 
-		studentsListInit();
-		groupsListInit();
-		coursesListInit();
+        studentsListInit();
+        groupsListInit();
+        coursesListInit();
 
-		when(studentToCourse.addStudentToCourse(students, courses.size())).thenReturn(studentAtCourses);
-		when(studentGenerator.generate(groups)).thenReturn(students);
-		when(groupGenerator.generate()).thenReturn(groups);
+        when(studentToCourse.addStudentToCourse(students, courses.size())).thenReturn(studentAtCourses);
+        when(studentGenerator.generate(groups)).thenReturn(students);
+        when(groupGenerator.generate()).thenReturn(groups);
 
-		List<StudentAtCourse> result = dataConduct.createRelationStudentCourse();
+        List<StudentAtCourse> result = dataConduct.createRelationStudentCourse();
 
-		for (StudentAtCourse studentAtCourse : result) {
-			Student student = studentAtCourse.getStudent();
-			Course course = studentAtCourse.getCourse();
+        for (StudentAtCourse studentAtCourse : result) {
+            Student student = studentAtCourse.getStudent();
+            Course course = studentAtCourse.getCourse();
 
-			assertThat((studentAtCourse.getEnrollmentID() > 0) && (studentAtCourse.getEnrollmentID() <= 3)).isTrue();
+            assertThat((studentAtCourse.getEnrollmentID() > 0) && (studentAtCourse.getEnrollmentID() <= 3)).isTrue();
 
-			assertThat((student.getStudentID() > 0) && (student.getStudentID() <= 3)).isTrue();
-			assertThat(student.getFirstName()).isNotEmpty();
-			assertThat(student.getLastName()).isNotEmpty();
-			assertThat((student.getGroupID() > 0) && (student.getGroupID() <= 3)).isTrue();
+            assertThat((student.getStudentID() > 0) && (student.getStudentID() <= 3)).isTrue();
+            assertThat(student.getFirstName()).isNotEmpty();
+            assertThat(student.getLastName()).isNotEmpty();
+            assertThat((student.getGroupID() > 0) && (student.getGroupID() <= 3)).isTrue();
 
-			assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
-			assertThat(course.getCourseName()).isNotEmpty();
-			assertThat(course.getCourseDescription()).isNotEmpty();
-		}
-		verify(courseGenerator).generate();
-		verify(groupGenerator).generate();
-		verify(studentGenerator).generate(groups);
-	}
+            assertThat((course.getCourseID() > 0) && (course.getCourseID() <= 3)).isTrue();
+            assertThat(course.getCourseName()).isNotEmpty();
+            assertThat(course.getCourseDescription()).isNotEmpty();
+        }
+        verify(courseGenerator).generate();
+        verify(groupGenerator).generate();
+        verify(studentGenerator).generate(groups);
+    }
 
-	void studentsListInit() {
-		students = new ArrayList<>();
-		for (int id = 1; id <= 3; id++) {
-			students.add(new Student((long) id, "firstName", "lastName", (long) id));
-		}
-	}
+    void studentsListInit() {
+        students = new ArrayList<>();
+        for (int id = 1; id <= 3; id++) {
+            students.add(new Student((long) id, "firstName", "lastName", (long) id));
+        }
+    }
 
-	void coursesListInit() {
-		courses = new ArrayList<>();
+    void coursesListInit() {
+        courses = new ArrayList<>();
 
-		for (int id = 1; id <= 3; id++) {
-			courses.add(new Course((long) id, "courseName", "courseDescription"));
-		}
-	}
+        for (int id = 1; id <= 3; id++) {
+            courses.add(new Course((long) id, "courseName", "courseDescription"));
+        }
+    }
 
-	void groupsListInit() {
-		groups = new ArrayList<>();
+    void groupsListInit() {
+        groups = new ArrayList<>();
 
-		for (int id = 1; id <= 3; id++) {
-			groups.add(new Group((long) id, "groupName"));
-		}
-	}
+        for (int id = 1; id <= 3; id++) {
+            groups.add(new Group((long) id, "groupName"));
+        }
+    }
 }

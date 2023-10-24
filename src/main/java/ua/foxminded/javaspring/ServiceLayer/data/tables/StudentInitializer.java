@@ -12,47 +12,47 @@ import java.util.List;
 
 public class StudentInitializer {
 
-	private StudentDAO studentDAO;
-	private DataConduct dataConduct;
+    private StudentDAO studentDAO;
+    private DataConduct dataConduct;
 
-	private ReadResourcesFile readResourcesFile;
+    private ReadResourcesFile readResourcesFile;
 
-	private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist isTableExist;
 
-	private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable createTable;
 
-	private List<Student> students = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 
-	public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
-			SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
-		this.studentDAO = studentDAO;
-		this.dataConduct = dataConduct;
-		this.readResourcesFile = readResourcesFile;
-		this.isTableExist = isTableExist;
-		this.createTable = createTable;
-	}
+    public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
+                              SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+        this.studentDAO = studentDAO;
+        this.dataConduct = dataConduct;
+        this.readResourcesFile = readResourcesFile;
+        this.isTableExist = isTableExist;
+        this.createTable = createTable;
+    }
 
-	public void initializeStudentTableAndData() {
-		if (studentDAO.isTableExist(isTableExist.getStudentTableExist())) {
-			insertIfTableIsEmpty();
-		} else {
-			studentDAO.createStudentTable(readResourcesFile.getScript(createTable.getStudentFilePath()));
-			insertStudentsIntoTable();
-		}
-	}
+    public void initializeStudentTableAndData() {
+        if (studentDAO.isTableExist(isTableExist.getStudentTableExist())) {
+            insertIfTableIsEmpty();
+        } else {
+            studentDAO.createStudentTable(readResourcesFile.getScript(createTable.getStudentFilePath()));
+            insertStudentsIntoTable();
+        }
+    }
 
-	private void insertIfTableIsEmpty() {
-		if (studentDAO.isTableEmpty()) {
-			insertStudentsIntoTable();
-		}
-	}
+    private void insertIfTableIsEmpty() {
+        if (studentDAO.isTableEmpty()) {
+            insertStudentsIntoTable();
+        }
+    }
 
-	private void insertStudentsIntoTable() {
-		generateStudentsData();
-		students.forEach(studentDAO::addStudent);
-	}
+    private void insertStudentsIntoTable() {
+        generateStudentsData();
+        students.forEach(studentDAO::addStudent);
+    }
 
-	private void generateStudentsData() {
-		students = dataConduct.createStudents();
-	}
+    private void generateStudentsData() {
+        students = dataConduct.createStudents();
+    }
 }
