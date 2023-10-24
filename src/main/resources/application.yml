@@ -23,3 +23,6 @@ databaseResourseFilepath:
   COURSES_FILE: data/courses.txt
   FIRST_NAME_FILE: data/firstNames.txt
   LAST_NAME_FILE: data/lastNames.txt
+countConfig:
+  MAX_COUNT_COURSES_OF_STUDENT: 3
+  MAX_COUNT_OF_STUDENT: 200
