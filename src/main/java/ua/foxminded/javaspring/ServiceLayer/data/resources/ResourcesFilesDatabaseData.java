@@ -9,7 +9,7 @@ public class ResourcesFilesDatabaseData {
 	@Value("${databaseResourseFilepath.GROUPS_FILE}")
 	private String GROUPS_FILE;
 
-	@Value("${databaseResourseFilepath.GROUPS_FILE}")
+	@Value("${databaseResourseFilepath.COURSES_FILE}")
 	private String COURSES_FILE;
 
 	@Value("${databaseResourseFilepath.FIRST_NAME_FILE}")
