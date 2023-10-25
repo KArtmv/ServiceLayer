@@ -26,7 +26,7 @@ import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentInitializer;
 import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentToCourseInitializer;
 
 @Component
-public class Config {
+public class DataConfigInitializer {
 
     @Autowired
     private ResourceLoader resourceLoader;
