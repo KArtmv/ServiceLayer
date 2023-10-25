@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,7 @@ public class StudentRepo implements StudentDAO {
     private static final String SQL_CHECK_IS_STUDENT_EXIST = "select student_id from student where student_id=?";
     private static final String SQL_CHECK_IS_STUDEN_TABLE_EMPTY = "SELECT COUNT(*) FROM students";
 
+    @Autowired
     public StudentRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

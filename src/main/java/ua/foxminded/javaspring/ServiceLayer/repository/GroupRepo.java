@@ -3,6 +3,7 @@ package ua.foxminded.javaspring.ServiceLayer.repository;
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ public class GroupRepo implements GroupDAO {
             + "from students s" + "join groups g on s.group_id = g.group_id" + "group by g.group_name"
             + "having count(s.student_id)<=21";
 
+    @Autowired
     public GroupRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

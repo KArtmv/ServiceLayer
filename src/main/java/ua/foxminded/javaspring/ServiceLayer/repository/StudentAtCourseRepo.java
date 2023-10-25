@@ -2,6 +2,7 @@ package ua.foxminded.javaspring.ServiceLayer.repository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,7 @@ public class StudentAtCourseRepo implements StudentAtCourseDAO {
     private static final String SQL_REMOVE_STUDENT_FROM_ALL_THEIR_COURSES = "delete from studentatcourse where student_id=?";
     private static final String SQL_CHECK_IS_STUDENT_TO_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM studenttocourse";
 
+    @Autowired
     public StudentAtCourseRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

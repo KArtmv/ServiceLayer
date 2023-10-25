@@ -2,6 +2,7 @@ package ua.foxminded.javaspring.ServiceLayer.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.CounterStudentsAtGroup;
@@ -13,6 +14,7 @@ public class GroupServiceImpl implements GroupService {
 
     private GroupDAO groupDAO;
 
+    @Autowired
     public GroupServiceImpl(GroupDAO groupDAO) {
         this.groupDAO = groupDAO;
     }

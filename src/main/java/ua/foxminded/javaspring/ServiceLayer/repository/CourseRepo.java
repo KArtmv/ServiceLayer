@@ -2,6 +2,7 @@ package ua.foxminded.javaspring.ServiceLayer.repository;
 
 import java.sql.ResultSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class CourseRepo implements CourseDAO {
     private static final String SQL_CHECK_IS_COURSE_EXIST = "select course_id from course where course_id=?";
     private static final String SQL_CHECK_IS_COURSE_TABLE_EMPTY = "SELECT COUNT(*) FROM courses";
 
+    @Autowired
     public CourseRepo(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

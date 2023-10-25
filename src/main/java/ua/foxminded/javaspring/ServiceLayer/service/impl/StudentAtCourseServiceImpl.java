@@ -2,6 +2,7 @@ package ua.foxminded.javaspring.ServiceLayer.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
@@ -14,6 +15,7 @@ public class StudentAtCourseServiceImpl implements StudentAtCourseService {
 
     private StudentAtCourseDAO studentAtCourseDAO;
 
+    @Autowired
     public StudentAtCourseServiceImpl(StudentAtCourseDAO studentAtCourseDAO) {
         this.studentAtCourseDAO = studentAtCourseDAO;
     }
