@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.data.config;
+package ua.foxminded.javaspring.ServiceLayer.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
