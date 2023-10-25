@@ -1,7 +1,7 @@
 package ua.foxminded.javaspring.ServiceLayer.data.generator;
 
 import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
+import ua.foxminded.javaspring.ServiceLayer.data.generator.sourceData.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 
 import java.util.ArrayList;

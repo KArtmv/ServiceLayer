@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.CountConfig;
+import ua.foxminded.javaspring.ServiceLayer.data.generator.sourceData.CountConfig;
 import ua.foxminded.javaspring.ServiceLayer.model.Course;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 import ua.foxminded.javaspring.ServiceLayer.model.StudentAtCourse;

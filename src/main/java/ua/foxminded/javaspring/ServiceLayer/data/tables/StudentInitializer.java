@@ -3,8 +3,8 @@ package ua.foxminded.javaspring.ServiceLayer.data.tables;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
 import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryIsTableExist;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.SQLQueryOfCreateTable;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryIsTableExist;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryOfCreateTable;
 import ua.foxminded.javaspring.ServiceLayer.model.Student;
 
 import java.util.ArrayList;

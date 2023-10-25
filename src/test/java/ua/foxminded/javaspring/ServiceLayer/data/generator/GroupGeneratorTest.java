@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
-import ua.foxminded.javaspring.ServiceLayer.data.resources.ResourcesFilesDatabaseData;
+import ua.foxminded.javaspring.ServiceLayer.data.generator.sourceData.ResourcesFilesDatabaseData;
 import ua.foxminded.javaspring.ServiceLayer.model.Group;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package ua.foxminded.javaspring.ServiceLayer.data.resources;
+package ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
