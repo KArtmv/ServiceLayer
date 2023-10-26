@@ -59,14 +59,14 @@ public class StudentToCourseInitializerTest {
 
     @Test
     void initializeStudentToCourseTableAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenStudentToCourseTableExist() {
-        when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForStudentToCourseTable()).thenReturn(sqlQueryTableExist);
         when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(true);
         when(studentAtCourseDAO.isStudentToCourseTableEmpty()).thenReturn(true);
         when(dataConduct.createRelationStudentCourse()).thenReturn(studentAtCourses);
 
-        initializer.initializeStudentToCourseTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getStudentToCourseTableExist();
+        verify(queryIsTableExist).queryForStudentToCourseTable();
         verify(studentAtCourseDAO).isStudentToCourseTableExist(sqlQueryTableExist);
         verify(studentAtCourseDAO).isStudentToCourseTableEmpty();
         verify(dataConduct).createRelationStudentCourse();
@@ -77,15 +77,15 @@ public class StudentToCourseInitializerTest {
         String filePath = "table/studentToCourse.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 
-        when(queryIsTableExist.getStudentToCourseTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForStudentToCourseTable()).thenReturn(sqlQueryTableExist);
         when(studentAtCourseDAO.isStudentToCourseTableExist(sqlQueryTableExist)).thenReturn(false);
         when(queryOfCreateTable.getStudentToCourseFilePath()).thenReturn(filePath);
         when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
         when(dataConduct.createRelationStudentCourse()).thenReturn(studentAtCourses);
 
-        initializer.initializeStudentToCourseTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getStudentToCourseTableExist();
+        verify(queryIsTableExist).queryForStudentToCourseTable();
         verify(studentAtCourseDAO).isStudentToCourseTableExist(sqlQueryTableExist);
         verify(queryOfCreateTable).getStudentToCourseFilePath();
         verify(readResourcesFile).getScript(filePath);

@@ -56,14 +56,14 @@ public class CourseInitializerTest {
     @Test
     void initializeCourseTableAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenCourseTableExist() {
 
-        when(queryIsTableExist.getCourseTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForCourseTable()).thenReturn(sqlQueryTableExist);
         when(courseDAO.isCourseTableExist(sqlQueryTableExist)).thenReturn(true);
         when(courseDAO.isCourseTableEmpty()).thenReturn(true);
         when(dataConduct.createCourses()).thenReturn(courses);
 
-        initializer.initializeCourseTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getCourseTableExist();
+        verify(queryIsTableExist).queryForCourseTable();
         verify(courseDAO).isCourseTableExist(sqlQueryTableExist);
         verify(courseDAO).isCourseTableEmpty();
         verify(dataConduct).createCourses();
@@ -76,15 +76,15 @@ public class CourseInitializerTest {
         String filePath = "table/course.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 
-        when(queryIsTableExist.getCourseTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForCourseTable()).thenReturn(sqlQueryTableExist);
         when(courseDAO.isCourseTableExist(sqlQueryTableExist)).thenReturn(false);
         when(queryOfCreateTable.getCourseFilePath()).thenReturn(filePath);
         when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
         when(dataConduct.createCourses()).thenReturn(courses);
 
-        initializer.initializeCourseTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getCourseTableExist();
+        verify(queryIsTableExist).queryForCourseTable();
         verify(courseDAO).isCourseTableExist(sqlQueryTableExist);
         verify(queryOfCreateTable).getCourseFilePath();
         verify(readResourcesFile).getScript(filePath);

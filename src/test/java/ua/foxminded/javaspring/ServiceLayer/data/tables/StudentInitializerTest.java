@@ -56,14 +56,14 @@ public class StudentInitializerTest {
 
     @Test
     void initializeStudentTablesAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenGroupTableExist() {
-        when(queryIsTableExist.getStudentTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForStudentTable()).thenReturn(sqlQueryTableExist);
         when(studentDAO.isTableExist(sqlQueryTableExist)).thenReturn(true);
         when(studentDAO.isTableEmpty()).thenReturn(true);
         when(dataConduct.createStudents()).thenReturn(students);
 
-        initializer.initializeStudentTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getStudentTableExist();
+        verify(queryIsTableExist).queryForStudentTable();
         verify(studentDAO).isTableExist(sqlQueryTableExist);
         verify(studentDAO).isTableEmpty();
         verify(dataConduct).createStudents();
@@ -74,15 +74,15 @@ public class StudentInitializerTest {
         String filePath = "table/student.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 
-        when(queryIsTableExist.getStudentTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForStudentTable()).thenReturn(sqlQueryTableExist);
         when(studentDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
         when(queryOfCreateTable.getStudentFilePath()).thenReturn(filePath);
         when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
         when(dataConduct.createStudents()).thenReturn(students);
 
-        initializer.initializeStudentTableAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getStudentTableExist();
+        verify(queryIsTableExist).queryForStudentTable();
         verify(studentDAO).isTableExist(sqlQueryTableExist);
         verify(queryOfCreateTable).getStudentFilePath();
         verify(readResourcesFile).getScript(filePath);

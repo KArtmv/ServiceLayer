@@ -56,14 +56,14 @@ public class GroupInitializerTest {
 
     @Test
     void initializeGroupTablesAndData_shouldCreateCourseAndInsertIntoDatabaseTable_whenGroupTableExist() {
-        when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForGroupTable()).thenReturn(sqlQueryTableExist);
         when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(true);
         when(groupDAO.isGroupTableEmpty()).thenReturn(true);
         when(dataConduct.createGroups()).thenReturn(groups);
 
-        initializer.initializeGroupTablesAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getGroupTableExist();
+        verify(queryIsTableExist).queryForGroupTable();
         verify(groupDAO).isTableExist(sqlQueryTableExist);
         verify(groupDAO).isGroupTableEmpty();
         verify(dataConduct).createGroups();
@@ -74,15 +74,15 @@ public class GroupInitializerTest {
         String filePath = "table/group.txt";
         String sqlQueryCreateTable = "CreateTableQuery";
 
-        when(queryIsTableExist.getGroupTableExist()).thenReturn(sqlQueryTableExist);
+        when(queryIsTableExist.queryForGroupTable()).thenReturn(sqlQueryTableExist);
         when(groupDAO.isTableExist(sqlQueryTableExist)).thenReturn(false);
         when(queryOfCreateTable.getGroupFilePath()).thenReturn(filePath);
         when(readResourcesFile.getScript(filePath)).thenReturn(sqlQueryCreateTable);
         when(dataConduct.createGroups()).thenReturn(groups);
 
-        initializer.initializeGroupTablesAndData();
+        initializer.initialize();
 
-        verify(queryIsTableExist).getGroupTableExist();
+        verify(queryIsTableExist).queryForGroupTable();
         verify(groupDAO).isTableExist(sqlQueryTableExist);
         verify(queryOfCreateTable).getGroupFilePath();
         verify(readResourcesFile).getScript(filePath);
