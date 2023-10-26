@@ -11,17 +11,22 @@ import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentToCourseInitializ
 
 @Component
 public class GeneratorDatabaseData {
-    @Autowired
     private GroupInitializer groupInitializer;
 
-    @Autowired
     private CourseInitializer courseInitializer;
 
-    @Autowired
     private StudentInitializer studentInitializer;
 
-    @Autowired
     private StudentToCourseInitializer studentToCourseInitializer;
+
+    @Autowired
+    public GeneratorDatabaseData(GroupInitializer groupInitializer, CourseInitializer courseInitializer,
+              StudentInitializer studentInitializer, StudentToCourseInitializer studentToCourseInitializer) {
+        this.groupInitializer = groupInitializer;
+        this.courseInitializer = courseInitializer;
+        this.studentInitializer = studentInitializer;
+        this.studentToCourseInitializer = studentToCourseInitializer;
+    }
 
     @PostConstruct
     public void generateDataAndInsertIntoDatabase() {
