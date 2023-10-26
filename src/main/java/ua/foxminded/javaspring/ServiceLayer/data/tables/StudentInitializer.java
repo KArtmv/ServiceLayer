@@ -17,37 +17,37 @@ public class StudentInitializer {
 
     private ReadResourcesFile readResourcesFile;
 
-    private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist queryIsTableExist;
 
-    private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
     private List<Student> students = new ArrayList<>();
 
     public StudentInitializer(StudentDAO studentDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
-                              SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+                              SQLQueryIsTableExist queryIsTableExist, SQLQueryOfCreateTable queryOfCreateTable) {
         this.studentDAO = studentDAO;
         this.dataConduct = dataConduct;
         this.readResourcesFile = readResourcesFile;
-        this.isTableExist = isTableExist;
-        this.createTable = createTable;
+        this.queryIsTableExist = queryIsTableExist;
+        this.queryOfCreateTable = queryOfCreateTable;
     }
 
-    public void initializeStudentTableAndData() {
-        if (studentDAO.isTableExist(isTableExist.getStudentTableExist())) {
-            insertIfTableIsEmpty();
+    public void initialize() {
+        if (studentDAO.isTableExist(queryIsTableExist.queryForStudentTable())) {
+            checkIsTableEmptyAndPopulate();
         } else {
-            studentDAO.createStudentTable(readResourcesFile.getScript(createTable.getStudentFilePath()));
-            insertStudentsIntoTable();
+            studentDAO.createStudentTable(readResourcesFile.getScript(queryOfCreateTable.getStudentFilePath()));
+            populateTable();
         }
     }
 
-    private void insertIfTableIsEmpty() {
+    private void checkIsTableEmptyAndPopulate() {
         if (studentDAO.isTableEmpty()) {
-            insertStudentsIntoTable();
+            populateTable();
         }
     }
 
-    private void insertStudentsIntoTable() {
+    private void populateTable() {
         generateStudentsData();
         students.forEach(studentDAO::addStudent);
     }

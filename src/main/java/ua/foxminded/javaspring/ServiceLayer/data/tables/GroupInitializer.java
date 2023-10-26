@@ -17,37 +17,37 @@ public class GroupInitializer {
 
     private ReadResourcesFile readResourcesFile;
 
-    private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist queryIsTableExist;
 
-    private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
     private List<Group> groups;
 
     public GroupInitializer(GroupDAO groupDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
-                            SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+                            SQLQueryIsTableExist queryIsTableExist, SQLQueryOfCreateTable queryOfCreateTable) {
         this.groupDAO = groupDAO;
         this.dataConduct = dataConduct;
         this.readResourcesFile = readResourcesFile;
-        this.isTableExist = isTableExist;
-        this.createTable = createTable;
+        this.queryIsTableExist = queryIsTableExist;
+        this.queryOfCreateTable = queryOfCreateTable;
     }
 
-    public void initializeGroupTablesAndData() {
-        if (groupDAO.isTableExist(isTableExist.getGroupTableExist())) {
-            insertIfTableIsEmpty();
+    public void initialize() {
+        if (groupDAO.isTableExist(queryIsTableExist.queryForGroupTable())) {
+            checkIsTableEmptyAndPopulate();
         } else {
-            groupDAO.createGroupTable(readResourcesFile.getScript(createTable.getGroupFilePath()));
-            insertGroupsIntoTable();
+            groupDAO.createGroupTable(readResourcesFile.getScript(queryOfCreateTable.getGroupFilePath()));
+            populateTable();
         }
     }
 
-    private void insertIfTableIsEmpty() {
+    private void checkIsTableEmptyAndPopulate() {
         if (groupDAO.isGroupTableEmpty()) {
-            insertGroupsIntoTable();
+            populateTable();
         }
     }
 
-    private void insertGroupsIntoTable() {
+    private void populateTable() {
         generateGroupData();
         groups.forEach(groupDAO::addGroup);
     }

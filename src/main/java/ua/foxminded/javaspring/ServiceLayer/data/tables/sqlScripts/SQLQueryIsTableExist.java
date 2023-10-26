@@ -20,19 +20,19 @@ public class SQLQueryIsTableExist {
     @Value("${sqlQueryIsTableExist.STUDENT_TO_COURSE_TABLE_NAME}")
     private String STUDENT_TO_COURSE_TABLE_NAME;
 
-    public String getStudentTableExist() {
+    public String queryForStudentTable() {
         return String.format(SQL_CHECK_IS_TABLE_EXIST, STUDENT_TABLE_NAME);
     }
 
-    public String getCourseTableExist() {
+    public String queryForCourseTable() {
         return String.format(SQL_CHECK_IS_TABLE_EXIST, COURSE_TABLE_NAME);
     }
 
-    public String getGroupTableExist() {
+    public String queryForGroupTable() {
         return String.format(SQL_CHECK_IS_TABLE_EXIST, GROUP_TABLE_NAME);
     }
 
-    public String getStudentToCourseTableExist() {
+    public String queryForStudentToCourseTable() {
         return String.format(SQL_CHECK_IS_TABLE_EXIST, STUDENT_TO_COURSE_TABLE_NAME);
     }
 }

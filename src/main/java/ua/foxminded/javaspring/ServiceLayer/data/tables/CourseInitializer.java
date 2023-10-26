@@ -17,42 +17,42 @@ public class CourseInitializer {
 
     private ReadResourcesFile readResourcesFile;
 
-    private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist queryIsTableExist;
 
-    private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
     private List<Course> courses;
 
     public CourseInitializer(CourseDAO courseDAO, DataConduct dataConduct, ReadResourcesFile readResourcesFile,
-                             SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+                             SQLQueryIsTableExist queryIsTableExist, SQLQueryOfCreateTable queryOfCreateTable) {
         this.courseDAO = courseDAO;
         this.dataConduct = dataConduct;
         this.readResourcesFile = readResourcesFile;
-        this.isTableExist = isTableExist;
-        this.createTable = createTable;
+        this.queryIsTableExist = queryIsTableExist;
+        this.queryOfCreateTable = queryOfCreateTable;
     }
 
-    public void initializeCourseTableAndData() {
-        if (courseDAO.isCourseTableExist(isTableExist.getCourseTableExist())) {
-            insertIfTableIsEmpty();
+    public void initialize() {
+        if (courseDAO.isCourseTableExist(queryIsTableExist.queryForCourseTable())) {
+            checkIsTableEmptyAndPopulate();
         } else {
-            courseDAO.createCourseTable(readResourcesFile.getScript(createTable.getCourseFilePath()));
-            insertCoursesIntoTable();
+            courseDAO.createCourseTable(readResourcesFile.getScript(queryOfCreateTable.getCourseFilePath()));
+            populateTable();
         }
     }
 
-    private void insertIfTableIsEmpty() {
+    private void checkIsTableEmptyAndPopulate() {
         if (courseDAO.isCourseTableEmpty()) {
-            insertCoursesIntoTable();
+            populateTable();
         }
     }
 
-    private void insertCoursesIntoTable() {
-        generateCoursesData();
+    private void populateTable() {
+        generateData();
         courses.forEach(courseDAO::addCourse);
     }
 
-    private void generateCoursesData() {
+    private void generateData() {
         courses = dataConduct.createCourses();
     }
 }

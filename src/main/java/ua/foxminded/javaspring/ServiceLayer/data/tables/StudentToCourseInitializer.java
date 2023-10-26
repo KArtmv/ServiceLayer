@@ -17,38 +17,38 @@ public class StudentToCourseInitializer {
 
     private ReadResourcesFile readResourcesFile;
 
-    private SQLQueryIsTableExist isTableExist;
+    private SQLQueryIsTableExist queryIsTableExist;
 
-    private SQLQueryOfCreateTable createTable;
+    private SQLQueryOfCreateTable queryOfCreateTable;
 
     private List<StudentAtCourse> studentAtCourses;
 
     public StudentToCourseInitializer(StudentAtCourseDAO studentAtCourseDAO, DataConduct dataConduct,
-                                      ReadResourcesFile readResourcesFile, SQLQueryIsTableExist isTableExist, SQLQueryOfCreateTable createTable) {
+                                      ReadResourcesFile readResourcesFile, SQLQueryIsTableExist queryIsTableExist, SQLQueryOfCreateTable queryOfCreateTable) {
         this.studentAtCourseDAO = studentAtCourseDAO;
         this.dataConduct = dataConduct;
         this.readResourcesFile = readResourcesFile;
-        this.isTableExist = isTableExist;
-        this.createTable = createTable;
+        this.queryIsTableExist = queryIsTableExist;
+        this.queryOfCreateTable = queryOfCreateTable;
     }
 
-    public void initializeStudentToCourseTableAndData() {
-        if (studentAtCourseDAO.isStudentToCourseTableExist(isTableExist.getStudentToCourseTableExist())) {
-            insertIfTableIsEmpty();
+    public void initialize() {
+        if (studentAtCourseDAO.isStudentToCourseTableExist(queryIsTableExist.queryForStudentToCourseTable())) {
+            checkIsTableEmptyAndPopulate();
         } else {
             studentAtCourseDAO
-                    .createStudentToCourseTable(readResourcesFile.getScript(createTable.getStudentToCourseFilePath()));
-            insertStudentToCourseIntoTable();
+                    .createStudentToCourseTable(readResourcesFile.getScript(queryOfCreateTable.getStudentToCourseFilePath()));
+            populateTable();
         }
     }
 
-    private void insertIfTableIsEmpty() {
+    private void checkIsTableEmptyAndPopulate() {
         if (studentAtCourseDAO.isStudentToCourseTableEmpty()) {
-            insertStudentToCourseIntoTable();
+            populateTable();
         }
     }
 
-    private void insertStudentToCourseIntoTable() {
+    private void populateTable() {
         generateStudentAtCoursesData();
         studentAtCourses.forEach(t -> studentAtCourseDAO.addStudentToCourse(t.getStudent(), t.getCourse()));
     }
