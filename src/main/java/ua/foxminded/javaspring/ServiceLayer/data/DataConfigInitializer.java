@@ -4,26 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-
 import ua.foxminded.javaspring.ServiceLayer.dao.CourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.dao.GroupDAO;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentAtCourseDAO;
 import ua.foxminded.javaspring.ServiceLayer.dao.StudentDAO;
-import ua.foxminded.javaspring.ServiceLayer.data.DataConduct;
-import ua.foxminded.javaspring.ServiceLayer.data.RandomNumber;
-import ua.foxminded.javaspring.ServiceLayer.data.ReadResourcesFile;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.CourseGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.GroupGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.StudentGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.StudentToCourseGenerator;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.sourceData.CountConfig;
 import ua.foxminded.javaspring.ServiceLayer.data.generator.sourceData.ResourcesFilesDatabaseData;
-import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryIsTableExist;
-import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryOfCreateTable;
 import ua.foxminded.javaspring.ServiceLayer.data.tables.CourseInitializer;
 import ua.foxminded.javaspring.ServiceLayer.data.tables.GroupInitializer;
 import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentInitializer;
 import ua.foxminded.javaspring.ServiceLayer.data.tables.StudentToCourseInitializer;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryIsTableExist;
+import ua.foxminded.javaspring.ServiceLayer.data.tables.sqlScripts.SQLQueryOfCreateTable;
 
 @Component
 public class DataConfigInitializer {
